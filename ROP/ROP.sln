@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROP", "ROP\ROP.csproj", "{97A05750-C929-46A4-BDEA-38D86C19D3EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97A05750-C929-46A4-BDEA-38D86C19D3EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97A05750-C929-46A4-BDEA-38D86C19D3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97A05750-C929-46A4-BDEA-38D86C19D3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97A05750-C929-46A4-BDEA-38D86C19D3EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {046CCECF-992F-4A29-B16C-3FB23967C80E}
+	EndGlobalSection
+EndGlobal
