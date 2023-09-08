@@ -92,5 +92,250 @@ namespace ROP
             Form1.ActiveForm.Refresh();
 
         }
+
+        private void buttonRight_Click(object sender, EventArgs e)
+        {
+            TurnRight();
+        }
+
+        private void buttonLeft_Click(object sender, EventArgs e)
+        {
+            TurnLeft();
+        }
+
+        private void buttonTop_Click(object sender, EventArgs e)
+        {
+            TurnUp();
+        }
+
+        private void buttonBottom_Click(object sender, EventArgs e)
+        {
+            TurnDown();
+        }
+
+        private void buttonFront_Click(object sender, EventArgs e)
+        {
+            TurnFront();
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            TurnBack();
+        }
+
+        public void TurnRight()
+        {
+            int[] buff = { top[2, 0], top[2, 1], top[2, 2] };
+            top[2, 0] = front[2, 0];
+            top[2, 1] = front[2, 1];
+            top[2, 2] = front[2, 2];
+            front[2, 0] = bottom[2, 0];
+            front[2, 1] = bottom[2, 1];
+            front[2, 2] = bottom[2, 2];
+            bottom[2, 0] = back[0, 2];
+            bottom[2, 1] = back[0, 1];
+            bottom[2, 2] = back[0, 0];
+            back[0, 2] = buff[0];
+            back[0, 1] = buff[1];
+            back[0, 0] = buff[2];
+            int buffCorner = right[0, 0];
+            right[0, 0] = right[0, 2];
+            right[0, 2] = right[2, 2];
+            right[2, 2] = right[2, 0];
+            right[2, 0] = buffCorner;
+            int buffEdge = right[1, 0];
+            right[1, 0] = right[0, 1];
+            right[0, 1] = right[1, 2];
+            right[1, 2] = right[2, 1];
+            right[2, 1] = buffEdge;
+            Form1.ActiveForm.Refresh();
+        }
+        public void TurnLeft()
+        {
+            int[] buff = { top[0, 0], top[0, 1], top[0, 2] };
+            top[0, 0] = back[2, 2];
+            top[0, 1] = back[2, 1];
+            top[0, 2] = back[2, 0];
+            back[2, 2] = bottom[0, 0];
+            back[2, 1] = bottom[0, 1];
+            back[2, 0] = bottom[0, 2];
+            bottom[0, 0] = front[0, 0];
+            bottom[0, 1] = front[0, 1];
+            bottom[0, 2] = front[0, 2];
+            front[0, 0] = buff[0];
+            front[0, 1] = buff[1];
+            front[0, 2] = buff[2];
+            int buffCorner = left[0, 0];
+            left[0, 0] = left[0, 2];
+            left[0, 2] = left[2, 2];
+            left[2, 2] = left[2, 0];
+            left[2, 0] = buffCorner;
+            int buffEdge = left[1, 0];
+            left[1, 0] = left[0, 1];
+            left[0, 1] = left[1, 2];
+            left[1, 2] = left[2, 1];
+            left[2, 1] = buffEdge;
+            Form1.ActiveForm.Refresh();
+        }
+        public void TurnUp()
+        {
+            int[] buff = { front[0, 0], front[1, 0], front[2, 0] };
+            front[0, 0] = right[0, 0];
+            front[1, 0] = right[1, 0];
+            front[2, 0] = right[2, 0];
+            right[0, 0] = back[0, 0];
+            right[1, 0] = back[1, 0];
+            right[2, 0] = back[2, 0];
+            back[0, 0] = left[0, 0];
+            back[1, 0] = left[1, 0];
+            back[2, 0] = left[2, 0];
+            left[0, 0] = buff[0];
+            left[1, 0] = buff[1];
+            left[2, 0] = buff[2];
+            int buffCorner = top[0, 0];
+            top[0, 0] = top[0, 2];
+            top[0, 2] = top[2, 2];
+            top[2, 2] = top[2, 0];
+            top[2, 0] = buffCorner;
+            int buffEdge = top[1, 0];
+            top[1, 0] = top[0, 1];
+            top[0, 1] = top[1, 2];
+            top[1, 2] = top[2, 1];
+            top[2, 1] = buffEdge;
+            Form1.ActiveForm.Refresh();
+        }
+        public void TurnDown()
+        {
+            int[] buff = { front[0, 2], front[1, 2], front[2, 2] };
+            front[0, 2] = left[0, 2];
+            front[1, 2] = left[1, 2];
+            front[2, 2] = left[2, 2];
+            left[0, 2] = back[0, 2];
+            left[1, 2] = back[1, 2];
+            left[2, 2] = back[2, 2];
+            back[0, 2] = right[0, 2];
+            back[1, 2] = right[1, 2];
+            back[2, 2] = right[2, 2];
+            right[0, 2] = buff[0];
+            right[1, 2] = buff[1];
+            right[2, 2] = buff[2];
+            int buffCorner = bottom[0, 0];
+            bottom[0, 0] = bottom[0, 2];
+            bottom[0, 2] = bottom[2, 2];
+            bottom[2, 2] = bottom[2, 0];
+            bottom[2, 0] = buffCorner;
+            int buffEdge = bottom[1, 0];
+            bottom[1, 0] = bottom[0, 1];
+            bottom[0, 1] = bottom[1, 2];
+            bottom[1, 2] = bottom[2, 1];
+            bottom[2, 1] = buffEdge;
+            Form1.ActiveForm.Refresh();
+        }
+        public void TurnFront()
+        {
+            int[] buff = { top[0, 2], top[1, 2], top[2, 2] };
+            top[0, 2] = left[2, 2];
+            top[1, 2] = left[2, 1];
+            top[2, 2] = left[2, 0];
+            left[2, 0] = bottom[0, 0];
+            left[2, 1] = bottom[1, 0];
+            left[2, 2] = bottom[2, 0];
+            bottom[2, 0] = right[0, 0];
+            bottom[1, 0] = right[0, 1];
+            bottom[0, 0] = right[0, 2];
+            right[0, 0] = buff[0];
+            right[0, 1] = buff[1];
+            right[0, 2] = buff[2];
+            int buffCorner = front[0, 0];
+            front[0, 0] = front[0, 2];
+            front[0, 2] = front[2, 2];
+            front[2, 2] = front[2, 0];
+            front[2, 0] = buffCorner;
+            int buffEdge = front[1, 0];
+            front[1, 0] = front[0, 1];
+            front[0, 1] = front[1, 2];
+            front[1, 2] = front[2, 1];
+            front[2, 1] = buffEdge;
+            Form1.ActiveForm.Refresh();
+        }
+        public void TurnBack()
+        {
+            int[] buff = { top[0, 0], top[1, 0], top[2, 0] };
+            top[0, 0] = right[2, 0];
+            top[1, 0] = right[2, 1];
+            top[2, 0] = right[2, 2];
+            right[2, 0] = bottom[2, 2];
+            right[2, 1] = bottom[1, 2];
+            right[2, 2] = bottom[0, 2];
+            bottom[2, 2] = left[0, 2];
+            bottom[1, 2] = left[0, 1];
+            bottom[0, 2] = left[0, 0];
+            left[0, 2] = buff[0];
+            left[0, 1] = buff[1];
+            left[0, 0] = buff[2];
+            int buffCorner = back[0, 0];
+            back[0, 0] = back[0, 2];
+            back[0, 2] = back[2, 2];
+            back[2, 2] = back[2, 0];
+            back[2, 0] = buffCorner;
+            int buffEdge = back[1, 0];
+            back[1, 0] = back[0, 1];
+            back[0, 1] = back[1, 2];
+            back[1, 2] = back[2, 1];
+            back[2, 1] = buffEdge;
+            Form1.ActiveForm.Refresh();
+        }
+
+        private void buttonAlgorithm_Click(object sender, EventArgs e)
+        {
+            string tahy = "RLUDFB";
+            string alg = textBoxAlgorithm.Text;
+            for (int i = 0; i < alg.Length; i++)
+            {
+                if (tahy.Contains(alg[i]))
+                {
+                    if (i+1 < alg.Length)
+                    {
+                        if(alg[i+1] == '\'')
+                        {
+                            switch (alg[i])
+                            {
+                                case 'R': TurnRight(); TurnRight(); TurnRight(); break;
+                                case 'L': TurnLeft(); TurnLeft(); TurnLeft(); break;
+                                case 'U': TurnUp(); TurnUp(); TurnUp(); break;
+                                case 'D': TurnDown(); TurnDown(); TurnDown(); break;
+                                case 'F': TurnFront(); TurnFront(); TurnFront(); break;
+                                case 'B': TurnBack(); TurnBack(); TurnBack(); break;
+                            }
+                            continue;
+                        }
+                        else if(alg[i+1] == '2')
+                        {
+                            alg = alg.Remove(i+1, 1).Insert(i+1, alg[i].ToString());
+                        }
+                    }
+                    switch (alg[i])
+                    {
+                        case 'R': TurnRight(); break;
+                        case 'L': TurnLeft(); break;
+                        case 'U': TurnUp(); break;
+                        case 'D': TurnDown(); break;
+                        case 'F': TurnFront(); break;
+                        case 'B': TurnBack(); break;
+                        default: MessageBox.Show("error v algoritmu"); break;
+                    }
+                }
+            }
+        }
+
+        private void algorithm2_Click(object sender, EventArgs e)
+        {
+            textBoxAlgorithm.Text = "D2U2R2L2F2B2";
+        }
+
+        private void algorithm1_Click(object sender, EventArgs e)
+        {
+            textBoxAlgorithm.Text = "U'L'U'F'R2B'RFUB2UB'LU'FURF'";
+        }
     }
 }
