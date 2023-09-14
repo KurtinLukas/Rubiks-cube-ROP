@@ -31,14 +31,14 @@ namespace ROP
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            cubeVertices[0, 0, 0] = new Point(basePoint.X, basePoint.Y + (int)(cubeWidth*1.5));
-            cubeVertices[1, 0, 0] = new Point(basePoint.X + cubeWidth, basePoint.Y + (int)(cubeWidth * 1.5));
-            cubeVertices[0, 1, 0] = new Point(basePoint.X, basePoint.Y + cubeWidth/2);
-            cubeVertices[1, 1, 0] = new Point(basePoint.X + cubeWidth, basePoint.Y + cubeWidth/2);
-            cubeVertices[0, 0, 1] = new Point(basePoint.X + cubeWidth/2, basePoint.Y + cubeWidth);
-            cubeVertices[1, 0, 1] = new Point(basePoint.X + (int)(cubeWidth*1.5), basePoint.Y + cubeWidth);
-            cubeVertices[0, 1, 1] = new Point(basePoint.X + cubeWidth/2, basePoint.Y);
-            cubeVertices[1, 1, 1] = new Point(basePoint.X + (int)(cubeWidth*1.5), basePoint.Y);
+            cubeVertices[0, 0, 0] = new Point(0, (int)(cubeWidth*1.5));
+            cubeVertices[1, 0, 0] = new Point(cubeWidth, (int)(cubeWidth * 1.5));
+            cubeVertices[0, 1, 0] = new Point(0, cubeWidth/2);
+            cubeVertices[1, 1, 0] = new Point(cubeWidth, cubeWidth/2);
+            cubeVertices[0, 0, 1] = new Point(cubeWidth/2, cubeWidth);
+            cubeVertices[1, 0, 1] = new Point((int)(cubeWidth*1.5), cubeWidth);
+            cubeVertices[0, 1, 1] = new Point(cubeWidth/2, 0);
+            cubeVertices[1, 1, 1] = new Point((int)(cubeWidth*1.5), 0);
 
             for (int i = 0; i < 3; i++)
             {
@@ -71,32 +71,32 @@ namespace ROP
             g.DrawPolygon(borderPen, new Point[] { cubeVertices[0, 0, 1], cubeVertices[0, 1, 1], cubeVertices[1, 1, 1], cubeVertices[1, 0, 1] });//B
             g.DrawPolygon(borderPen, new Point[] { cubeVertices[0, 0, 0], cubeVertices[0, 0, 1], cubeVertices[1, 0, 1], cubeVertices[1, 0, 0] });//D
 
-            g.FillRectangle(Brushes.Black, new Rectangle(535, 195, 80, 240));
-            g.FillRectangle(Brushes.Black, new Rectangle(455, 275, 320, 80));
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    //síť kostky
-                    g.FillRectangle(brushes[bottom[i, j]], new Rectangle(540 + i * 25, 360 + j * 25, 20, 20));
-                    g.FillRectangle(brushes[top[i, j]], new Rectangle(540 + i * 25, 200 + j * 25, 20, 20));
-                    g.FillRectangle(brushes[right[i, j]], new Rectangle(620 + i * 25, 280 + j * 25, 20, 20));
-                    g.FillRectangle(brushes[left[i, j]], new Rectangle(460 + i * 25, 280 + j * 25, 20, 20));
-                    g.FillRectangle(brushes[front[i, j]], new Rectangle(540 + i * 25, 280 + j * 25, 20, 20));
-                    g.FillRectangle(brushes[back[i, j]], new Rectangle(700 + i * 25, 280 + j * 25, 20, 20));
+            //g.FillRectangle(Brushes.Black, new Rectangle(535, 195, 80, 240));
+            //g.FillRectangle(Brushes.Black, new Rectangle(455, 275, 320, 80));
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    for (int j = 0; j < 3; j++)
+            //    {
+            //        //síť kostky
+            //        g.FillRectangle(brushes[bottom[i, j]], new Rectangle(540 + i * 25, 360 + j * 25, 20, 20));
+            //        g.FillRectangle(brushes[top[i, j]], new Rectangle(540 + i * 25, 200 + j * 25, 20, 20));
+            //        g.FillRectangle(brushes[right[i, j]], new Rectangle(620 + i * 25, 280 + j * 25, 20, 20));
+            //        g.FillRectangle(brushes[left[i, j]], new Rectangle(460 + i * 25, 280 + j * 25, 20, 20));
+            //        g.FillRectangle(brushes[front[i, j]], new Rectangle(540 + i * 25, 280 + j * 25, 20, 20));
+            //        g.FillRectangle(brushes[back[i, j]], new Rectangle(700 + i * 25, 280 + j * 25, 20, 20));
 
-                    //3d (3 strany)
-                    g.FillRectangle(brushes[front[i, j]], new Rectangle(50 + i * 80, 180 + j * 80, 70, 70));
-                    g.FillPolygon(brushes[top[i, j]], new Point[] { new Point(55 + i * 80 + (2 - j) * 45, 80 + j * 45),
-                                                                                      new Point(95 + i * 80 + (2 - j) * 45, 40 + j * 45),
-                                                                                      new Point(165 + i * 80 + (2 - j) * 45, 40 + j * 45),
-                                                                                      new Point(125 + i * 80 + (2 - j) * 45, 80 + j * 45) });
-                    g.FillPolygon(brushes[right[i, j]], new Point[] { new Point(290 + i * 45, 175 + j * 80 + i * -45),
-                                                                                      new Point(330 + i * 45, 135 + j * 80 + i * -45),
-                                                                                      new Point(330 + i * 45, 205 + j * 80 + i * -45),
-                                                                                      new Point(290 + i * 45, 245 + j * 80 + i * -45) });
-                }
-            }
+            //        //3d (3 strany)
+            //        g.FillRectangle(brushes[front[i, j]], new Rectangle(50 + i * 80, 180 + j * 80, 70, 70));
+            //        g.FillPolygon(brushes[top[i, j]], new Point[] { new Point(55 + i * 80 + (2 - j) * 45, 80 + j * 45),
+            //                                                                          new Point(95 + i * 80 + (2 - j) * 45, 40 + j * 45),
+            //                                                                          new Point(165 + i * 80 + (2 - j) * 45, 40 + j * 45),
+            //                                                                          new Point(125 + i * 80 + (2 - j) * 45, 80 + j * 45) });
+            //        g.FillPolygon(brushes[right[i, j]], new Point[] { new Point(290 + i * 45, 175 + j * 80 + i * -45),
+            //                                                                          new Point(330 + i * 45, 135 + j * 80 + i * -45),
+            //                                                                          new Point(330 + i * 45, 205 + j * 80 + i * -45),
+            //                                                                          new Point(290 + i * 45, 245 + j * 80 + i * -45) });
+            //    }
+            //}
         }
 
         private void Form1_Activated(object sender, EventArgs e)
@@ -354,17 +354,18 @@ namespace ROP
         {
             switch (e.KeyCode)
             {
-                case Keys.Right: for (int i = 0; i < 2; i++)
-                    {
-                        a.X = Convert.ToInt32(Math.Sin(Convert.ToDouble(a) + 10));
-                    }
-                        break;
-                case Keys.Left: break;
-                case Keys.Up: break;
+                case Keys.Right: 
+                        cubeVertices[0,0,0].X += Convert.ToInt32(cubeWidth * Math.Sin(cubeVertices[0, 0, 0].X/240 + 1 * Math.PI/180));
+                        cubeVertices[1, 0, 0].X = cubeWidth * Convert.ToInt32(Math.Sin(Convert.ToDouble(cubeVertices[1, 0, 0].X)));
+                        cubeVertices[0, 1, 0].X = cubeWidth * Convert.ToInt32(Math.Sin(Convert.ToDouble(cubeVertices[0, 1, 0].X)));
+                        cubeVertices[1, 1, 0].X = cubeWidth * Convert.ToInt32(Math.Sin(Convert.ToDouble(cubeVertices[1, 1, 0].X)));
+                    break;
+                case Keys.Left: MessageBox.Show((20 * Math.PI / 180).ToString()); break;
+                case Keys.Up: MessageBox.Show((cubeWidth * Convert.ToInt32(Math.Sin(Convert.ToDouble(cubeVertices[0, 0, 0].X)))).ToString()); break;
                 case Keys.Down: break;
             }
-            
 
+            ActiveForm.Refresh();
         }
     }
 }
