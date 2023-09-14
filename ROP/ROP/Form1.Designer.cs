@@ -44,6 +44,7 @@ namespace ROP
             // 
             // buttonRight
             // 
+            this.buttonRight.Enabled = false;
             this.buttonRight.Location = new System.Drawing.Point(713, 12);
             this.buttonRight.Name = "buttonRight";
             this.buttonRight.Size = new System.Drawing.Size(75, 23);
@@ -54,6 +55,7 @@ namespace ROP
             // 
             // buttonLeft
             // 
+            this.buttonLeft.Enabled = false;
             this.buttonLeft.Location = new System.Drawing.Point(713, 41);
             this.buttonLeft.Name = "buttonLeft";
             this.buttonLeft.Size = new System.Drawing.Size(75, 23);
@@ -64,6 +66,7 @@ namespace ROP
             // 
             // buttonBack
             // 
+            this.buttonBack.Enabled = false;
             this.buttonBack.Location = new System.Drawing.Point(713, 70);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
@@ -74,6 +77,7 @@ namespace ROP
             // 
             // buttonTop
             // 
+            this.buttonTop.Enabled = false;
             this.buttonTop.Location = new System.Drawing.Point(632, 12);
             this.buttonTop.Name = "buttonTop";
             this.buttonTop.Size = new System.Drawing.Size(75, 23);
@@ -84,6 +88,7 @@ namespace ROP
             // 
             // buttonBottom
             // 
+            this.buttonBottom.Enabled = false;
             this.buttonBottom.Location = new System.Drawing.Point(632, 41);
             this.buttonBottom.Name = "buttonBottom";
             this.buttonBottom.Size = new System.Drawing.Size(75, 23);
@@ -94,6 +99,7 @@ namespace ROP
             // 
             // buttonFront
             // 
+            this.buttonFront.Enabled = false;
             this.buttonFront.Location = new System.Drawing.Point(632, 70);
             this.buttonFront.Name = "buttonFront";
             this.buttonFront.Size = new System.Drawing.Size(75, 23);
@@ -104,6 +110,7 @@ namespace ROP
             // 
             // buttonAlgorithm
             // 
+            this.buttonAlgorithm.Enabled = false;
             this.buttonAlgorithm.Location = new System.Drawing.Point(673, 129);
             this.buttonAlgorithm.Name = "buttonAlgorithm";
             this.buttonAlgorithm.Size = new System.Drawing.Size(115, 23);
@@ -114,6 +121,7 @@ namespace ROP
             // 
             // textBoxAlgorithm
             // 
+            this.textBoxAlgorithm.Enabled = false;
             this.textBoxAlgorithm.Location = new System.Drawing.Point(448, 103);
             this.textBoxAlgorithm.Name = "textBoxAlgorithm";
             this.textBoxAlgorithm.Size = new System.Drawing.Size(340, 20);
@@ -121,6 +129,7 @@ namespace ROP
             // 
             // algorithm2
             // 
+            this.algorithm2.Enabled = false;
             this.algorithm2.Location = new System.Drawing.Point(448, 69);
             this.algorithm2.Name = "algorithm2";
             this.algorithm2.Size = new System.Drawing.Size(89, 23);
@@ -131,6 +140,7 @@ namespace ROP
             // 
             // algorithm1
             // 
+            this.algorithm1.Enabled = false;
             this.algorithm1.Location = new System.Drawing.Point(448, 40);
             this.algorithm1.Name = "algorithm1";
             this.algorithm1.Size = new System.Drawing.Size(89, 23);
@@ -142,6 +152,7 @@ namespace ROP
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Enabled = false;
             this.label1.Location = new System.Drawing.Point(448, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
@@ -169,6 +180,7 @@ namespace ROP
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -25,9 +25,22 @@ namespace ROP
         public int[,] front = new int[3, 3];
         public int[,] back = new int[3, 3];
 
+        public Point[,,] cubeVertices = new Point[2, 2, 2]; //x, y, z
+        public int cubeWidth = 240;
+        public Point basePoint = new Point(45, 45);
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            for(int i = 0; i < 3; i++)
+            cubeVertices[0, 0, 0] = new Point(basePoint.X, basePoint.Y + (int)(cubeWidth*1.5));
+            cubeVertices[1, 0, 0] = new Point(basePoint.X + cubeWidth, basePoint.Y + (int)(cubeWidth * 1.5));
+            cubeVertices[0, 1, 0] = new Point(basePoint.X, basePoint.Y + cubeWidth/2);
+            cubeVertices[1, 1, 0] = new Point(basePoint.X + cubeWidth, basePoint.Y + cubeWidth/2);
+            cubeVertices[0, 0, 1] = new Point(basePoint.X + cubeWidth/2, basePoint.Y + cubeWidth);
+            cubeVertices[1, 0, 1] = new Point(basePoint.X + (int)(cubeWidth*1.5), basePoint.Y + cubeWidth);
+            cubeVertices[0, 1, 1] = new Point(basePoint.X + cubeWidth/2, basePoint.Y);
+            cubeVertices[1, 1, 1] = new Point(basePoint.X + (int)(cubeWidth*1.5), basePoint.Y);
+
+            for (int i = 0; i < 3; i++)
             {
                 bottom[0, i] = 0; bottom[1, i] = 0; bottom[2, i] = 0;
                 top[0, i] = 1; top[1, i] = 1; top[2, i] = 1;
@@ -40,6 +53,7 @@ namespace ROP
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            Pen borderPen = new Pen(Color.Black, 5);
             Brush[] brushes = new Brush[6];
             brushes[0] = Brushes.White;
             brushes[1] = Brushes.Yellow;
@@ -49,19 +63,17 @@ namespace ROP
             brushes[5] = Brushes.Green;
             
             Graphics g = e.Graphics;
-            g.FillRectangle(Brushes.Black, new Rectangle(45, 175, 240, 240));
-            g.FillPolygon(Brushes.Black, new Point[] { new Point(45, 174),
-                                                                                      new Point(183, 37),
-                                                                                      new Point(423, 37),
-                                                                                      new Point(287, 173) });
-            g.FillPolygon(Brushes.Black, new Point[] { new Point(286, 175),
-                                                                                      new Point(423, 38),
-                                                                                      new Point(423, 277),
-                                                                                      new Point(286, 414) });
+            g.DrawPolygon(borderPen, new Point[] { cubeVertices[0, 0, 0], cubeVertices[0, 1, 0], cubeVertices[1, 1, 0], cubeVertices[1,0,0] }); //F
+            g.DrawPolygon(borderPen, new Point[] { cubeVertices[0,1,0],cubeVertices[0,1,1],cubeVertices[1,1,1],cubeVertices[1,1,0] });//U
+            g.DrawPolygon(borderPen, new Point[] { cubeVertices[1,1,0],cubeVertices[1,1,1],cubeVertices[1,0,1],cubeVertices[1,0,0] });//R
+
+            g.DrawPolygon(borderPen, new Point[] { cubeVertices[0, 1, 0], cubeVertices[0, 1, 1], cubeVertices[0, 0, 1], cubeVertices[0, 0, 0] });//L
+            g.DrawPolygon(borderPen, new Point[] { cubeVertices[0, 0, 1], cubeVertices[0, 1, 1], cubeVertices[1, 1, 1], cubeVertices[1, 0, 1] });//B
+            g.DrawPolygon(borderPen, new Point[] { cubeVertices[0, 0, 0], cubeVertices[0, 0, 1], cubeVertices[1, 0, 1], cubeVertices[1, 0, 0] });//D
 
             g.FillRectangle(Brushes.Black, new Rectangle(535, 195, 80, 240));
             g.FillRectangle(Brushes.Black, new Rectangle(455, 275, 320, 80));
-            for (int i = 0;  i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
@@ -336,6 +348,23 @@ namespace ROP
         private void algorithm1_Click(object sender, EventArgs e)
         {
             textBoxAlgorithm.Text = "U'L'U'F'R2B'RFUB2UB'LU'FURF'";
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Right: for (int i = 0; i < 2; i++)
+                    {
+                        a.X = Convert.ToInt32(Math.Sin(Convert.ToDouble(a) + 10));
+                    }
+                        break;
+                case Keys.Left: break;
+                case Keys.Up: break;
+                case Keys.Down: break;
+            }
+            
+
         }
     }
 }
