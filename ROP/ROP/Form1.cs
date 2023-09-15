@@ -29,6 +29,10 @@ namespace ROP
         public int cubeWidth = 240;
         public Point basePoint = new Point(45, 45);
 
+        public int frontSide = 4;
+        public int upSide = 1;
+        public int rightSide = 2;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             cubeVertices[0, 0, 0] = new Point(0, (int)(cubeWidth*1.5));
@@ -49,6 +53,7 @@ namespace ROP
                 front[0, i] = 4; front[1, i] = 4; front[2, i] = 4;
                 back[0, i] = 5; back[1, i] = 5; back[2, i] = 5;
             }
+            Render();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -63,13 +68,13 @@ namespace ROP
             brushes[5] = Brushes.Green;
             
             Graphics g = e.Graphics;
-            g.DrawPolygon(borderPen, new Point[] { cubeVertices[0, 0, 0], cubeVertices[0, 1, 0], cubeVertices[1, 1, 0], cubeVertices[1,0,0] }); //F
-            g.DrawPolygon(borderPen, new Point[] { cubeVertices[0,1,0],cubeVertices[0,1,1],cubeVertices[1,1,1],cubeVertices[1,1,0] });//U
-            g.DrawPolygon(borderPen, new Point[] { cubeVertices[1,1,0],cubeVertices[1,1,1],cubeVertices[1,0,1],cubeVertices[1,0,0] });//R
+            g.FillPolygon(brushes[4], new Point[] { cubeVertices[0, 0, 0], cubeVertices[0, 1, 0], cubeVertices[1, 1, 0], cubeVertices[1,0,0] }); //F
+            g.FillPolygon(brushes[1], new Point[] { cubeVertices[0,1,0],cubeVertices[0,1,1],cubeVertices[1,1,1],cubeVertices[1,1,0] });//U
+            g.FillPolygon(brushes[2], new Point[] { cubeVertices[1,1,0],cubeVertices[1,1,1],cubeVertices[1,0,1],cubeVertices[1,0,0] });//R
 
-            g.DrawPolygon(borderPen, new Point[] { cubeVertices[0, 1, 0], cubeVertices[0, 1, 1], cubeVertices[0, 0, 1], cubeVertices[0, 0, 0] });//L
-            g.DrawPolygon(borderPen, new Point[] { cubeVertices[0, 0, 1], cubeVertices[0, 1, 1], cubeVertices[1, 1, 1], cubeVertices[1, 0, 1] });//B
-            g.DrawPolygon(borderPen, new Point[] { cubeVertices[0, 0, 0], cubeVertices[0, 0, 1], cubeVertices[1, 0, 1], cubeVertices[1, 0, 0] });//D
+            g.FillPolygon(brushes[3], new Point[] { cubeVertices[0, 1, 0], cubeVertices[0, 1, 1], cubeVertices[0, 0, 1], cubeVertices[0, 0, 0] });//L
+            g.FillPolygon(brushes[5], new Point[] { cubeVertices[0, 0, 1], cubeVertices[0, 1, 1], cubeVertices[1, 1, 1], cubeVertices[1, 0, 1] });//B
+            g.FillPolygon(brushes[0], new Point[] { cubeVertices[0, 0, 0], cubeVertices[0, 0, 1], cubeVertices[1, 0, 1], cubeVertices[1, 0, 0] });//D
 
             //g.FillRectangle(Brushes.Black, new Rectangle(535, 195, 80, 240));
             //g.FillRectangle(Brushes.Black, new Rectangle(455, 275, 320, 80));
@@ -351,59 +356,47 @@ namespace ROP
         }
 
         double anim = 0;
-
+        double vertical = 0.5;
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.Right:
-                    anim += 0;
-                    cubeVertices[0, 0, 0].X = Convert.ToInt32(cubeWidth * Math.Sin(anim + Math.PI * 1) + cubeWidth);
-                    //cubeVertices[1, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 1.5);
-                    //cubeVertices[0, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 0.5);
-                    //cubeVertices[1, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 1.5);
-                    //cubeVertices[0, 0, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 2) + cubeWidth * 0.5);
-                    //cubeVertices[1, 0, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1.5) + cubeWidth * 1.5);
-                    //cubeVertices[0, 1, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 0.5);
-                    //cubeVertices[1, 1, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 1.5);
-
-                    cubeVertices[0, 0, 0].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 1.25);
-                    //cubeVertices[1, 0, 0].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 0.5) + cubeWidth * 1.25);
-                    //cubeVertices[0, 1, 0].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 0.5) + cubeWidth * 0.25);
-                    //cubeVertices[1, 1, 0].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 0.25);
-                    //cubeVertices[0, 0, 1].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 1.5) + cubeWidth * 1.25);
-                    //cubeVertices[1, 0, 1].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 1.5) + cubeWidth * 1.25);
-                    //cubeVertices[0, 1, 1].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 2) + cubeWidth * 0.25);
-                    //cubeVertices[1, 1, 1].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 1.5) + cubeWidth * 0.25);
+                    anim += 0.1;
                     break;
                 case Keys.Left:
                     anim -= 0.1;
-                    cubeVertices[0, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
-                    cubeVertices[1, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5);
-                    cubeVertices[0, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
-                    cubeVertices[1, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5);
-                    cubeVertices[0, 0, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(-anim) + cubeWidth * 0.5);
-                    cubeVertices[1, 0, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(-anim) + cubeWidth * 1.5);
-                    cubeVertices[0, 1, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(-anim) + cubeWidth * 0.5);
-                    cubeVertices[1, 1, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(-anim) + cubeWidth * 1.5);
-
-                    
                     break;
                 case Keys.Up:
-                    cubeVertices[0, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
-                    cubeVertices[1, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5);
-                    cubeVertices[0, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
-                    cubeVertices[1, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5); 
+                    vertical -= 0.1;
                     break;
                 case Keys.Down:
-                    cubeVertices[0, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
-                    cubeVertices[1, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5);
-                    cubeVertices[0, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
-                    cubeVertices[1, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5); 
+                    vertical += 0.1;
                     break;
             }
+            Render();
 
             ActiveForm.Refresh();
+        }
+        public void Render()
+        {
+            cubeVertices[0, 0, 0].X = Convert.ToInt32(cubeWidth * Math.Sin(anim + Math.PI * 1.5) + cubeWidth);
+            cubeVertices[1, 0, 0].X = Convert.ToInt32(cubeWidth * Math.Sin(anim + Math.PI * 1) + cubeWidth);
+            cubeVertices[0, 1, 0].X = Convert.ToInt32(cubeWidth * Math.Sin(anim + Math.PI * 1.5) + cubeWidth);
+            cubeVertices[1, 1, 0].X = Convert.ToInt32(cubeWidth * Math.Sin(anim + Math.PI * 1) + cubeWidth);
+            cubeVertices[0, 0, 1].X = Convert.ToInt32(cubeWidth * Math.Sin(anim + Math.PI * 0) + cubeWidth);
+            cubeVertices[1, 0, 1].X = Convert.ToInt32(cubeWidth * Math.Sin(anim + Math.PI * 0.5) + cubeWidth);
+            cubeVertices[0, 1, 1].X = Convert.ToInt32(cubeWidth * Math.Sin(anim + Math.PI * 0) + cubeWidth);
+            cubeVertices[1, 1, 1].X = Convert.ToInt32(cubeWidth * Math.Sin(anim + Math.PI * 0.5) + cubeWidth);
+
+            cubeVertices[0, 0, 0].Y = Convert.ToInt32(cubeWidth * Math.Sin(vertical) * Math.Sin(anim + Math.PI * 1) + cubeWidth * 1.5);
+            cubeVertices[1, 0, 0].Y = Convert.ToInt32(cubeWidth * Math.Sin(vertical) * Math.Sin(anim + Math.PI * 0.5) + cubeWidth * 1.5);
+            cubeVertices[0, 1, 0].Y = Convert.ToInt32(cubeWidth * Math.Sin(vertical) * Math.Sin(anim + Math.PI * 1) + cubeWidth * 0.5);
+            cubeVertices[1, 1, 0].Y = Convert.ToInt32(cubeWidth * Math.Sin(vertical) * Math.Sin(anim + Math.PI * 0.5) + cubeWidth * 0.5);
+            cubeVertices[0, 0, 1].Y = Convert.ToInt32(cubeWidth * Math.Sin(vertical) * Math.Sin(anim + Math.PI * 1.5) + cubeWidth * 1.5);
+            cubeVertices[1, 0, 1].Y = Convert.ToInt32(cubeWidth * Math.Sin(vertical) * Math.Sin(anim + Math.PI * 2) + cubeWidth * 1.5);
+            cubeVertices[0, 1, 1].Y = Convert.ToInt32(cubeWidth * Math.Sin(vertical) * Math.Sin(anim + Math.PI * 1.5) + cubeWidth * 0.5);
+            cubeVertices[1, 1, 1].Y = Convert.ToInt32(cubeWidth * Math.Sin(vertical) * Math.Sin(anim + Math.PI * 2) + cubeWidth * 0.5);
         }
     }
 }
