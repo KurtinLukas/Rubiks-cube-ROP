@@ -350,19 +350,57 @@ namespace ROP
             textBoxAlgorithm.Text = "U'L'U'F'R2B'RFUB2UB'LU'FURF'";
         }
 
+        double anim = 0;
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
-                case Keys.Right: 
-                        cubeVertices[0,0,0].X += Convert.ToInt32(cubeWidth * Math.Sin(cubeVertices[0, 0, 0].X/240 + 1 * Math.PI/180));
-                        cubeVertices[1, 0, 0].X = cubeWidth * Convert.ToInt32(Math.Sin(Convert.ToDouble(cubeVertices[1, 0, 0].X)));
-                        cubeVertices[0, 1, 0].X = cubeWidth * Convert.ToInt32(Math.Sin(Convert.ToDouble(cubeVertices[0, 1, 0].X)));
-                        cubeVertices[1, 1, 0].X = cubeWidth * Convert.ToInt32(Math.Sin(Convert.ToDouble(cubeVertices[1, 1, 0].X)));
+                case Keys.Right:
+                    anim += 0;
+                    cubeVertices[0, 0, 0].X = Convert.ToInt32(cubeWidth * Math.Sin(anim + Math.PI * 1) + cubeWidth);
+                    //cubeVertices[1, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 1.5);
+                    //cubeVertices[0, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 0.5);
+                    //cubeVertices[1, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 1.5);
+                    //cubeVertices[0, 0, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 2) + cubeWidth * 0.5);
+                    //cubeVertices[1, 0, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1.5) + cubeWidth * 1.5);
+                    //cubeVertices[0, 1, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 0.5);
+                    //cubeVertices[1, 1, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 1.5);
+
+                    cubeVertices[0, 0, 0].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 1.25);
+                    //cubeVertices[1, 0, 0].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 0.5) + cubeWidth * 1.25);
+                    //cubeVertices[0, 1, 0].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 0.5) + cubeWidth * 0.25);
+                    //cubeVertices[1, 1, 0].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 1) + cubeWidth * 0.25);
+                    //cubeVertices[0, 0, 1].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 1.5) + cubeWidth * 1.25);
+                    //cubeVertices[1, 0, 1].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 1.5) + cubeWidth * 1.25);
+                    //cubeVertices[0, 1, 1].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 2) + cubeWidth * 0.25);
+                    //cubeVertices[1, 1, 1].Y = Convert.ToInt32(cubeWidth / 4 * Math.Sin(anim + Math.PI * 1.5) + cubeWidth * 0.25);
                     break;
-                case Keys.Left: MessageBox.Show((20 * Math.PI / 180).ToString()); break;
-                case Keys.Up: MessageBox.Show((cubeWidth * Convert.ToInt32(Math.Sin(Convert.ToDouble(cubeVertices[0, 0, 0].X)))).ToString()); break;
-                case Keys.Down: break;
+                case Keys.Left:
+                    anim -= 0.1;
+                    cubeVertices[0, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
+                    cubeVertices[1, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5);
+                    cubeVertices[0, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
+                    cubeVertices[1, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5);
+                    cubeVertices[0, 0, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(-anim) + cubeWidth * 0.5);
+                    cubeVertices[1, 0, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(-anim) + cubeWidth * 1.5);
+                    cubeVertices[0, 1, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(-anim) + cubeWidth * 0.5);
+                    cubeVertices[1, 1, 1].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(-anim) + cubeWidth * 1.5);
+
+                    
+                    break;
+                case Keys.Up:
+                    cubeVertices[0, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
+                    cubeVertices[1, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5);
+                    cubeVertices[0, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
+                    cubeVertices[1, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5); 
+                    break;
+                case Keys.Down:
+                    cubeVertices[0, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
+                    cubeVertices[1, 0, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5);
+                    cubeVertices[0, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth / 2);
+                    cubeVertices[1, 1, 0].X = Convert.ToInt32(cubeWidth / 2 * Math.Sin(anim) + cubeWidth * 1.5); 
+                    break;
             }
 
             ActiveForm.Refresh();
