@@ -40,6 +40,8 @@ namespace ROP
             this.algorithm2 = new System.Windows.Forms.Button();
             this.algorithm1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.scrambleButton = new System.Windows.Forms.Button();
+            this.solveButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonRight
@@ -159,11 +161,35 @@ namespace ROP
             this.label1.TabIndex = 10;
             this.label1.Text = "Algoritmy:";
             // 
+            // scrambleButton
+            // 
+            this.scrambleButton.Enabled = false;
+            this.scrambleButton.Location = new System.Drawing.Point(537, 40);
+            this.scrambleButton.Name = "scrambleButton";
+            this.scrambleButton.Size = new System.Drawing.Size(89, 23);
+            this.scrambleButton.TabIndex = 11;
+            this.scrambleButton.Text = "Scramble";
+            this.scrambleButton.UseVisualStyleBackColor = true;
+            this.scrambleButton.Click += new System.EventHandler(this.scrambleButton_Click);
+            // 
+            // solveButton
+            // 
+            this.solveButton.Enabled = false;
+            this.solveButton.Location = new System.Drawing.Point(537, 69);
+            this.solveButton.Name = "solveButton";
+            this.solveButton.Size = new System.Drawing.Size(89, 23);
+            this.solveButton.TabIndex = 12;
+            this.solveButton.Text = "Solve";
+            this.solveButton.UseVisualStyleBackColor = true;
+            this.solveButton.Click += new System.EventHandler(this.solveButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 677);
+            this.ClientSize = new System.Drawing.Size(800, 394);
+            this.Controls.Add(this.solveButton);
+            this.Controls.Add(this.scrambleButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.algorithm1);
             this.Controls.Add(this.algorithm2);
@@ -199,6 +225,8 @@ namespace ROP
         private System.Windows.Forms.Button algorithm2;
         private System.Windows.Forms.Button algorithm1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button scrambleButton;
+        private System.Windows.Forms.Button solveButton;
     }
 }
 
