@@ -28,10 +28,13 @@ namespace ROP
         public Point[,,] cubeVertices = new Point[2, 2, 2]; //x, y, z
         public int cubeWidth = 240;
         public Point basePoint = new Point(45, 45);
+        public double[,] cubeMatrix = new double[4, 4];
 
         public int frontSide = 4;
         public int upSide = 1;
         public int rightSide = 2;
+
+        public string historieTahu = "";
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -53,7 +56,7 @@ namespace ROP
                 front[0, i] = 4; front[1, i] = 4; front[2, i] = 4;
                 back[0, i] = 5; back[1, i] = 5; back[2, i] = 5;
             }
-            Render();
+            //Render();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -112,36 +115,49 @@ namespace ROP
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
+            historieTahu += "R";
+            label2.Text = "Historie: " + historieTahu;
             TurnRight();
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
+            historieTahu += "L";
+            label2.Text = "Historie: " + historieTahu;
             TurnLeft();
         }
 
         private void buttonTop_Click(object sender, EventArgs e)
         {
+            historieTahu += "U";
+            label2.Text = "Historie: " + historieTahu;
             TurnUp();
         }
 
         private void buttonBottom_Click(object sender, EventArgs e)
         {
+            historieTahu += "D";
+            label2.Text = "Historie: " + historieTahu;
             TurnDown();
         }
 
         private void buttonFront_Click(object sender, EventArgs e)
         {
+            historieTahu += "F";
+            label2.Text = "Historie: " + historieTahu;
             TurnFront();
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
+            historieTahu += "B";
+            label2.Text = "Historie: " + historieTahu;
             TurnBack();
         }
 
         public void TurnRight()
         {
+
             int[] buff = { top[2, 0], top[2, 1], top[2, 2] };
             top[2, 0] = front[2, 0];
             top[2, 1] = front[2, 1];
@@ -306,6 +322,7 @@ namespace ROP
         private void buttonAlgorithm_Click(object sender, EventArgs e)
         {
             Algorithm(textBoxAlgorithm.Text);
+            historieTahu += textBoxAlgorithm.Text;
         }
 
         public void Algorithm(string alg)
@@ -347,7 +364,7 @@ namespace ROP
                     }
                 }
             }
-            Render();
+            //Render();
         }
 
         private void algorithm2_Click(object sender, EventArgs e)
@@ -386,36 +403,56 @@ namespace ROP
 
         public void RenderMatrix(float fov, float aspectRatio, float znear, float zfar)
         {
-            // [ aspectRatio / tan(fov/2)           0                         0                        0
-            // [                0                      1/tan(fov/2)                0                        0
-            // [                0                             0              zfar/(zfar-znear)   (zfar-znear)/(zfar-znear)
-            // [                0                             0                         0                        0
+            // { aspectRatio / tan(fov/2)           0                     0                       0
+            // {                0             1/tan(fov/2)                0                       0
+            // {                0                   0              zfar/(zfar-znear)    (zfar-znear)/(zfar-znear)
+            // {                0                   0                     -1                      0
 
+            cubeMatrix[0, 0] = aspectRatio / Math.Tan(fov / 2);
+            cubeMatrix[1, 1] = 1 / Math.Tan(fov / 2);
+            cubeMatrix[2, 2] = zfar / (zfar - znear);
+            cubeMatrix[3, 2] = (zfar - znear) / (zfar - znear);
+            cubeMatrix[2, 3] = -1;
         }
 
         private void solveButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 3; i++)
+            string solve = "";
+            for(int i = historieTahu.Length-1; i >= 0; i--)
             {
-                bottom[0, i] = 0; bottom[1, i] = 0; bottom[2, i] = 0;
-                top[0, i] = 1; top[1, i] = 1; top[2, i] = 1;
-                right[0, i] = 2; right[1, i] = 2; right[2, i] = 2;
-                left[0, i] = 3; left[1, i] = 3; left[2, i] = 3;
-                front[0, i] = 4; front[1, i] = 4; front[2, i] = 4;
-                back[0, i] = 5; back[1, i] = 5; back[2, i] = 5;
+                if (historieTahu[i] == '\'')
+                {
+                    solve += historieTahu[i - 1];
+                    i--;
+                }
+                else if(historieTahu[i] == '2')
+                {
+                    solve += historieTahu[i - 1] + "2";
+                    i--;
+                }
+                else solve += historieTahu[i] + "\'";
+                historieTahu = historieTahu.Remove(i);
             }
+            label2.Text = "Historie: " + historieTahu;
+            Algorithm(solve);
             ActiveForm.Refresh();
         }
 
         private void scrambleButton_Click(object sender, EventArgs e)
         {
             string moves = "RLUDFB2'";
-            string scramble = "";
             Random rng = new Random();
-            for(int i = 0; i < 20; i++)
+            string scramble = moves[rng.Next(0,6)].ToString();
+            for(int i = 1; i < 20; i++)
             {
-                scramble += moves[rng.Next(0, 8)];
+                char m;
+                do
+                    m = moves[rng.Next(0, 8)];
+                while(m == scramble[i-1] || (m == '\'' && scramble[i-1] == '2') || (m == '2' && scramble[i - 1] == '\''));
+                scramble += m;
             }
+            historieTahu += scramble;
+            label2.Text = "Historie: " + historieTahu;
             Algorithm(scramble);
         }
     }
