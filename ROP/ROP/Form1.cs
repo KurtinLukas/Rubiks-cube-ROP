@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace ROP
 {
@@ -141,7 +142,31 @@ namespace ROP
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            
+            Pen borderPen = new Pen(Color.Black, 5);
+            Brush[] brushes = new Brush[6];
+            brushes[0] = Brushes.White;
+            brushes[1] = Brushes.Yellow;
+            brushes[2] = Brushes.Red;
+            brushes[3] = Brushes.Orange;
+            brushes[4] = Brushes.Blue;
+            brushes[5] = Brushes.Green;
+
+            Graphics g = e.Graphics;
+            g.FillRectangle(Brushes.Black, new Rectangle(645, 195, 80, 240));
+            g.FillRectangle(Brushes.Black, new Rectangle(565, 275, 320, 80));
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    //síť kostky
+                    g.FillRectangle(brushes[bottom[i, j]], new Rectangle(650 + i * 25, 360 + j * 25, 20, 20));
+                    g.FillRectangle(brushes[top[i, j]], new Rectangle(650 + i * 25, 200 + j * 25, 20, 20));
+                    g.FillRectangle(brushes[right[i, j]], new Rectangle(730 + i * 25, 280 + j * 25, 20, 20));
+                    g.FillRectangle(brushes[left[i, j]], new Rectangle(570 + i * 25, 280 + j * 25, 20, 20));
+                    g.FillRectangle(brushes[front[i, j]], new Rectangle(650 + i * 25, 280 + j * 25, 20, 20));
+                    g.FillRectangle(brushes[back[i, j]], new Rectangle(810 + i * 25, 280 + j * 25, 20, 20));
+                }
+            }
         }
         public void DrawSquare(Graphics g, Square s)
         {
@@ -179,16 +204,16 @@ namespace ROP
             if(b != Brushes.Black)
             {
 
-                //g.FillPolygon(b, new PointF[]{
-                //                                        new PointF((float)d.vectors[0].X, (float)d.vectors[0].Y), 
-                //                                        new PointF((float)d.vectors[1].X, (float)d.vectors[1].Y), 
-                //                                        new PointF((float)d.vectors[2].X, (float)d.vectors[2].Y), 
-                //                                        new PointF((float)d.vectors[3].X, (float)d.vectors[3].Y)});
-                g.DrawPolygon(new Pen(b, 2), new PointF[]{
+                g.FillPolygon(b, new PointF[]{
                                                         new PointF((float)d.vectors[0].X, (float)d.vectors[0].Y),
                                                         new PointF((float)d.vectors[1].X, (float)d.vectors[1].Y),
                                                         new PointF((float)d.vectors[2].X, (float)d.vectors[2].Y),
                                                         new PointF((float)d.vectors[3].X, (float)d.vectors[3].Y)});
+                //g.DrawPolygon(new Pen(b, 2), new PointF[]{
+                //                                        new PointF((float)d.vectors[0].X, (float)d.vectors[0].Y),
+                //                                        new PointF((float)d.vectors[1].X, (float)d.vectors[1].Y),
+                //                                        new PointF((float)d.vectors[2].X, (float)d.vectors[2].Y),
+                //                                        new PointF((float)d.vectors[3].X, (float)d.vectors[3].Y)});
             }
         }
 
@@ -412,10 +437,12 @@ namespace ROP
         public void Algorithm(string alg)
         {
             string tahy = "RLUDFB";
+            Stopwatch sw = new Stopwatch();
             for (int i = 0; i < alg.Length; i++)
             {
                 if (tahy.Contains(alg[i]))
                 {
+                    sw.Start();
                     if (i + 1 < alg.Length)
                     {
                         if (alg[i + 1] == '\'')
@@ -446,6 +473,12 @@ namespace ROP
                         case 'B': TurnBack(); break;
                         default: MessageBox.Show("error v algoritmu"); break;
                     }
+                    while(sw.ElapsedMilliseconds < 500)
+                    {
+
+                    }
+                    sw.Stop();
+                    sw.Reset();
                 }
             }
             //Render();
@@ -575,7 +608,7 @@ namespace ROP
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //anim += 0.02;
+            anim += 0.01;
             ZRotationMatrix[0, 0] = Math.Cos(anim);
             ZRotationMatrix[0, 1] = Math.Sin(anim);
             ZRotationMatrix[1, 0] = -Math.Sin(anim);
@@ -596,14 +629,7 @@ namespace ROP
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            Pen borderPen = new Pen(Color.Black, 5);
-            Brush[] brushes = new Brush[6];
-            brushes[0] = Brushes.White;
-            brushes[1] = Brushes.Yellow;
-            brushes[2] = Brushes.Red;
-            brushes[3] = Brushes.Orange;
-            brushes[4] = Brushes.Blue;
-            brushes[5] = Brushes.Green;
+            
 
             Graphics g = e.Graphics;
 
@@ -619,29 +645,15 @@ namespace ROP
                 redraw = false;
             }
             
-
-            g.FillRectangle(Brushes.Black, new Rectangle(535, 195, 80, 240));
-            g.FillRectangle(Brushes.Black, new Rectangle(455, 275, 320, 80));
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    //síť kostky
-                    g.FillRectangle(brushes[bottom[i, j]], new Rectangle(540 + i * 25, 360 + j * 25, 20, 20));
-                    g.FillRectangle(brushes[top[i, j]], new Rectangle(540 + i * 25, 200 + j * 25, 20, 20));
-                    g.FillRectangle(brushes[right[i, j]], new Rectangle(620 + i * 25, 280 + j * 25, 20, 20));
-                    g.FillRectangle(brushes[left[i, j]], new Rectangle(460 + i * 25, 280 + j * 25, 20, 20));
-                    g.FillRectangle(brushes[front[i, j]], new Rectangle(540 + i * 25, 280 + j * 25, 20, 20));
-                    g.FillRectangle(brushes[back[i, j]], new Rectangle(700 + i * 25, 280 + j * 25, 20, 20));
-                }
-            }
-            Square a = cubes[5, 0].squares[5];
-            DrawSquare(g, a);
-
-            Vector3 z = MultiplyMatrixVector(a.normal, ZRotationMatrix);
+            //cubes[4,0].squares[5].vectors[0]
+            Vector3 z = MultiplyMatrixVector(new Vector3(0,0,0), ZRotationMatrix);
             Vector3 x = MultiplyMatrixVector(z, XRotationMatrix);
             Vector3 v = MultiplyMatrixVector(x, projectionMatrix);
+            z = MultiplyMatrixVector(new Vector3(0,0,0), ZRotationMatrix);
+            x = MultiplyMatrixVector(z, XRotationMatrix);
+            Vector3 zeroPoint = MultiplyMatrixVector(x, projectionMatrix);
             label2.Text = v.X + "\n" + v.Y + "\n" + v.Z;
+            g.DrawLine(new Pen(Brushes.Black, 3), (float)v.X, (float)v.Y, (float)zeroPoint.X, (float)zeroPoint.Y);
         }
     }
 

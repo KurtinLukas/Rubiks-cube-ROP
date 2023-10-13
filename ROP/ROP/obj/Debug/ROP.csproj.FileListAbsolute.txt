@@ -17,4 +17,4 @@ G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.GenerateResource.cach
 G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.CoreCompileInputs.cache
 G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.exe
 G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.pdb
-G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.AssemblyReference.cache
+G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csprojAssemblyReference.cache
