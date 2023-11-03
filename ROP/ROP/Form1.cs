@@ -437,7 +437,7 @@ namespace ROP
             {
                 if (tahy.Contains(alg[i]))
                 {
-                    //sw.Start();
+                    sw.Restart();
                     if (i + 1 < alg.Length)
                     {
                         if (alg[i + 1] == '\'')
@@ -468,15 +468,13 @@ namespace ROP
                         case 'B': TurnBack(); break;
                         default: MessageBox.Show("error v algoritmu"); break;
                     }
-                    //while(sw.ElapsedMilliseconds < 500)
+                    while(sw.ElapsedMilliseconds < 200)
                     {
 
                     }
-                    sw.Stop();
-                    sw.Reset();
+                    Refresh();
                 }
             }
-            //Render();
         }
 
         private void algorithm2_Click(object sender, EventArgs e)
@@ -551,7 +549,6 @@ namespace ROP
         //Algorithm stuff
         private void solveButton_Click(object sender, EventArgs e)
         {
-            /*
             string solve = "";
             for (int i = historieTahu.Length - 1; i >= 0; i--)
             {
@@ -570,9 +567,7 @@ namespace ROP
             }
             label2.Text = "Historie: " + historieTahu;
             Algorithm(solve);
-            */
-            if (SolveBad(21, (Cube[,])cubes.Clone())) MessageBox.Show("Solved in " + countMoves + " moves!");
-            else MessageBox.Show("No solve :(");
+            historieTahu = "";
             ActiveForm.Refresh();
         }
 
@@ -661,23 +656,6 @@ namespace ROP
             else if (m == 2)
                 scramble += "\'";
             return scramble;
-        }
-        double countMoves = 0;
-        public bool SolveBad(int a, Cube[,] c)
-        {
-            bool solved = false;
-            Random rng = new Random();
-            if (c == cubes) return true;
-            //Cube[,] newCube = c.Clone();
-            //Je potřeba předělat Algorithm() na Algorithm(Cube);
-            string move = MoveRandom(rng);
-            Algorithm(move);
-            countMoves++;
-            //label1.Text = countMoves.ToString();
-            if (solved)
-                return true;
-            else return SolveBad(a - 1, c);
-
         }
     }
 
