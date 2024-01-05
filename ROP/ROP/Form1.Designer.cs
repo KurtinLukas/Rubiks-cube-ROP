@@ -46,13 +46,15 @@ namespace ROP
             this.label2 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonRight
             // 
             this.buttonRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRight.Location = new System.Drawing.Point(798, 610);
+            this.buttonRight.Location = new System.Drawing.Point(956, 610);
             this.buttonRight.Name = "buttonRight";
             this.buttonRight.Size = new System.Drawing.Size(75, 23);
             this.buttonRight.TabIndex = 0;
@@ -63,7 +65,7 @@ namespace ROP
             // buttonLeft
             // 
             this.buttonLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLeft.Location = new System.Drawing.Point(798, 639);
+            this.buttonLeft.Location = new System.Drawing.Point(956, 639);
             this.buttonLeft.Name = "buttonLeft";
             this.buttonLeft.Size = new System.Drawing.Size(75, 23);
             this.buttonLeft.TabIndex = 1;
@@ -74,7 +76,7 @@ namespace ROP
             // buttonBack
             // 
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBack.Location = new System.Drawing.Point(798, 668);
+            this.buttonBack.Location = new System.Drawing.Point(956, 668);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
             this.buttonBack.TabIndex = 2;
@@ -85,7 +87,7 @@ namespace ROP
             // buttonTop
             // 
             this.buttonTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonTop.Location = new System.Drawing.Point(717, 610);
+            this.buttonTop.Location = new System.Drawing.Point(875, 610);
             this.buttonTop.Name = "buttonTop";
             this.buttonTop.Size = new System.Drawing.Size(75, 23);
             this.buttonTop.TabIndex = 3;
@@ -96,7 +98,7 @@ namespace ROP
             // buttonBottom
             // 
             this.buttonBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBottom.Location = new System.Drawing.Point(717, 639);
+            this.buttonBottom.Location = new System.Drawing.Point(875, 639);
             this.buttonBottom.Name = "buttonBottom";
             this.buttonBottom.Size = new System.Drawing.Size(75, 23);
             this.buttonBottom.TabIndex = 4;
@@ -107,7 +109,7 @@ namespace ROP
             // buttonFront
             // 
             this.buttonFront.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFront.Location = new System.Drawing.Point(717, 668);
+            this.buttonFront.Location = new System.Drawing.Point(875, 668);
             this.buttonFront.Name = "buttonFront";
             this.buttonFront.Size = new System.Drawing.Size(75, 23);
             this.buttonFront.TabIndex = 5;
@@ -118,7 +120,7 @@ namespace ROP
             // buttonAlgorithm
             // 
             this.buttonAlgorithm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAlgorithm.Location = new System.Drawing.Point(758, 727);
+            this.buttonAlgorithm.Location = new System.Drawing.Point(916, 727);
             this.buttonAlgorithm.Name = "buttonAlgorithm";
             this.buttonAlgorithm.Size = new System.Drawing.Size(115, 23);
             this.buttonAlgorithm.TabIndex = 6;
@@ -129,7 +131,7 @@ namespace ROP
             // textBoxAlgorithm
             // 
             this.textBoxAlgorithm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAlgorithm.Location = new System.Drawing.Point(533, 701);
+            this.textBoxAlgorithm.Location = new System.Drawing.Point(691, 701);
             this.textBoxAlgorithm.Name = "textBoxAlgorithm";
             this.textBoxAlgorithm.Size = new System.Drawing.Size(340, 20);
             this.textBoxAlgorithm.TabIndex = 7;
@@ -137,7 +139,7 @@ namespace ROP
             // algorithm2
             // 
             this.algorithm2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.algorithm2.Location = new System.Drawing.Point(533, 667);
+            this.algorithm2.Location = new System.Drawing.Point(691, 667);
             this.algorithm2.Name = "algorithm2";
             this.algorithm2.Size = new System.Drawing.Size(89, 23);
             this.algorithm2.TabIndex = 8;
@@ -148,7 +150,7 @@ namespace ROP
             // algorithm1
             // 
             this.algorithm1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.algorithm1.Location = new System.Drawing.Point(533, 638);
+            this.algorithm1.Location = new System.Drawing.Point(691, 638);
             this.algorithm1.Name = "algorithm1";
             this.algorithm1.Size = new System.Drawing.Size(89, 23);
             this.algorithm1.TabIndex = 9;
@@ -160,7 +162,7 @@ namespace ROP
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(533, 610);
+            this.label1.Location = new System.Drawing.Point(691, 610);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 10;
@@ -169,7 +171,7 @@ namespace ROP
             // scrambleButton
             // 
             this.scrambleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.scrambleButton.Location = new System.Drawing.Point(622, 638);
+            this.scrambleButton.Location = new System.Drawing.Point(780, 638);
             this.scrambleButton.Name = "scrambleButton";
             this.scrambleButton.Size = new System.Drawing.Size(89, 23);
             this.scrambleButton.TabIndex = 11;
@@ -180,7 +182,7 @@ namespace ROP
             // solveButton
             // 
             this.solveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.solveButton.Location = new System.Drawing.Point(622, 667);
+            this.solveButton.Location = new System.Drawing.Point(780, 667);
             this.solveButton.Name = "solveButton";
             this.solveButton.Size = new System.Drawing.Size(89, 23);
             this.solveButton.TabIndex = 12;
@@ -212,12 +214,25 @@ namespace ROP
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(568, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(462, 313);
+            this.pictureBox2.TabIndex = 15;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 761);
+            this.ClientSize = new System.Drawing.Size(1042, 761);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.solveButton);
@@ -237,10 +252,10 @@ namespace ROP
             this.Text = "Form1";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,6 +279,7 @@ namespace ROP
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 
