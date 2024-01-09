@@ -455,7 +455,8 @@ namespace ROP
                     {
 
                     }
-                    Refresh();
+                    pictureBox1.Refresh();
+                    pictureBox2.Refresh();
                 }
             }
         }
@@ -552,8 +553,6 @@ namespace ROP
             }
             label2.Text = "Historie: " + historieTahu;
             Algorithm(solve);
-            
-            ActiveForm.Refresh();
         }
 
         private void scrambleButton_Click(object sender, EventArgs e)
@@ -573,7 +572,6 @@ namespace ROP
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             redraw = true;
-            Refresh();
         }
 
         private void Form1_ResizeEnd(object sender, EventArgs e)
@@ -599,7 +597,8 @@ namespace ROP
             XRotationMatrix[3, 3] = 1;
 
             redraw = true;
-            Refresh();
+            pictureBox1.Refresh();
+            pictureBox2.Refresh();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -610,7 +609,7 @@ namespace ROP
             {
                 foreach (Cube c in cubes)
                 {
-                        foreach (Square s in c.squares)
+                        foreach (Square s in c.squares.Where(s => s.color != Color.Black))
                         {
                             DrawSquare(g, s);
                         }
@@ -645,9 +644,7 @@ namespace ROP
                 d.vectors[i].X = (d.vectors[i].X + 1) * 0.5 * pictureBox1.Width;
                 d.vectors[i].Y = (d.vectors[i].Y + 1) * 0.5 * pictureBox1.Height;
             }
-            Brush b = GetBrush(s.color);
-            if (b != Brushes.Black)
-            {
+                Brush b = GetBrush(s.color);
                 g.FillPolygon(b, new PointF[]{
                                                         new PointF((float)d.vectors[0].X, (float)d.vectors[0].Y),
                                                         new PointF((float)d.vectors[1].X, (float)d.vectors[1].Y),
@@ -658,7 +655,7 @@ namespace ROP
                 //                                        new PointF((float)d.vectors[1].X, (float)d.vectors[1].Y),
                 //                                        new PointF((float)d.vectors[2].X, (float)d.vectors[2].Y),
                 //                                        new PointF((float)d.vectors[3].X, (float)d.vectors[3].Y)});
-            }
+            
         }
 
         private Brush GetBrush(Color c)
@@ -714,21 +711,17 @@ namespace ROP
             
             g.FillRectangle(Brushes.Black, new Rectangle(new Point(0, height), new Size(pictureBox2.Size.Width, height)));
             g.FillRectangle(Brushes.Black, new Rectangle(new Point(width, 0), new Size(width, pictureBox2.Size.Height)));
-            
-            for(int i = 0; i < 3; i++)
-            {
-                for(int j = 0; j < 9; j++)
-                {
-                    Cube c = cubes[j, i];
-                    foreach(Square s in c.squares)
-                    {
-                        Brush b = Brushes.Black;
-                        //not working
-                        if (b == Brushes.Black) break;
 
-                        g.FillRectangle(b, new Rectangle(new Point(i,j), new Size((width-5)/3, (height-5)/3)));
+            if (redraw)
+            {
+                foreach (Cube c in cubes)
+                {
+                    foreach (Square s in c.squares.Where(x=>x.color != Color.Black))
+                    {
+                        
                     }
                 }
+                redraw = false;
             }
         }
     }
