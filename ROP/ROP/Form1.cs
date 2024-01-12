@@ -608,12 +608,18 @@ namespace ROP
 
             if (redraw)
             {
+                List<Square> squareSort = new List<Square>();
                 foreach (Cube c in cubes)
                 {
-                        foreach (Square s in c.squares)
-                        {
-                            DrawSquare(g, s);
-                        }
+                    foreach(Square squ in c.squares.Where(w => w.color != Color.Black))
+                    {
+                        squareSort.Add(computeVectors(squ));
+                    }
+                }
+                squareSort = squareSort.OrderByDescending(q => q.Middle().Z).ToList();
+                foreach (Square s in squareSort)
+                {
+                    DrawSquare(g, s);
                 }
                 redraw = false;
             }
@@ -628,13 +634,12 @@ namespace ROP
             g.DrawLine(new Pen(Brushes.Black, 3), (float)v.X, (float)v.Y, (float)zeroPoint.X, (float)zeroPoint.Y);
         }
 
-        public void DrawSquare(Graphics g, Square s)
+        public Square computeVectors(Square s)
         {
-            Square d = new Square(); //Výsledný polygon
+            Square d = s.Copy(); //Výsledný polygon
             Square t = new Square(); //offset polygon
             Square rotaceZ = new Square(); //první rotace polygon
             Square rotaceX = new Square(); //druhá rotace polygon
-
             for (int i = 0; i < 4; i++)
             {
                 rotaceZ.vectors[i] = MultiplyMatrixVector(s.vectors[i], ZRotationMatrix);
@@ -645,19 +650,24 @@ namespace ROP
                 d.vectors[i].X = (d.vectors[i].X + 1) * 0.5 * pictureBox1.Width;
                 d.vectors[i].Y = (d.vectors[i].Y + 1) * 0.5 * pictureBox1.Height;
             }
+            return d;
+        }
+
+        public void DrawSquare(Graphics g, Square s)
+        {            
             Brush b = GetBrush(s.color);
             if (b != Brushes.Black)
             {
                 g.FillPolygon(b, new PointF[]{
-                                                        new PointF((float)d.vectors[0].X, (float)d.vectors[0].Y),
-                                                        new PointF((float)d.vectors[1].X, (float)d.vectors[1].Y),
-                                                        new PointF((float)d.vectors[2].X, (float)d.vectors[2].Y),
-                                                        new PointF((float)d.vectors[3].X, (float)d.vectors[3].Y)});
+                                                        new PointF((float)s.vectors[0].X, (float)s.vectors[0].Y),
+                                                        new PointF((float)s.vectors[1].X, (float)s.vectors[1].Y),
+                                                        new PointF((float)s.vectors[2].X, (float)s.vectors[2].Y),
+                                                        new PointF((float)s.vectors[3].X, (float)s.vectors[3].Y)});
                 //g.DrawPolygon(new Pen(b, 2), new PointF[]{
-                //                                        new PointF((float)d.vectors[0].X, (float)d.vectors[0].Y),
-                //                                        new PointF((float)d.vectors[1].X, (float)d.vectors[1].Y),
-                //                                        new PointF((float)d.vectors[2].X, (float)d.vectors[2].Y),
-                //                                        new PointF((float)d.vectors[3].X, (float)d.vectors[3].Y)});
+                //                                        new PointF((float)s.vectors[0].X, (float)s.vectors[0].Y),
+                //                                        new PointF((float)s.vectors[1].X, (float)s.vectors[1].Y),
+                //                                        new PointF((float)s.vectors[2].X, (float)s.vectors[2].Y),
+                //                                        new PointF((float)s.vectors[3].X, (float)s.vectors[3].Y)});
             }
         }
 
@@ -782,7 +792,13 @@ namespace ROP
 
         public Square(Vector3[] vArray)
         {
-            vectors = vArray;
+            vArray.CopyTo(vectors, 0);
+        }
+        public Square(Vector3[] vArray, Color c)
+        {
+            vectors = new Vector3[4];
+            vArray.CopyTo(vectors, 0);
+            color = c;
         }
         public Square(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3)
         {
@@ -811,6 +827,14 @@ namespace ROP
         public object Clone()
         {
             return new Square(vectors.Select(item => (Vector3)vectors.Clone()).ToArray());
+        }
+        public Square Copy()
+        {
+            return new Square(vectors.ToArray(),color);
+        }
+        public Vector3 Middle()
+        {
+            return (vectors[0] - vectors[2]) / 2 + vectors[2];
         }
     }
     public class Cube : ICloneable
