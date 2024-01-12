@@ -663,11 +663,11 @@ namespace ROP
                                                         new PointF((float)s.vectors[1].X, (float)s.vectors[1].Y),
                                                         new PointF((float)s.vectors[2].X, (float)s.vectors[2].Y),
                                                         new PointF((float)s.vectors[3].X, (float)s.vectors[3].Y)});
-                //g.DrawPolygon(new Pen(b, 2), new PointF[]{
-                //                                        new PointF((float)s.vectors[0].X, (float)s.vectors[0].Y),
-                //                                        new PointF((float)s.vectors[1].X, (float)s.vectors[1].Y),
-                //                                        new PointF((float)s.vectors[2].X, (float)s.vectors[2].Y),
-                //                                        new PointF((float)s.vectors[3].X, (float)s.vectors[3].Y)});
+                g.DrawPolygon(new Pen(Brushes.Black, 1), new PointF[]{
+                                                        new PointF((float)s.vectors[0].X, (float)s.vectors[0].Y),
+                                                        new PointF((float)s.vectors[1].X, (float)s.vectors[1].Y),
+                                                        new PointF((float)s.vectors[2].X, (float)s.vectors[2].Y),
+                                                        new PointF((float)s.vectors[3].X, (float)s.vectors[3].Y)});
             }
         }
 
@@ -740,148 +740,6 @@ namespace ROP
                     }
                 }
             }
-        }
-    }
-
-    public class Vector3 : ICloneable
-    {
-        public double X;
-        public double Y;
-        public double Z;
-        public Vector3(double x, double y, double z)
-        {
-            X = x;
-            Y = y;
-            Z = z;
-        }
-        public Vector3()
-        {
-            X = 0;
-            Y = 0;
-            Z = 0;
-        }
-
-        public object Clone()
-        {
-            return new Vector3(X, Y, Z);
-        }
-
-        public static Vector3 operator +(Vector3 a, Vector3 b) => new Vector3(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
-        public static Vector3 operator -(Vector3 a, Vector3 b) => new Vector3(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
-        public static Vector3 operator *(Vector3 a, Vector3 b) => new Vector3(a.X * b.X, a.Y * b.Y, a.Z * b.Z);
-        public static Vector3 operator *(Vector3 a, double b) => new Vector3(a.X * b, a.Y * b, a.Z * b);
-        public static Vector3 operator /(Vector3 a, Vector3 b)
-        {
-            if (b.X == 0 || b.Y == 0 || b.Z == 0)
-                throw new DivideByZeroException();
-            return new Vector3(a.X / b.X, a.Y / b.Y, a.Z / b.Z);
-        }
-        public static Vector3 operator /(Vector3 a, double b)
-        {
-            if (b == 0)
-                throw new DivideByZeroException();
-            return new Vector3(a.X / b, a.Y / b, a.Z / b);
-        }
-    }
-
-    public class Square : ICloneable
-    {
-        public Vector3[] vectors;
-        public Color color = Color.Black;
-        public Vector3 normal;
-
-        public Square(Vector3[] vArray)
-        {
-            vArray.CopyTo(vectors, 0);
-        }
-        public Square(Vector3[] vArray, Color c)
-        {
-            vectors = new Vector3[4];
-            vArray.CopyTo(vectors, 0);
-            color = c;
-        }
-        public Square(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3)
-        {
-            vectors = new Vector3[4];
-            vectors[0] = v0;
-            vectors[1] = v1;
-            vectors[2] = v2;
-            vectors[3] = v3;
-            normal = (v1 - v0) * (v1 - v3);
-        }
-        public Square(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3, Color color)
-        {
-            vectors = new Vector3[4];
-            vectors[0] = v0;
-            vectors[1] = v1;
-            vectors[2] = v2;
-            vectors[3] = v3;
-            this.color = color;
-            normal = (v1 - v0) * (v3 - v0);
-        }
-        public Square()
-        {
-            vectors = new Vector3[4];
-        }
-
-        public object Clone()
-        {
-            return new Square(vectors.Select(item => (Vector3)vectors.Clone()).ToArray());
-        }
-        public Square Copy()
-        {
-            return new Square(vectors.ToArray(),color);
-        }
-        public Vector3 Middle()
-        {
-            return (vectors[0] - vectors[2]) / 2 + vectors[2];
-        }
-    }
-    public class Cube : ICloneable
-    {
-        public Square[] squares;
-        public int rotation = 0;
-        public int position;
-        
-        public Cube(Square[] arr, int pos)
-        {
-            squares = arr;
-            position = pos;
-        }
-        public Cube(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Vector3 v5, Vector3 v6, Vector3 v7, int pos)
-        {
-            squares = new Square[6];
-            squares[0] = new Square(v0, v1, v2, v3);
-            squares[1] = new Square(v0, v1, v5, v4);
-            squares[2] = new Square(v4, v5, v6, v7);
-            squares[3] = new Square(v3, v2, v6, v7);
-            squares[4] = new Square(v0, v4, v7, v3);
-            squares[5] = new Square(v1, v5, v6, v2);
-
-            position = pos;
-        }
-        public Cube(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Vector3 v5, Vector3 v6, Vector3 v7, Color cF, Color cR, Color cB, Color cL, Color cD, Color cU, int pos)
-        {
-            squares = new Square[6];
-            squares[0] = new Square(v0, v1, v2, v3, cF);
-            squares[1] = new Square(v0, v1, v5, v4, cR);
-            squares[2] = new Square(v4, v5, v6, v7, cB);
-            squares[3] = new Square(v3, v2, v6, v7, cL);
-            squares[4] = new Square(v0, v4, v7, v3, cD);
-            squares[5] = new Square(v1, v5, v6, v2, cU);
-
-            position = pos;
-        }
-        public Cube()
-        {
-            squares = new Square[6];
-
-            position = 0;
-        }
-
-        public object Clone()
-        {
-            return new Cube(squares.Select(item => (Square)item.Clone()).ToArray(), position);
         }
     }
 }
