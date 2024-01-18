@@ -125,12 +125,6 @@ namespace ROP
         }
 
         //bílá = 0; žlutá = 1; červená = 2; oranžová = 3; modrá = 4; zelená = 5
-        public int[,] bottom = new int[3, 3];
-        public int[,] top = new int[3, 3];
-        public int[,] right = new int[3, 3];
-        public int[,] left = new int[3, 3];
-        public int[,] front = new int[3, 3];
-        public int[,] back = new int[3, 3];
 
         public double[,] projectionMatrix = new double[4, 4];
         public double[,] XRotationMatrix = new double[4, 4];
@@ -146,51 +140,46 @@ namespace ROP
         Cube[,] cubes = new Cube[9, 3];
 
 
-        private void Form1_Activated(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonRight_Click(object sender, EventArgs e)
         {
             historieTahu += "R";
             label2.Text = "Historie: " + historieTahu;
-            TurnRight();
+            Turn("R");
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
             historieTahu += "L";
             label2.Text = "Historie: " + historieTahu;
-            TurnLeft();
+            Turn("L");
         }
 
         private void buttonTop_Click(object sender, EventArgs e)
         {
             historieTahu += "U";
             label2.Text = "Historie: " + historieTahu;
-            TurnUp();
+            Turn("U");
         }
 
         private void buttonBottom_Click(object sender, EventArgs e)
         {
             historieTahu += "D";
             label2.Text = "Historie: " + historieTahu;
-            TurnDown();
+            Turn("D");
         }
 
         private void buttonFront_Click(object sender, EventArgs e)
         {
             historieTahu += "F";
             label2.Text = "Historie: " + historieTahu;
-            TurnFront();
+            Turn("F");
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
             historieTahu += "B";
             label2.Text = "Historie: " + historieTahu;
-            TurnBack();
+            Turn("B");
         }
 
         public void Turn(string input)
@@ -228,182 +217,20 @@ namespace ROP
             }
             if(input.Last() == '\'') 
             {
-                switch (input[0])
-                {
-                    case 'R': TurnRight(); TurnRight(); TurnRight(); break;
-                    case 'L': TurnLeft(); TurnLeft(); TurnLeft(); break;
-                    case 'U': TurnUp(); TurnUp(); TurnUp(); break;
-                    case 'D': TurnDown(); TurnDown(); TurnDown(); break;
-                    case 'F': TurnFront(); TurnFront(); TurnFront(); break;
-                    case 'B': TurnBack(); TurnBack(); TurnBack(); break;
-                }
+                //switch (input[0])
+                //{
+                //    case 'R': Turn("RRR"); break;
+                //    case 'L': Turn("LLL"); break;
+                //    case 'U': Turn("UUU"); break;
+                //    case 'D': Turn("DDD"); break;
+                //    case 'F': Turn("FFF"); break;
+                //    case 'B': Turn("BBB"); break;
+                //}
             }
-            else if(input[0] == '2')
+            else if(input[1] == '2')
             {
-
+                //Turn(input[0].ToString());
             }
-        }
-
-        //zastaralé funkce
-        public void TurnRight()
-        {
-
-
-            //zastaralé
-            int[] buff = { top[2, 0], top[2, 1], top[2, 2] };
-            top[2, 0] = front[2, 0];
-            top[2, 1] = front[2, 1];
-            top[2, 2] = front[2, 2];
-            front[2, 0] = bottom[2, 0];
-            front[2, 1] = bottom[2, 1];
-            front[2, 2] = bottom[2, 2];
-            bottom[2, 0] = back[0, 2];
-            bottom[2, 1] = back[0, 1];
-            bottom[2, 2] = back[0, 0];
-            back[0, 2] = buff[0];
-            back[0, 1] = buff[1];
-            back[0, 0] = buff[2];
-            int buffCorner = right[0, 0];
-            right[0, 0] = right[0, 2];
-            right[0, 2] = right[2, 2];
-            right[2, 2] = right[2, 0];
-            right[2, 0] = buffCorner;
-            int buffEdge = right[1, 0];
-            right[1, 0] = right[0, 1];
-            right[0, 1] = right[1, 2];
-            right[1, 2] = right[2, 1];
-            right[2, 1] = buffEdge;
-        }
-        public void TurnLeft()
-        {
-            int[] buff = { top[0, 0], top[0, 1], top[0, 2] };
-            top[0, 0] = back[2, 2];
-            top[0, 1] = back[2, 1];
-            top[0, 2] = back[2, 0];
-            back[2, 2] = bottom[0, 0];
-            back[2, 1] = bottom[0, 1];
-            back[2, 0] = bottom[0, 2];
-            bottom[0, 0] = front[0, 0];
-            bottom[0, 1] = front[0, 1];
-            bottom[0, 2] = front[0, 2];
-            front[0, 0] = buff[0];
-            front[0, 1] = buff[1];
-            front[0, 2] = buff[2];
-            int buffCorner = left[0, 0];
-            left[0, 0] = left[0, 2];
-            left[0, 2] = left[2, 2];
-            left[2, 2] = left[2, 0];
-            left[2, 0] = buffCorner;
-            int buffEdge = left[1, 0];
-            left[1, 0] = left[0, 1];
-            left[0, 1] = left[1, 2];
-            left[1, 2] = left[2, 1];
-            left[2, 1] = buffEdge;
-        }
-        public void TurnUp()
-        {
-            int[] buff = { front[0, 0], front[1, 0], front[2, 0] };
-            front[0, 0] = right[0, 0];
-            front[1, 0] = right[1, 0];
-            front[2, 0] = right[2, 0];
-            right[0, 0] = back[0, 0];
-            right[1, 0] = back[1, 0];
-            right[2, 0] = back[2, 0];
-            back[0, 0] = left[0, 0];
-            back[1, 0] = left[1, 0];
-            back[2, 0] = left[2, 0];
-            left[0, 0] = buff[0];
-            left[1, 0] = buff[1];
-            left[2, 0] = buff[2];
-            int buffCorner = top[0, 0];
-            top[0, 0] = top[0, 2];
-            top[0, 2] = top[2, 2];
-            top[2, 2] = top[2, 0];
-            top[2, 0] = buffCorner;
-            int buffEdge = top[1, 0];
-            top[1, 0] = top[0, 1];
-            top[0, 1] = top[1, 2];
-            top[1, 2] = top[2, 1];
-            top[2, 1] = buffEdge;
-        }
-        public void TurnDown()
-        {
-            int[] buff = { front[0, 2], front[1, 2], front[2, 2] };
-            front[0, 2] = left[0, 2];
-            front[1, 2] = left[1, 2];
-            front[2, 2] = left[2, 2];
-            left[0, 2] = back[0, 2];
-            left[1, 2] = back[1, 2];
-            left[2, 2] = back[2, 2];
-            back[0, 2] = right[0, 2];
-            back[1, 2] = right[1, 2];
-            back[2, 2] = right[2, 2];
-            right[0, 2] = buff[0];
-            right[1, 2] = buff[1];
-            right[2, 2] = buff[2];
-            int buffCorner = bottom[0, 0];
-            bottom[0, 0] = bottom[0, 2];
-            bottom[0, 2] = bottom[2, 2];
-            bottom[2, 2] = bottom[2, 0];
-            bottom[2, 0] = buffCorner;
-            int buffEdge = bottom[1, 0];
-            bottom[1, 0] = bottom[0, 1];
-            bottom[0, 1] = bottom[1, 2];
-            bottom[1, 2] = bottom[2, 1];
-            bottom[2, 1] = buffEdge;
-        }
-        public void TurnFront()
-        {
-            int[] buff = { top[0, 2], top[1, 2], top[2, 2] };
-            top[0, 2] = left[2, 2];
-            top[1, 2] = left[2, 1];
-            top[2, 2] = left[2, 0];
-            left[2, 0] = bottom[0, 0];
-            left[2, 1] = bottom[1, 0];
-            left[2, 2] = bottom[2, 0];
-            bottom[2, 0] = right[0, 0];
-            bottom[1, 0] = right[0, 1];
-            bottom[0, 0] = right[0, 2];
-            right[0, 0] = buff[0];
-            right[0, 1] = buff[1];
-            right[0, 2] = buff[2];
-            int buffCorner = front[0, 0];
-            front[0, 0] = front[0, 2];
-            front[0, 2] = front[2, 2];
-            front[2, 2] = front[2, 0];
-            front[2, 0] = buffCorner;
-            int buffEdge = front[1, 0];
-            front[1, 0] = front[0, 1];
-            front[0, 1] = front[1, 2];
-            front[1, 2] = front[2, 1];
-            front[2, 1] = buffEdge;
-        }
-        public void TurnBack()
-        {
-            int[] buff = { top[0, 0], top[1, 0], top[2, 0] };
-            top[0, 0] = right[2, 0];
-            top[1, 0] = right[2, 1];
-            top[2, 0] = right[2, 2];
-            right[2, 0] = bottom[2, 2];
-            right[2, 1] = bottom[1, 2];
-            right[2, 2] = bottom[0, 2];
-            bottom[2, 2] = left[0, 2];
-            bottom[1, 2] = left[0, 1];
-            bottom[0, 2] = left[0, 0];
-            left[0, 2] = buff[0];
-            left[0, 1] = buff[1];
-            left[0, 0] = buff[2];
-            int buffCorner = back[0, 0];
-            back[0, 0] = back[0, 2];
-            back[0, 2] = back[2, 2];
-            back[2, 2] = back[2, 0];
-            back[2, 0] = buffCorner;
-            int buffEdge = back[1, 0];
-            back[1, 0] = back[0, 1];
-            back[0, 1] = back[1, 2];
-            back[1, 2] = back[2, 1];
-            back[2, 1] = buffEdge;
-
         }
 
         private void buttonAlgorithm_Click(object sender, EventArgs e)
@@ -421,36 +248,22 @@ namespace ROP
                 if (tahy.Contains(alg[i]))
                 {
                     sw.Restart();
+                    string turn = alg[i].ToString();
                     if (i + 1 < alg.Length)
                     {
                         if (alg[i + 1] == '\'')
                         {
-                            switch (alg[i])
-                            {
-                                case 'R': TurnRight(); TurnRight(); TurnRight(); break;
-                                case 'L': TurnLeft(); TurnLeft(); TurnLeft(); break;
-                                case 'U': TurnUp(); TurnUp(); TurnUp(); break;
-                                case 'D': TurnDown(); TurnDown(); TurnDown(); break;
-                                case 'F': TurnFront(); TurnFront(); TurnFront(); break;
-                                case 'B': TurnBack(); TurnBack(); TurnBack(); break;
-                            }
+                            turn += "\'";
+                            i++;
                             continue;
                         }
                         else if (alg[i + 1] == '2')
                         {
-                            alg = alg.Remove(i + 1, 1).Insert(i + 1, alg[i].ToString());
+                            turn += "2";
+                            i++;
                         }
                     }
-                    switch (alg[i])
-                    {
-                        case 'R': TurnRight(); break;
-                        case 'L': TurnLeft(); break;
-                        case 'U': TurnUp(); break;
-                        case 'D': TurnDown(); break;
-                        case 'F': TurnFront(); break;
-                        case 'B': TurnBack(); break;
-                        default: MessageBox.Show("error v algoritmu"); break;
-                    }
+                    Turn(turn);
                     while(sw.ElapsedMilliseconds < 200)
                     {
 
@@ -608,6 +421,7 @@ namespace ROP
 
             if (redraw)
             {
+                //add all squares to a list and sort by Z position, draw from far to near
                 List<Square> squareSort = new List<Square>();
                 foreach (Cube c in cubes)
                 {
@@ -701,6 +515,7 @@ namespace ROP
         {
             if (moveCube)
             {
+                //řádně vypočítat rotaci nebo změnit způsob otáčení
                 if(rotZ%(Math.PI*2+Math.PI) >Math.PI)
                     rotX -= (double)(oldMouse.X - MousePosition.X) / 100;
                 else rotX += (double)(oldMouse.X - MousePosition.X) / 100;

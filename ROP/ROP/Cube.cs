@@ -11,11 +11,15 @@ namespace ROP
     {
         public Square[] squares;
         public int rotation = 0;
+        //přítomná pozice kostičky. Pokud je na správném místě, position == cubeIndex
         public int position;
+        //sudé = rohy, liché = hrany; správná originální pozice
+        public int cubeIndex;
 
         public Cube(Square[] arr, int pos)
         {
             squares = arr;
+            cubeIndex = pos;
             position = pos;
         }
         public Cube(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Vector3 v5, Vector3 v6, Vector3 v7, int pos)
@@ -28,6 +32,7 @@ namespace ROP
             squares[4] = new Square(v0, v4, v7, v3);
             squares[5] = new Square(v1, v5, v6, v2);
 
+            cubeIndex = pos;
             position = pos;
         }
         public Cube(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Vector3 v5, Vector3 v6, Vector3 v7, Color cF, Color cR, Color cB, Color cL, Color cD, Color cU, int pos)
@@ -40,12 +45,13 @@ namespace ROP
             squares[4] = new Square(v0, v4, v7, v3, cD);
             squares[5] = new Square(v1, v5, v6, v2, cU);
 
+            cubeIndex = pos;
             position = pos;
         }
         public Cube()
         {
             squares = new Square[6];
-
+            cubeIndex = 0;
             position = 0;
         }
 

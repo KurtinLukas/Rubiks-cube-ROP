@@ -208,7 +208,6 @@ namespace ROP
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackgroundImage = global::ROP.Properties.Resources.tomiqq;
             this.pictureBox2.Location = new System.Drawing.Point(568, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(462, 313);
@@ -218,7 +217,6 @@ namespace ROP
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::ROP.Properties.Resources.Stella1;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(550, 550);
@@ -252,7 +250,6 @@ namespace ROP
             this.Controls.Add(this.buttonRight);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Activated += new System.EventHandler(this.Form1_Activated);
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
