@@ -16,16 +16,6 @@ namespace ROP
         public Form1()
         {
             InitializeComponent();
-            
-            for (int i = 0; i < 3; i++)
-            {
-                bottom[0, i] = 0; bottom[1, i] = 0; bottom[2, i] = 0;
-                top[0, i] = 1; top[1, i] = 1; top[2, i] = 1;
-                right[0, i] = 2; right[1, i] = 2; right[2, i] = 2;
-                left[0, i] = 3; left[1, i] = 3; left[2, i] = 3;
-                front[0, i] = 4; front[1, i] = 4; front[2, i] = 4;
-                back[0, i] = 5; back[1, i] = 5; back[2, i] = 5;
-            }
 
             RenderMatrix();
 
@@ -116,7 +106,6 @@ namespace ROP
                                                      new Vector3(0.5, -1.5, -0.5)+b, new Vector3(0.5, -0.5, -0.5)+b, new Vector3(1.5, -0.5, -0.5)+b, new Vector3(1.5, -1.5, -0.5)+b,
                                                      Color.Blue, Color.Black, Color.Black, Color.Red, Color.White, Color.Black, 28);
             }
-            redraw = true;
 
             // scale_x     0       0        translation_X
             //    0         scale_y 0       translation_Y
@@ -129,13 +118,17 @@ namespace ROP
         public double[,] projectionMatrix = new double[4, 4];
         public double[,] XRotationMatrix = new double[4, 4];
         public double[,] ZRotationMatrix = new double[4, 4];
+        public double[,] animationZRotationMatrix = new double[4, 4];
+        public double[,] animationXRotationMatrix = new double[4, 4];
 
+        public string animateTurn = "E";
+        public double turnAnimX = 0;
+        public double turnAnimZ = 0;
         public double anim = 0;
         public double rotX = 0;
         public double rotZ = 0;
 
         public string historieTahu = "";
-        public bool redraw = false;
 
         Cube[,] cubes = new Cube[9, 3];
 
@@ -195,16 +188,16 @@ namespace ROP
                         
                         break;
                     case 'U':
-                        for (int i = 0; i < 9; i++)
+                        animateTurn = "U";
+                        for (int i = 0; i < 7; i++)
                         {
-                            cubes[2, i] = cubes[2, i + 2];
+                            //cubes[0,i] = 
                         }
                         break;
                     case 'D':
                         for(int i = 0; i < 9; i++)
                         {
-                            cubes[0, i] = cubes[0, i + 2];
-                            cubes[0, i].position+=2;
+
                         }
                         break;
                     case 'F': 
@@ -227,7 +220,7 @@ namespace ROP
                 //    case 'B': Turn("BBB"); break;
                 //}
             }
-            else if(input[1] == '2')
+            else if(input.Last() == '2')
             {
                 //Turn(input[0].ToString());
             }
@@ -264,11 +257,11 @@ namespace ROP
                         }
                     }
                     Turn(turn);
-                    while(sw.ElapsedMilliseconds < 200)
+                    //while(sw.ElapsedMilliseconds < 200)
                     {
 
                     }
-                    Refresh();
+                    pictureBox1.Refresh();
                 }
             }
         }
@@ -365,8 +358,6 @@ namespace ROP
             }
             label2.Text = "Historie: " + historieTahu;
             Algorithm(solve);
-            
-            ActiveForm.Refresh();
         }
 
         private void scrambleButton_Click(object sender, EventArgs e)
@@ -385,14 +376,15 @@ namespace ROP
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            redraw = true;
-            Refresh();
+            
         }
 
         private void Form1_ResizeEnd(object sender, EventArgs e)
         {
             RenderMatrix();
         }
+
+        
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -411,58 +403,100 @@ namespace ROP
             XRotationMatrix[2, 2] = Math.Cos(rotZ * 0.5);
             XRotationMatrix[3, 3] = 1;
 
-            redraw = true;
-            Refresh();
+            if(animateTurn == "E")
+            {
+                turnAnimX = anim;
+                turnAnimZ = anim;
+            }
+            else
+            {
+                turnAnimZ += 0.02;
+                animationZRotationMatrix[0, 0] = Math.Cos(turnAnimZ);
+                animationZRotationMatrix[0, 1] = Math.Sin(turnAnimZ);
+                animationZRotationMatrix[1, 0] = -Math.Sin(turnAnimZ);
+                animationZRotationMatrix[1, 1] = Math.Cos(turnAnimZ);
+                animationZRotationMatrix[2, 2] = 1;
+                animationZRotationMatrix[3, 3] = 1;
+
+                animationXRotationMatrix[0, 0] = 1;
+                animationXRotationMatrix[1, 1] = Math.Cos(turnAnimX * 0.5);
+                animationXRotationMatrix[1, 2] = Math.Sin(turnAnimX * 0.5);
+                animationXRotationMatrix[2, 1] = -Math.Sin(turnAnimX * 0.5);
+                animationXRotationMatrix[2, 2] = Math.Cos(turnAnimX * 0.5);
+                animationXRotationMatrix[3, 3] = 1;
+            }
+
+            pictureBox1.Refresh();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
 
-            if (redraw)
+            //add all squares to a list and sort by Z position, draw from far to near
+            List<Square> squareSort = new List<Square>();
+            switch (animateTurn)
             {
-                //add all squares to a list and sort by Z position, draw from far to near
-                List<Square> squareSort = new List<Square>();
-                foreach (Cube c in cubes)
-                {
-                    foreach(Square squ in c.squares.Where(w => w.color != Color.Black))
+                case "U":
+                    for (int i = 0; i < 3; i++)
                     {
-                        squareSort.Add(computeVectors(squ));
+                        for (int j = 0; j < 3; j++)
+                        {
+                            for (int k = cubes[i, j].squares.Length - 1; k > 0; k--)
+                            {
+                                squareSort.Add(computeVectors(cubes[i, j].squares[k], true));
+
+                            }
+                        }
                     }
-                }
-                squareSort = squareSort.OrderByDescending(q => q.Middle().Z).ToList();
-                foreach (Square s in squareSort)
-                {
-                    DrawSquare(g, s);
-                }
-                redraw = false;
+                    break;
             }
-            
-            Vector3 z = MultiplyMatrixVector(new Vector3(0,0,0), ZRotationMatrix);
-            Vector3 x = MultiplyMatrixVector(z, XRotationMatrix);
-            Vector3 v = MultiplyMatrixVector(x, projectionMatrix);
-            z = MultiplyMatrixVector(new Vector3(0,0,0), ZRotationMatrix);
-            x = MultiplyMatrixVector(z, XRotationMatrix);
-            Vector3 zeroPoint = MultiplyMatrixVector(x, projectionMatrix);
-            label2.Text = zeroPoint.X + "\n" + zeroPoint.Y + "\n" + zeroPoint.Z;
-            g.DrawLine(new Pen(Brushes.Black, 3), (float)v.X, (float)v.Y, (float)zeroPoint.X, (float)zeroPoint.Y);
+            foreach (Cube c in cubes)
+            {
+                foreach(Square squ in c.squares.Where(w => w.color != Color.Black))
+                {
+                    if (!squareSort.Contains(squ))
+                        squareSort.Add(computeVectors(squ, false));
+                }
+            }
+            squareSort = squareSort.OrderByDescending(q => q.Middle().Z).ToList();
+            foreach (Square s in squareSort)
+            {
+                DrawSquare(g, s);
+            }
         }
 
-        public Square computeVectors(Square s)
+        public Square computeVectors(Square s, bool turnAnimation)
         {
             Square d = s.Copy(); //Výsledný polygon
             Square t = new Square(); //offset polygon
             Square rotaceZ = new Square(); //první rotace polygon
             Square rotaceX = new Square(); //druhá rotace polygon
-            for (int i = 0; i < 4; i++)
+            if (turnAnimation)
             {
-                rotaceZ.vectors[i] = MultiplyMatrixVector(s.vectors[i], ZRotationMatrix);
-                rotaceX.vectors[i] = MultiplyMatrixVector(rotaceZ.vectors[i], XRotationMatrix);
-                t.vectors[i] = rotaceX.vectors[i];
-                t.vectors[i].Z += 8;
-                d.vectors[i] = MultiplyMatrixVector(t.vectors[i], projectionMatrix);
-                d.vectors[i].X = (d.vectors[i].X + 1) * 0.5 * pictureBox1.Width;
-                d.vectors[i].Y = (d.vectors[i].Y + 1) * 0.5 * pictureBox1.Height;
+                for (int i = 0; i < 4; i++)
+                {
+                    rotaceZ.vectors[i] = MultiplyMatrixVector(s.vectors[i], animationZRotationMatrix);
+                    rotaceX.vectors[i] = MultiplyMatrixVector(rotaceZ.vectors[i], animationXRotationMatrix);
+                    t.vectors[i] = rotaceX.vectors[i];
+                    t.vectors[i].Z += 8;
+                    d.vectors[i] = MultiplyMatrixVector(t.vectors[i], projectionMatrix);
+                    d.vectors[i].X = (d.vectors[i].X + 1) * 0.5 * pictureBox1.Width;
+                    d.vectors[i].Y = (d.vectors[i].Y + 1) * 0.5 * pictureBox1.Height;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    rotaceZ.vectors[i] = MultiplyMatrixVector(s.vectors[i], ZRotationMatrix);
+                    rotaceX.vectors[i] = MultiplyMatrixVector(rotaceZ.vectors[i], XRotationMatrix);
+                    t.vectors[i] = rotaceX.vectors[i];
+                    t.vectors[i].Z += 8;
+                    d.vectors[i] = MultiplyMatrixVector(t.vectors[i], projectionMatrix);
+                    d.vectors[i].X = (d.vectors[i].X + 1) * 0.5 * pictureBox1.Width;
+                    d.vectors[i].Y = (d.vectors[i].Y + 1) * 0.5 * pictureBox1.Height;
+                }
             }
             return d;
         }
@@ -516,7 +550,7 @@ namespace ROP
             if (moveCube)
             {
                 //řádně vypočítat rotaci nebo změnit způsob otáčení
-                if(rotZ%(Math.PI*2+Math.PI) >Math.PI)
+                if(rotZ%(Math.PI*2) >Math.PI)
                     rotX -= (double)(oldMouse.X - MousePosition.X) / 100;
                 else rotX += (double)(oldMouse.X - MousePosition.X) / 100;
                 rotZ -= (double)(oldMouse.Y - MousePosition.Y)/100;
