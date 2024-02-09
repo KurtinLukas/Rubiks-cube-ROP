@@ -11,6 +11,10 @@ namespace ROP
         public double X;
         public double Y;
         public double Z;
+
+
+        public Vector3 lengthFrom0;
+
         public Vector3(double x, double y, double z)
         {
             X = x;

@@ -106,7 +106,10 @@ namespace ROP
                                                      new Vector3(0.5, -1.5, -0.5)+b, new Vector3(0.5, -0.5, -0.5)+b, new Vector3(1.5, -0.5, -0.5)+b, new Vector3(1.5, -1.5, -0.5)+b,
                                                      Color.Blue, Color.Black, Color.Black, Color.Red, Color.White, Color.Black, 28);
             }
-
+            foreach (Cube c in cubes)
+                foreach (Square s in c.squares)
+                    foreach (Vector3 v in s.vectors)
+                        v.lengthFrom0 = new Vector3(Math.Abs(v.X), Math.Abs(v.Y), Math.Abs(v.Z));
             // scale_x     0       0        translation_X
             //    0         scale_y 0       translation_Y
             //      0       0       scale_z translation_Z
@@ -122,8 +125,9 @@ namespace ROP
         public double[,] animationXRotationMatrix = new double[4, 4];
 
         public string animateTurn = "E";
-        public double turnAnimX = 0;
-        public double turnAnimZ = 0;
+        //public double turnAnimX = 0;
+        //public double turnAnimZ = 0;
+        public double turnAnim = 0;
         public double anim = 0;
         public double rotX = 0;
         public double rotZ = 0;
@@ -403,27 +407,65 @@ namespace ROP
             XRotationMatrix[2, 2] = Math.Cos(rotZ * 0.5);
             XRotationMatrix[3, 3] = 1;
 
-            if(animateTurn == "E")
-            {
-                turnAnimX = anim;
-                turnAnimZ = anim;
-            }
-            else
-            {
-                turnAnimZ += 0.02;
-                animationZRotationMatrix[0, 0] = Math.Cos(turnAnimZ);
-                animationZRotationMatrix[0, 1] = Math.Sin(turnAnimZ);
-                animationZRotationMatrix[1, 0] = -Math.Sin(turnAnimZ);
-                animationZRotationMatrix[1, 1] = Math.Cos(turnAnimZ);
-                animationZRotationMatrix[2, 2] = 1;
-                animationZRotationMatrix[3, 3] = 1;
+            //if(animateTurn == "E")
+            //{
+            //    turnAnimX = anim;
+            //    turnAnimZ = anim;
+            //}
+            //else
+            //{
+            //    turnAnimZ += 0.02;
+            //    //animationZRotationMatrix[0, 0] = Math.Cos(turnAnimZ);
+            //    //animationZRotationMatrix[0, 1] = Math.Sin(turnAnimZ);
+            //    //animationZRotationMatrix[1, 0] = -Math.Sin(turnAnimZ);
+            //    //animationZRotationMatrix[1, 1] = Math.Cos(turnAnimZ);
+            //    //animationZRotationMatrix[2, 2] = 1;
+            //    //animationZRotationMatrix[3, 3] = 1;
 
-                animationXRotationMatrix[0, 0] = 1;
-                animationXRotationMatrix[1, 1] = Math.Cos(turnAnimX * 0.5);
-                animationXRotationMatrix[1, 2] = Math.Sin(turnAnimX * 0.5);
-                animationXRotationMatrix[2, 1] = -Math.Sin(turnAnimX * 0.5);
-                animationXRotationMatrix[2, 2] = Math.Cos(turnAnimX * 0.5);
-                animationXRotationMatrix[3, 3] = 1;
+            //    //animationXRotationMatrix[0, 0] = 1;
+            //    //animationXRotationMatrix[1, 1] = Math.Cos(turnAnimX * 0.5);
+            //    //animationXRotationMatrix[1, 2] = Math.Sin(turnAnimX * 0.5);
+            //    //animationXRotationMatrix[2, 1] = -Math.Sin(turnAnimX * 0.5);
+            //    //animationXRotationMatrix[2, 2] = Math.Cos(turnAnimX * 0.5);
+            //    //animationXRotationMatrix[3, 3] = 1;
+
+            //}
+            if(animateTurn != "E")
+                turnAnim += 0.005;
+            switch (animateTurn)
+            {
+                case "U":
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            foreach(Square s in cubes[i, j].squares)
+                            {
+                                foreach(Vector3 v in s.vectors)
+                                {
+                                    v.X = Math.Sin(turnAnim) * v.lengthFrom0.X;
+                                    v.Y = Math.Cos(turnAnim) * v.lengthFrom0.Y;
+                                    //je potřeba délka od 0 a ne X,Y,Z přímo
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case "D":
+
+                    break;
+                case "R":
+
+                    break;
+                case "L":
+
+                    break;
+                case "F":
+
+                    break;
+                case "B":
+
+                    break;
             }
 
             pictureBox1.Refresh();
@@ -438,17 +480,7 @@ namespace ROP
             switch (animateTurn)
             {
                 case "U":
-                    for (int i = 0; i < 3; i++)
-                    {
-                        for (int j = 0; j < 3; j++)
-                        {
-                            for (int k = cubes[i, j].squares.Length - 1; k > 0; k--)
-                            {
-                                squareSort.Add(computeVectors(cubes[i, j].squares[k], true));
-
-                            }
-                        }
-                    }
+                    
                     break;
             }
             foreach (Cube c in cubes)
