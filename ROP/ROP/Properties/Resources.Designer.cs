@@ -19,7 +19,7 @@ namespace ROP.Properties {
     // pomocí nástroje podobného aplikaci ResGen nebo Visual Studio.
     // Chcete-li přidat nebo odebrat člena, upravte souboru .ResX a pak znovu spusťte aplikaci ResGen
     // s parametrem /str nebo znovu sestavte projekt aplikace Visual Studio.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,26 +57,6 @@ namespace ROP.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Stella1 {
-            get {
-                object obj = ResourceManager.GetObject("Stella1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap tomiqq {
-            get {
-                object obj = ResourceManager.GetObject("tomiqq", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

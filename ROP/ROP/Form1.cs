@@ -106,10 +106,7 @@ namespace ROP
                                                      new Vector3(0.5, -1.5, -0.5)+b, new Vector3(0.5, -0.5, -0.5)+b, new Vector3(1.5, -0.5, -0.5)+b, new Vector3(1.5, -1.5, -0.5)+b,
                                                      Color.Blue, Color.Black, Color.Black, Color.Red, Color.White, Color.Black, 28);
             }
-            foreach (Cube c in cubes)
-                foreach (Square s in c.squares)
-                    foreach (Vector3 v in s.vectors)
-                        v.lengthFrom0 = new Vector3(Math.Abs(v.X), Math.Abs(v.Y), Math.Abs(v.Z));
+
             // scale_x     0       0        translation_X
             //    0         scale_y 0       translation_Y
             //      0       0       scale_z translation_Z
@@ -124,13 +121,14 @@ namespace ROP
         public double[,] animationZRotationMatrix = new double[4, 4];
         public double[,] animationXRotationMatrix = new double[4, 4];
 
-        public string animateTurn = "E";
+        public List<char> animateTurn = new List<char>();
         //public double turnAnimX = 0;
         //public double turnAnimZ = 0;
         public double turnAnim = 0;
         public double anim = 0;
         public double rotX = 0;
-        public double rotZ = 0;
+        public double rotZ = Math.PI * 2;
+        public double turnStep = 32;
 
         public string historieTahu = "";
 
@@ -185,31 +183,30 @@ namespace ROP
             {
                 switch (input[0])
                 {
-                    case 'R': 
-                        
+                    case 'R':
+                        animateTurn.Add('R');
                         break;
-                    case 'L': 
-                        
+                    case 'L':
+                        animateTurn.Add('L');
                         break;
                     case 'U':
-                        animateTurn = "U";
+                        animateTurn.Add('U');
                         for (int i = 0; i < 7; i++)
                         {
                             //cubes[0,i] = 
                         }
                         break;
                     case 'D':
-                        for(int i = 0; i < 9; i++)
-                        {
-
-                        }
+                        animateTurn.Add('D');
                         break;
-                    case 'F': 
-                        
+                    case 'F':
+                        animateTurn.Add('F');
                         break;
-                    case 'B': 
-                        
+                    case 'B':
+                        animateTurn.Add('B');
                         break;
+                    default:
+                        throw new Exception("Invalid first symbol in Turn();");
                 }
             }
             if(input.Last() == '\'') 
@@ -308,7 +305,7 @@ namespace ROP
             projectionMatrix[3, 2] = (-zfar * znear) / (zfar - znear);
             projectionMatrix[2, 3] = 1;
 
-
+            //note: anim = 0
             ZRotationMatrix[0, 0] = Math.Cos(anim);
             ZRotationMatrix[0, 1] = Math.Sin(anim);
             ZRotationMatrix[1, 0] = -Math.Sin(anim);
@@ -318,8 +315,8 @@ namespace ROP
 
             XRotationMatrix[0, 0] = 1;
             XRotationMatrix[1, 1] = Math.Cos(anim * 0.5);
-            XRotationMatrix[1, 2] = Math.Sin(anim * 0.5);
-            XRotationMatrix[2, 1] = -Math.Sin(anim * 0.5);
+            XRotationMatrix[1, 2] = -Math.Sin(anim * 0.5);
+            XRotationMatrix[2, 1] = Math.Sin(anim * 0.5);
             XRotationMatrix[2, 2] = Math.Cos(anim * 0.5);
             XRotationMatrix[3, 3] = 1;
         }
@@ -392,12 +389,19 @@ namespace ROP
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            anim += 0.01;
+            //anim += 0.01;
+            //ZRotationMatrix[0, 0] = Math.Cos(rotX);
+            //ZRotationMatrix[0, 1] = Math.Sin(rotX);
+            //ZRotationMatrix[1, 0] = -Math.Sin(rotX);
+            //ZRotationMatrix[1, 1] = Math.Cos(rotX);
+            //ZRotationMatrix[2, 2] = 1;
+            //ZRotationMatrix[3, 3] = 1;
+
             ZRotationMatrix[0, 0] = Math.Cos(rotX);
-            ZRotationMatrix[0, 1] = Math.Sin(rotX);
-            ZRotationMatrix[1, 0] = -Math.Sin(rotX);
-            ZRotationMatrix[1, 1] = Math.Cos(rotX);
-            ZRotationMatrix[2, 2] = 1;
+            ZRotationMatrix[0, 2] = -Math.Sin(rotX);
+            ZRotationMatrix[1, 1] = 1;
+            ZRotationMatrix[2, 0] = Math.Sin(rotX);
+            ZRotationMatrix[2, 2] = Math.Cos(rotX);
             ZRotationMatrix[3, 3] = 1;
 
             XRotationMatrix[0, 0] = 1;
@@ -407,68 +411,93 @@ namespace ROP
             XRotationMatrix[2, 2] = Math.Cos(rotZ * 0.5);
             XRotationMatrix[3, 3] = 1;
 
-            //if(animateTurn == "E")
-            //{
-            //    turnAnimX = anim;
-            //    turnAnimZ = anim;
-            //}
-            //else
-            //{
-            //    turnAnimZ += 0.02;
-            //    //animationZRotationMatrix[0, 0] = Math.Cos(turnAnimZ);
-            //    //animationZRotationMatrix[0, 1] = Math.Sin(turnAnimZ);
-            //    //animationZRotationMatrix[1, 0] = -Math.Sin(turnAnimZ);
-            //    //animationZRotationMatrix[1, 1] = Math.Cos(turnAnimZ);
-            //    //animationZRotationMatrix[2, 2] = 1;
-            //    //animationZRotationMatrix[3, 3] = 1;
-
-            //    //animationXRotationMatrix[0, 0] = 1;
-            //    //animationXRotationMatrix[1, 1] = Math.Cos(turnAnimX * 0.5);
-            //    //animationXRotationMatrix[1, 2] = Math.Sin(turnAnimX * 0.5);
-            //    //animationXRotationMatrix[2, 1] = -Math.Sin(turnAnimX * 0.5);
-            //    //animationXRotationMatrix[2, 2] = Math.Cos(turnAnimX * 0.5);
-            //    //animationXRotationMatrix[3, 3] = 1;
-
-            //}
-            if(animateTurn != "E")
-                turnAnim += 0.005;
-            switch (animateTurn)
+            if (animateTurn.Count > 0)
             {
-                case "U":
-                    for (int i = 0; i < 3; i++)
+                turnAnim += 1;
+                AnimateTurn();
+            }
+            
+            if (turnAnim == turnStep)
+            {
+                animateTurn.RemoveAt(0);
+                turnAnim = 0;
+            }
+            pictureBox1.Refresh();
+        }
+
+        public void AnimateTurn()
+        {
+            switch (animateTurn[0])
+            {
+                case 'U':
+                    for (int i = 0; i < 9; i++)
                     {
-                        for (int j = 0; j < 3; j++)
+                        foreach (Square s in cubes[i, 0].squares)
                         {
-                            foreach(Square s in cubes[i, j].squares)
+                            foreach (Vector3 v in s.vectors)
                             {
-                                foreach(Vector3 v in s.vectors)
+                                v.animState.Y++;
+                                v.X = Math.Sin(-v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y) * v.lengthFrom0.Y;
+                                v.Z = Math.Cos(-v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y) * v.lengthFrom0.Y;
+                            }
+                        }
+                    }
+                    break;
+                case 'D':
+                    for (int i = 0; i < 9; i++)
+                    {
+                        foreach (Square s in cubes[i, 2].squares)
+                        {
+                            foreach (Vector3 v in s.vectors)
+                            {
+                                v.animState.Y++;
+                                v.X = Math.Sin(v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y) * v.lengthFrom0.Y;
+                                v.Z = Math.Cos(v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y) * v.lengthFrom0.Y;
+                            }
+                        }
+                    }
+                    break;
+                case 'R':
+                    for (int i = 1; i < 4; i++)
+                    {
+                        for(int j = 0; j < 3; j++)
+                        {
+                            foreach (Square s in cubes[i*3-1, j].squares)
+                            {
+                                foreach (Vector3 v in s.vectors)
                                 {
-                                    v.X = Math.Sin(turnAnim) * v.lengthFrom0.X;
-                                    v.Y = Math.Cos(turnAnim) * v.lengthFrom0.Y;
-                                    //je potřeba délka od 0 a ne X,Y,Z přímo
+                                    v.animState.X++;
+                                    v.Z = Math.Sin(v.animState.X * Math.PI / 6 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                    v.Y = Math.Cos(v.animState.X * Math.PI / 6 / turnStep + v.displacement.X) * v.lengthFrom0.X;
                                 }
                             }
                         }
                     }
                     break;
-                case "D":
+                case 'L':
 
                     break;
-                case "R":
-
+                case 'F':
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            foreach (Square s in cubes[i, j].squares)
+                            {
+                                foreach (Vector3 v in s.vectors)
+                                {
+                                    v.animState.Z++;
+                                    v.X = Math.Sin(-v.animState.Z * Math.PI / 6 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                    v.Y = Math.Cos(-v.animState.Z * Math.PI / 6 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                }
+                            }
+                        }
+                    }
                     break;
-                case "L":
-
-                    break;
-                case "F":
-
-                    break;
-                case "B":
+                case 'B':
 
                     break;
             }
-
-            pictureBox1.Refresh();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -477,15 +506,9 @@ namespace ROP
 
             //add all squares to a list and sort by Z position, draw from far to near
             List<Square> squareSort = new List<Square>();
-            switch (animateTurn)
-            {
-                case "U":
-                    
-                    break;
-            }
             foreach (Cube c in cubes)
             {
-                foreach(Square squ in c.squares.Where(w => w.color != Color.Black))
+                foreach(Square squ in c.squares)//.Where(w => w.color != Color.Black)
                 {
                     if (!squareSort.Contains(squ))
                         squareSort.Add(computeVectors(squ, false));

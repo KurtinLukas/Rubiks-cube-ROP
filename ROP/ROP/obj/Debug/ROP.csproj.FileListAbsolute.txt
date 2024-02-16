@@ -18,3 +18,13 @@ G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.CoreCompileInputs.cac
 G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.exe
 G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.pdb
 G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.AssemblyReference.cache
+D:\lukas\GitHub\Rubiks-cube-ROP\ROP\ROP\bin\Debug\ROP.exe.config
+D:\lukas\GitHub\Rubiks-cube-ROP\ROP\ROP\bin\Debug\ROP.exe
+D:\lukas\GitHub\Rubiks-cube-ROP\ROP\ROP\bin\Debug\ROP.pdb
+D:\lukas\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.AssemblyReference.cache
+D:\lukas\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.Form1.resources
+D:\lukas\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.Properties.Resources.resources
+D:\lukas\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.GenerateResource.cache
+D:\lukas\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.CoreCompileInputs.cache
+D:\lukas\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.exe
+D:\lukas\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.pdb
