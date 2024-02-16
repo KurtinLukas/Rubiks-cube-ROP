@@ -7,53 +7,40 @@ using System.Threading.Tasks;
 
 namespace ROP
 {
-    public class Square : ICloneable
+    public class Square
     {
-        public Vector3[] vectors;
+        public Vector3[] vectors = new Vector3[4];
         public Color color = Color.Black;
-        public Vector3 normal;
+        //public Vector3 normal;
 
         public Square(Vector3[] vArray)
         {
             vArray.CopyTo(vectors, 0);
         }
-        public Square(Vector3[] vArray, Color c)
+        public Square(Vector3[] vArray, Color c) : this(vArray)
         {
-            vectors = new Vector3[4];
-            vArray.CopyTo(vectors, 0);
             color = c;
         }
         public Square(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3)
         {
-            vectors = new Vector3[4];
             vectors[0] = v0;
             vectors[1] = v1;
             vectors[2] = v2;
             vectors[3] = v3;
-            normal = (v1 - v0) * (v1 - v3);
+            //normal = (v1 - v0) * (v1 - v3);
         }
-        public Square(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3, Color color)
+        public Square(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3, Color color) : this(v0,v1,v2,v3)
         {
-            vectors = new Vector3[4];
-            vectors[0] = v0;
-            vectors[1] = v1;
-            vectors[2] = v2;
-            vectors[3] = v3;
             this.color = color;
-            normal = (v1 - v0) * (v3 - v0);
+            //normal = (v1 - v0) * (v3 - v0);
         }
         public Square()
         {
-            vectors = new Vector3[4];
-        }
 
-        public object Clone()
-        {
-            return new Square(vectors.Select(item => (Vector3)vectors.Clone()).ToArray());
         }
         public Square Copy()
         {
-            return new Square(vectors.ToArray(), color);
+            return new Square(vectors.Select(item => new Vector3(item.X, item.Y, item.Z, item.lengthFrom0, item.displacement, item.animState)).ToArray(), color);
         }
         public Vector3 Middle()
         {

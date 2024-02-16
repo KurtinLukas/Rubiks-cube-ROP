@@ -137,48 +137,38 @@ namespace ROP
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
-            historieTahu += "R";
-            label2.Text = "Historie: " + historieTahu;
             Turn("R");
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
-            historieTahu += "L";
-            label2.Text = "Historie: " + historieTahu;
             Turn("L");
         }
 
         private void buttonTop_Click(object sender, EventArgs e)
         {
-            historieTahu += "U";
-            label2.Text = "Historie: " + historieTahu;
             Turn("U");
         }
 
         private void buttonBottom_Click(object sender, EventArgs e)
         {
-            historieTahu += "D";
-            label2.Text = "Historie: " + historieTahu;
             Turn("D");
         }
 
         private void buttonFront_Click(object sender, EventArgs e)
         {
-            historieTahu += "F";
-            label2.Text = "Historie: " + historieTahu;
             Turn("F");
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            historieTahu += "B";
-            label2.Text = "Historie: " + historieTahu;
             Turn("B");
         }
 
         public void Turn(string input)
         {
+            historieTahu += input;
+            label2.Text = "Historie: " + historieTahu;
             if(input.Length == 1)
             {
                 switch (input[0])
@@ -190,11 +180,18 @@ namespace ROP
                         animateTurn.Add('L');
                         break;
                     case 'U':
+                        Cube buffCorner = new Cube(cubes[0, 0]);
+                        cubes[0, 0] = new Cube(cubes[2, 0]);
+                        cubes[2, 0] = new Cube(cubes[8, 0]);
+                        cubes[8, 0] = new Cube(cubes[6, 0]);
+                        cubes[6, 0] = new Cube(buffCorner);
+                        Cube buffEdge = new Cube(cubes[1, 0]);
+                        cubes[1, 0] = new Cube(cubes[5, 0]);
+                        cubes[5, 0] = new Cube(cubes[7, 0]);
+                        cubes[7, 0] = new Cube(cubes[3, 0]);
+                        cubes[3, 0] = new Cube(buffEdge);
+                        label1.Text = cubes[0, 0].squares[0].vectors[0].X.ToString();
                         animateTurn.Add('U');
-                        for (int i = 0; i < 7; i++)
-                        {
-                            //cubes[0,i] = 
-                        }
                         break;
                     case 'D':
                         animateTurn.Add('D');
@@ -208,22 +205,40 @@ namespace ROP
                     default:
                         throw new Exception("Invalid first symbol in Turn();");
                 }
+                return;
             }
             if(input.Last() == '\'') 
             {
-                //switch (input[0])
-                //{
-                //    case 'R': Turn("RRR"); break;
-                //    case 'L': Turn("LLL"); break;
-                //    case 'U': Turn("UUU"); break;
-                //    case 'D': Turn("DDD"); break;
-                //    case 'F': Turn("FFF"); break;
-                //    case 'B': Turn("BBB"); break;
-                //}
+                switch (input[0])
+                {
+                    case 'R':
+                        animateTurn.Add('R');
+                        break;
+                    case 'L':
+                        animateTurn.Add('L');
+                        break;
+                    case 'U':
+                        animateTurn.Add('U');
+                        break;
+                    case 'D':
+                        animateTurn.Add('D');
+                        break;
+                    case 'F':
+                        animateTurn.Add('F');
+                        break;
+                    case 'B':
+                        animateTurn.Add('B');
+                        break;
+                    default:
+                        throw new Exception("Invalid first symbol in Turn();");
+                }
+                animateTurn.Add('\'');
+                return;
             }
             else if(input.Last() == '2')
             {
-                //Turn(input[0].ToString());
+                Turn(input[0].ToString());
+                Turn(input[0].ToString());
             }
         }
 
@@ -231,17 +246,16 @@ namespace ROP
         {
             Algorithm(textBoxAlgorithm.Text);
             historieTahu += textBoxAlgorithm.Text;
+            label2.Text = historieTahu;
         }
 
         public void Algorithm(string alg)
         {
             string tahy = "RLUDFB";
-            Stopwatch sw = new Stopwatch();
             for (int i = 0; i < alg.Length; i++)
             {
                 if (tahy.Contains(alg[i]))
                 {
-                    sw.Restart();
                     string turn = alg[i].ToString();
                     if (i + 1 < alg.Length)
                     {
@@ -249,7 +263,6 @@ namespace ROP
                         {
                             turn += "\'";
                             i++;
-                            continue;
                         }
                         else if (alg[i + 1] == '2')
                         {
@@ -258,11 +271,6 @@ namespace ROP
                         }
                     }
                     Turn(turn);
-                    //while(sw.ElapsedMilliseconds < 200)
-                    {
-
-                    }
-                    pictureBox1.Refresh();
                 }
             }
         }
@@ -368,16 +376,13 @@ namespace ROP
             string scramble = moves[rng.Next(0, 6)].ToString();
             for (int i = 1; i < 20; i++)
             {
-                scramble += MoveRandom(rng);
+                string t = MoveRandom(rng);
+                scramble += t;
+                //Turn(t);
             }
             historieTahu += scramble;
             label2.Text = "Historie: " + historieTahu;
             Algorithm(scramble);
-        }
-
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            
         }
 
         private void Form1_ResizeEnd(object sender, EventArgs e)
@@ -420,13 +425,20 @@ namespace ROP
             if (turnAnim == turnStep)
             {
                 animateTurn.RemoveAt(0);
+                if (animateTurn.Count > 0 && animateTurn[0] == '\'')
+                    animateTurn.RemoveAt(0);
                 turnAnim = 0;
             }
+
             pictureBox1.Refresh();
         }
 
         public void AnimateTurn()
         {
+            int prime = 1;
+            List<Cube> rotationList = new List<Cube>();
+            if (animateTurn.Count > 1 && animateTurn[1] == '\'')
+                prime = -1;
             switch (animateTurn[0])
             {
                 case 'U':
@@ -437,8 +449,8 @@ namespace ROP
                             foreach (Vector3 v in s.vectors)
                             {
                                 v.animState.Y++;
-                                v.X = Math.Sin(-v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y) * v.lengthFrom0.Y;
-                                v.Z = Math.Cos(-v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y) * v.lengthFrom0.Y;
+                                v.X = Math.Sin(-v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y * prime) * v.lengthFrom0.Y;
+                                v.Z = Math.Cos(-v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y * prime) * v.lengthFrom0.Y;
                             }
                         }
                     }
@@ -451,8 +463,8 @@ namespace ROP
                             foreach (Vector3 v in s.vectors)
                             {
                                 v.animState.Y++;
-                                v.X = Math.Sin(v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y) * v.lengthFrom0.Y;
-                                v.Z = Math.Cos(v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y) * v.lengthFrom0.Y;
+                                v.X = Math.Sin(v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y * prime) * v.lengthFrom0.Y;
+                                v.Z = Math.Cos(v.animState.Y * Math.PI / 6 / turnStep + v.displacement.Y * prime) * v.lengthFrom0.Y;
                             }
                         }
                     }
@@ -467,15 +479,29 @@ namespace ROP
                                 foreach (Vector3 v in s.vectors)
                                 {
                                     v.animState.X++;
-                                    v.Z = Math.Sin(v.animState.X * Math.PI / 6 / turnStep + v.displacement.X) * v.lengthFrom0.X;
-                                    v.Y = Math.Cos(v.animState.X * Math.PI / 6 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                    v.Z = Math.Sin(-v.animState.X * Math.PI / 6 / turnStep + v.displacement.X * prime) * v.lengthFrom0.X;
+                                    v.Y = Math.Cos(-v.animState.X * Math.PI / 6 / turnStep + v.displacement.X * prime) * v.lengthFrom0.X;
                                 }
                             }
                         }
                     }
                     break;
                 case 'L':
-
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            foreach (Square s in cubes[i * 3, j].squares)
+                            {
+                                foreach (Vector3 v in s.vectors)
+                                {
+                                    v.animState.X++;
+                                    v.Z = Math.Sin(v.animState.X * Math.PI / 6 / turnStep + v.displacement.X * prime) * v.lengthFrom0.X;
+                                    v.Y = Math.Cos(v.animState.X * Math.PI / 6 / turnStep + v.displacement.X * prime) * v.lengthFrom0.X;
+                                }
+                            }
+                        }
+                    }
                     break;
                 case 'F':
                     for (int i = 0; i < 3; i++)
@@ -487,15 +513,29 @@ namespace ROP
                                 foreach (Vector3 v in s.vectors)
                                 {
                                     v.animState.Z++;
-                                    v.X = Math.Sin(-v.animState.Z * Math.PI / 6 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
-                                    v.Y = Math.Cos(-v.animState.Z * Math.PI / 6 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                    v.X = Math.Sin(v.animState.Z * Math.PI / 6 / turnStep + v.displacement.Z * prime) * v.lengthFrom0.Z;
+                                    v.Y = Math.Cos(v.animState.Z * Math.PI / 6 / turnStep + v.displacement.Z * prime) * v.lengthFrom0.Z;
                                 }
                             }
                         }
                     }
                     break;
                 case 'B':
-
+                    for (int i = 6; i < 9; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            foreach (Square s in cubes[i, j].squares)
+                            {
+                                foreach (Vector3 v in s.vectors)
+                                {
+                                    v.animState.Z++;
+                                    v.X = Math.Sin(-v.animState.Z * Math.PI / 6 / turnStep + v.displacement.Z * prime) * v.lengthFrom0.Z;
+                                    v.Y = Math.Cos(-v.animState.Z * Math.PI / 6 / turnStep + v.displacement.Z * prime) * v.lengthFrom0.Z;
+                                }
+                            }
+                        }
+                    }
                     break;
             }
         }
@@ -611,7 +651,6 @@ namespace ROP
                 rotZ -= (double)(oldMouse.Y - MousePosition.Y)/100;
                 oldMouse = MousePosition;
             }
-            label1.Text = "RotZ:" + rotZ + "\nRotX" + rotX;
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)

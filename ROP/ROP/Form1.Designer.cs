@@ -55,9 +55,10 @@ namespace ROP
             // buttonRight
             // 
             this.buttonRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRight.Location = new System.Drawing.Point(961, 547);
+            this.buttonRight.Location = new System.Drawing.Point(1281, 673);
+            this.buttonRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonRight.Name = "buttonRight";
-            this.buttonRight.Size = new System.Drawing.Size(75, 23);
+            this.buttonRight.Size = new System.Drawing.Size(100, 28);
             this.buttonRight.TabIndex = 0;
             this.buttonRight.Text = "R";
             this.buttonRight.UseVisualStyleBackColor = true;
@@ -66,9 +67,10 @@ namespace ROP
             // buttonLeft
             // 
             this.buttonLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLeft.Location = new System.Drawing.Point(961, 576);
+            this.buttonLeft.Location = new System.Drawing.Point(1281, 709);
+            this.buttonLeft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonLeft.Name = "buttonLeft";
-            this.buttonLeft.Size = new System.Drawing.Size(75, 23);
+            this.buttonLeft.Size = new System.Drawing.Size(100, 28);
             this.buttonLeft.TabIndex = 1;
             this.buttonLeft.Text = "L";
             this.buttonLeft.UseVisualStyleBackColor = true;
@@ -77,9 +79,10 @@ namespace ROP
             // buttonBack
             // 
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBack.Location = new System.Drawing.Point(961, 605);
+            this.buttonBack.Location = new System.Drawing.Point(1281, 745);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(75, 23);
+            this.buttonBack.Size = new System.Drawing.Size(100, 28);
             this.buttonBack.TabIndex = 2;
             this.buttonBack.Text = "B";
             this.buttonBack.UseVisualStyleBackColor = true;
@@ -88,9 +91,10 @@ namespace ROP
             // buttonTop
             // 
             this.buttonTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonTop.Location = new System.Drawing.Point(880, 547);
+            this.buttonTop.Location = new System.Drawing.Point(1173, 673);
+            this.buttonTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonTop.Name = "buttonTop";
-            this.buttonTop.Size = new System.Drawing.Size(75, 23);
+            this.buttonTop.Size = new System.Drawing.Size(100, 28);
             this.buttonTop.TabIndex = 3;
             this.buttonTop.Text = "U";
             this.buttonTop.UseVisualStyleBackColor = true;
@@ -99,9 +103,10 @@ namespace ROP
             // buttonBottom
             // 
             this.buttonBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBottom.Location = new System.Drawing.Point(880, 576);
+            this.buttonBottom.Location = new System.Drawing.Point(1173, 709);
+            this.buttonBottom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonBottom.Name = "buttonBottom";
-            this.buttonBottom.Size = new System.Drawing.Size(75, 23);
+            this.buttonBottom.Size = new System.Drawing.Size(100, 28);
             this.buttonBottom.TabIndex = 4;
             this.buttonBottom.Text = "D";
             this.buttonBottom.UseVisualStyleBackColor = true;
@@ -110,9 +115,10 @@ namespace ROP
             // buttonFront
             // 
             this.buttonFront.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFront.Location = new System.Drawing.Point(880, 605);
+            this.buttonFront.Location = new System.Drawing.Point(1173, 745);
+            this.buttonFront.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonFront.Name = "buttonFront";
-            this.buttonFront.Size = new System.Drawing.Size(75, 23);
+            this.buttonFront.Size = new System.Drawing.Size(100, 28);
             this.buttonFront.TabIndex = 5;
             this.buttonFront.Text = "F";
             this.buttonFront.UseVisualStyleBackColor = true;
@@ -121,9 +127,10 @@ namespace ROP
             // buttonAlgorithm
             // 
             this.buttonAlgorithm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAlgorithm.Location = new System.Drawing.Point(921, 664);
+            this.buttonAlgorithm.Location = new System.Drawing.Point(1228, 817);
+            this.buttonAlgorithm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAlgorithm.Name = "buttonAlgorithm";
-            this.buttonAlgorithm.Size = new System.Drawing.Size(115, 23);
+            this.buttonAlgorithm.Size = new System.Drawing.Size(153, 28);
             this.buttonAlgorithm.TabIndex = 6;
             this.buttonAlgorithm.Text = "Proveď algoritmus";
             this.buttonAlgorithm.UseVisualStyleBackColor = true;
@@ -132,17 +139,19 @@ namespace ROP
             // textBoxAlgorithm
             // 
             this.textBoxAlgorithm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAlgorithm.Location = new System.Drawing.Point(696, 638);
+            this.textBoxAlgorithm.Location = new System.Drawing.Point(928, 785);
+            this.textBoxAlgorithm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBoxAlgorithm.Name = "textBoxAlgorithm";
-            this.textBoxAlgorithm.Size = new System.Drawing.Size(340, 20);
+            this.textBoxAlgorithm.Size = new System.Drawing.Size(452, 22);
             this.textBoxAlgorithm.TabIndex = 7;
             // 
             // algorithm2
             // 
             this.algorithm2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.algorithm2.Location = new System.Drawing.Point(696, 604);
+            this.algorithm2.Location = new System.Drawing.Point(928, 743);
+            this.algorithm2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.algorithm2.Name = "algorithm2";
-            this.algorithm2.Size = new System.Drawing.Size(89, 23);
+            this.algorithm2.Size = new System.Drawing.Size(119, 28);
             this.algorithm2.TabIndex = 8;
             this.algorithm2.Text = "Checker";
             this.algorithm2.UseVisualStyleBackColor = true;
@@ -151,9 +160,10 @@ namespace ROP
             // algorithm1
             // 
             this.algorithm1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.algorithm1.Location = new System.Drawing.Point(696, 575);
+            this.algorithm1.Location = new System.Drawing.Point(928, 708);
+            this.algorithm1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.algorithm1.Name = "algorithm1";
-            this.algorithm1.Size = new System.Drawing.Size(89, 23);
+            this.algorithm1.Size = new System.Drawing.Size(119, 28);
             this.algorithm1.TabIndex = 9;
             this.algorithm1.Text = "Cube in a Cube";
             this.algorithm1.UseVisualStyleBackColor = true;
@@ -163,18 +173,20 @@ namespace ROP
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(696, 547);
+            this.label1.Location = new System.Drawing.Point(928, 673);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.Size = new System.Drawing.Size(66, 16);
             this.label1.TabIndex = 10;
             this.label1.Text = "Algoritmy:";
             // 
             // scrambleButton
             // 
             this.scrambleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.scrambleButton.Location = new System.Drawing.Point(785, 575);
+            this.scrambleButton.Location = new System.Drawing.Point(1047, 708);
+            this.scrambleButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.scrambleButton.Name = "scrambleButton";
-            this.scrambleButton.Size = new System.Drawing.Size(89, 23);
+            this.scrambleButton.Size = new System.Drawing.Size(119, 28);
             this.scrambleButton.TabIndex = 11;
             this.scrambleButton.Text = "Scramble";
             this.scrambleButton.UseVisualStyleBackColor = true;
@@ -183,9 +195,10 @@ namespace ROP
             // solveButton
             // 
             this.solveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.solveButton.Location = new System.Drawing.Point(785, 604);
+            this.solveButton.Location = new System.Drawing.Point(1047, 743);
+            this.solveButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.solveButton.Name = "solveButton";
-            this.solveButton.Size = new System.Drawing.Size(89, 23);
+            this.solveButton.Size = new System.Drawing.Size(119, 28);
             this.solveButton.TabIndex = 12;
             this.solveButton.Text = "Solve";
             this.solveButton.UseVisualStyleBackColor = true;
@@ -195,9 +208,10 @@ namespace ROP
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 673);
+            this.label2.Location = new System.Drawing.Point(16, 828);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(44, 16);
             this.label2.TabIndex = 13;
             this.label2.Text = "label2";
             // 
@@ -209,18 +223,20 @@ namespace ROP
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(568, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(757, 15);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(462, 313);
+            this.pictureBox2.Size = new System.Drawing.Size(616, 385);
             this.pictureBox2.TabIndex = 15;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(16, 15);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(550, 550);
+            this.pictureBox1.Size = new System.Drawing.Size(733, 677);
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -230,9 +246,9 @@ namespace ROP
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1042, 695);
+            this.ClientSize = new System.Drawing.Size(1389, 855);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
@@ -250,11 +266,11 @@ namespace ROP
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonRight);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Simulátor Rubikovy kostky";
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

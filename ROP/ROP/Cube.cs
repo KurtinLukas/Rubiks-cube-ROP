@@ -9,22 +9,21 @@ namespace ROP
 {
     public class Cube : ICloneable
     {
-        public Square[] squares;
+        public Square[] squares = new Square[6];
         public int rotation = 0;
         //přítomná pozice kostičky. Pokud je na správném místě, position == cubeIndex
         public int position;
         //sudé = rohy, liché = hrany; správná originální pozice
-        public int cubeIndex;
+        public int cubeIndex = -1;
 
         public Cube(Square[] arr, int pos)
         {
-            squares = arr;
+            arr.CopyTo(squares, 0);
             cubeIndex = pos;
             position = pos;
         }
         public Cube(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Vector3 v5, Vector3 v6, Vector3 v7, int pos)
         {
-            squares = new Square[6];
             squares[0] = new Square(v0, v1, v2, v3);
             squares[1] = new Square(v0, v1, v5, v4);
             squares[2] = new Square(v4, v5, v6, v7);
@@ -37,7 +36,6 @@ namespace ROP
         }
         public Cube(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Vector3 v5, Vector3 v6, Vector3 v7, Color cF, Color cR, Color cB, Color cL, Color cD, Color cU, int pos)
         {
-            squares = new Square[6];
             squares[0] = new Square(v0, v1, v2, v3, cF);
             squares[1] = new Square(v0, v1, v5, v4, cR);
             squares[2] = new Square(v4, v5, v6, v7, cB);
@@ -50,14 +48,21 @@ namespace ROP
         }
         public Cube()
         {
-            squares = new Square[6];
-            cubeIndex = 0;
-            position = 0;
+            cubeIndex = -1;
+            position = -1;
+        }
+
+        public Cube(Cube c)
+        {
+            this.squares = c.squares.Select(item => item.Copy()).ToArray(); //
+            this.rotation = c.rotation;
+            this.position = c.position;
+            this.cubeIndex = c.cubeIndex;
         }
 
         public object Clone()
         {
-            return new Cube(squares.Select(item => (Square)item.Clone()).ToArray(), position);
+            return new Cube(squares, position);
         }
     }
 }
