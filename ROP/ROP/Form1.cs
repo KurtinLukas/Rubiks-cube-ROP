@@ -180,18 +180,14 @@ namespace ROP
                         animateTurn.Add('L');
                         break;
                     case 'U':
-                        Cube buffCorner = new Cube(cubes[0, 0]);
-                        cubes[0, 0] = new Cube(cubes[2, 0]);
-                        cubes[2, 0] = new Cube(cubes[8, 0]);
-                        cubes[8, 0] = new Cube(cubes[6, 0]);
-                        cubes[6, 0] = new Cube(buffCorner);
-                        Cube buffEdge = new Cube(cubes[1, 0]);
-                        cubes[1, 0] = new Cube(cubes[5, 0]);
-                        cubes[5, 0] = new Cube(cubes[7, 0]);
-                        cubes[7, 0] = new Cube(cubes[3, 0]);
-                        cubes[3, 0] = new Cube(buffEdge);
-                        label1.Text = cubes[0, 0].squares[0].vectors[0].X.ToString();
                         animateTurn.Add('U');
+                        //do
+                        //{
+                        //    turnAnim++;
+                        //    AnimateTurn();
+                        //    MessageBox.Show("h" + turnAnim % turnStep);
+                        //} while (turnAnim != turnStep-1);
+                        
                         break;
                     case 'D':
                         animateTurn.Add('D');
@@ -428,15 +424,24 @@ namespace ROP
                 if (animateTurn.Count > 0 && animateTurn[0] == '\'')
                     animateTurn.RemoveAt(0);
                 turnAnim = 0;
+                Cube buffCorner = new Cube(cubes[0, 0]);
+                cubes[0, 0] = new Cube(cubes[2, 0]);
+                cubes[2, 0] = new Cube(cubes[8, 0]);
+                cubes[8, 0] = new Cube(cubes[6, 0]);
+                cubes[6, 0] = new Cube(buffCorner);
+                Cube buffEdge = new Cube(cubes[1, 0]);
+                cubes[1, 0] = new Cube(cubes[5, 0]);
+                cubes[5, 0] = new Cube(cubes[7, 0]);
+                cubes[7, 0] = new Cube(cubes[3, 0]);
+                cubes[3, 0] = new Cube(buffEdge);
+                label1.Text = cubes[0, 0].squares[0].vectors[0].X.ToString();
             }
-
             pictureBox1.Refresh();
         }
 
         public void AnimateTurn()
         {
             int prime = 1;
-            List<Cube> rotationList = new List<Cube>();
             if (animateTurn.Count > 1 && animateTurn[1] == '\'')
                 prime = -1;
             switch (animateTurn[0])

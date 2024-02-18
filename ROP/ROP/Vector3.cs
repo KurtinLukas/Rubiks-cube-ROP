@@ -156,14 +156,25 @@ namespace ROP
             Z = 0;
         }
 
-        public Vector3(double x, double y, double z, Vector3 lengthFrom0, Vector3 displacement, Vector3 animState) : this(x,y,z)
+        public Vector3(double x, double y, double z, Vector3 lengthFrom0, Vector3 displacement, Vector3 animState)
         {
             X = x;
             Y = y;
             Z = z;
-            this.lengthFrom0 = lengthFrom0;
-            this.displacement = displacement;
-            this.animState = animState;
+            this.lengthFrom0 = new Vector3(lengthFrom0);
+            this.displacement = new Vector3(displacement);
+            this.animState = new Vector3(animState);
+        }
+        /// <summary>
+        /// Negeneruje standardní vektor, chybí mu vlastnosti lengthFrom0, displacement, animState !
+        /// Kopíruje se pouze X,Y,Z
+        /// </summary>
+        /// <param name="v"></param>
+        public Vector3(Vector3 v)
+        {
+            X = v.X;
+            Y = v.Y;
+            Z = v.Z;
         }
 
         public object Clone()
