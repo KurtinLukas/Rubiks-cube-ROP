@@ -15,10 +15,10 @@ namespace ROP
 
         public Square(Vector3[] vArray)
         {
-            vectors[0] = vArray[0];
-            vectors[1] = vArray[1];
-            vectors[2] = vArray[2];
-            vectors[3] = vArray[3];
+            vectors[0] = new Vector3(vArray[0].X, vArray[0].Y, vArray[0].Z);
+            vectors[1] = new Vector3(vArray[1].X, vArray[1].Y, vArray[1].Z);
+            vectors[2] = new Vector3(vArray[2].X, vArray[2].Y, vArray[2].Z);
+            vectors[3] = new Vector3(vArray[3].X, vArray[3].Y, vArray[3].Z);
         }
         public Square(Vector3[] vArray, Color c) : this(vArray)
         {
@@ -43,7 +43,7 @@ namespace ROP
         }
         public Square Copy()
         {
-            return new Square(vectors.Select(item => new Vector3(item.X, item.Y, item.Z, item.lengthFrom0, item.displacement, item.animState)).ToArray(), color);
+            return new Square(vectors.Select(item => new Vector3(item.X, item.Y, item.Z, item.animState)).ToArray(), color);
         }
         public Vector3 Middle()
         {
