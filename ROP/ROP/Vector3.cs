@@ -198,5 +198,10 @@ namespace ROP
                 throw new DivideByZeroException();
             return new Vector3(a.X / b, a.Y / b, a.Z / b);
         }
+
+        public override string ToString()
+        {
+            return "X:" + X.ToString("F3") + ",Y:" + Y.ToString("F3") + ",Z:" + Z.ToString("F3") + ", displacement:" + displacement.Y.ToString("F3") + ", lengthFrom0:" + lengthFrom0.Y.ToString("F3") + ", animState:" + animState.Y.ToString("F3");
+        }
     }
 }

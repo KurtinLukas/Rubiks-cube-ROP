@@ -15,7 +15,10 @@ namespace ROP
 
         public Square(Vector3[] vArray)
         {
-            vArray.CopyTo(vectors, 0);
+            vectors[0] = vArray[0];
+            vectors[1] = vArray[1];
+            vectors[2] = vArray[2];
+            vectors[3] = vArray[3];
         }
         public Square(Vector3[] vArray, Color c) : this(vArray)
         {

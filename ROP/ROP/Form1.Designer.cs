@@ -30,7 +30,6 @@ namespace ROP
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
             this.buttonBack = new System.Windows.Forms.Button();
@@ -163,7 +162,7 @@ namespace ROP
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(696, 547);
+            this.label1.Location = new System.Drawing.Point(12, 629);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 10;
@@ -249,7 +248,6 @@ namespace ROP
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonRight);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Simulátor Rubikovy kostky";
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
