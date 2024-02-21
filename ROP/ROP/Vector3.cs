@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ROP
 {
-    public class Vector3 : ICloneable
+    public class Vector3
     {
         public double X;
         public double Y;
@@ -24,6 +24,7 @@ namespace ROP
             Z = z;
             animState = new Vector3();
             CalcDisplacement();
+            //System.Windows.Forms.MessageBox.Show(this.ToString());
         }
         public Vector3()
         {
@@ -39,6 +40,7 @@ namespace ROP
             Z = z;
             this.animState = new Vector3(animState);
             CalcDisplacement();
+            
         }
         /// <summary>
         /// Negeneruje standardní vektor, chybí mu vlastnosti lengthFrom0, displacement, animState !
@@ -51,11 +53,6 @@ namespace ROP
             Y = v.Y;
             Z = v.Z;
             CalcDisplacement();
-        }
-
-        public object Clone()
-        {
-            return new Vector3(X, Y, Z, animState);
         }
 
         public static Vector3 operator +(Vector3 a, Vector3 b) => new Vector3(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
@@ -82,6 +79,13 @@ namespace ROP
 
         public void CalcDisplacement()
         {
+            //round up imperfections
+            int neg = X < 0 ? -1 : 1;
+            X = (Math.Round(Math.Abs(X) - 0.5) + 0.5) * neg;
+            neg = Y < 0 ? -1 : 1;
+            Y = (Math.Round(Math.Abs(Y) - 0.5) + 0.5) * neg;
+            neg = Z < 0 ? -1 : 1;
+            Z = (Math.Round(Math.Abs(Z) - 0.5) + 0.5) * neg;
 
             lengthFrom0 = new Vector3();
             lengthFrom0.X = Math.Sqrt(Y * Y + Z * Z);
@@ -92,7 +96,7 @@ namespace ROP
             double uhelInsideX = 0.5 / lengthFrom0.X;
             double uhelInsideY = 0.5 / lengthFrom0.Y;
             double uhelInsideZ = 0.5 / lengthFrom0.Z;
-            //je to správná cesta
+            
             double uhelOutside = Math.PI / 4;
             switch (Math.Abs(X))
             {

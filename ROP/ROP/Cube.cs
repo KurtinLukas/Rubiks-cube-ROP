@@ -54,10 +54,15 @@ namespace ROP
 
         public Cube(Cube c)
         {
-            this.squares = c.squares.Select(item => item.Copy()).ToArray(); //
+            c.squares.Select(item => item.Copy()).ToArray().CopyTo(squares, 0); //
             this.rotation = c.rotation;
             this.position = c.position;
             this.cubeIndex = c.cubeIndex;
+        }
+
+        public Cube Copy()
+        {
+            return new Cube(squares, position);
         }
 
         public object Clone()

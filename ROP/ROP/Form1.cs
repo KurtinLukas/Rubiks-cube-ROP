@@ -285,7 +285,6 @@ namespace ROP
             else if(input.Last() == '2')
             {
                 animateTurn.Add(input[0]);
-                animateTurn.Add(input[0]);
             }
         }
 
@@ -438,6 +437,7 @@ namespace ROP
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            label1.Text = cubes[0, 0].squares[0].vectors[0].ToString();
             //anim += 0.01;
             //ZRotationMatrix[0, 0] = Math.Cos(rotX);
             //ZRotationMatrix[0, 1] = Math.Sin(rotX);
@@ -599,7 +599,7 @@ namespace ROP
                 foreach(Square squ in c.squares)//.Where(w => w.color != Color.Black)
                 {
                     if (!squareSort.Contains(squ))
-                        squareSort.Add(computeVectors(squ, false));
+                        squareSort.Add(ComputeVectors(squ));
                 }
             }
             squareSort = squareSort.OrderByDescending(q => q.Middle().Z).ToList();
@@ -609,37 +609,21 @@ namespace ROP
             }
         }
 
-        public Square computeVectors(Square s, bool turnAnimation)
+        public Square ComputeVectors(Square s)
         {
             Square d = s.Copy(); //Výsledný polygon
             Square t = new Square(); //offset polygon
             Square rotaceZ = new Square(); //první rotace polygon
             Square rotaceX = new Square(); //druhá rotace polygon
-            if (turnAnimation)
+            for (int i = 0; i < 4; i++)
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    rotaceZ.vectors[i] = MultiplyMatrixVector(s.vectors[i], animationZRotationMatrix);
-                    rotaceX.vectors[i] = MultiplyMatrixVector(rotaceZ.vectors[i], animationXRotationMatrix);
-                    t.vectors[i] = rotaceX.vectors[i];
-                    t.vectors[i].Z += 8;
-                    d.vectors[i] = MultiplyMatrixVector(t.vectors[i], projectionMatrix);
-                    d.vectors[i].X = (d.vectors[i].X + 1) * 0.5 * pictureBox1.Width;
-                    d.vectors[i].Y = (d.vectors[i].Y + 1) * 0.5 * pictureBox1.Height;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    rotaceZ.vectors[i] = MultiplyMatrixVector(s.vectors[i], ZRotationMatrix);
-                    rotaceX.vectors[i] = MultiplyMatrixVector(rotaceZ.vectors[i], XRotationMatrix);
-                    t.vectors[i] = rotaceX.vectors[i];
-                    t.vectors[i].Z += 8;
-                    d.vectors[i] = MultiplyMatrixVector(t.vectors[i], projectionMatrix);
-                    d.vectors[i].X = (d.vectors[i].X + 1) * 0.5 * pictureBox1.Width;
-                    d.vectors[i].Y = (d.vectors[i].Y + 1) * 0.5 * pictureBox1.Height;
-                }
+                rotaceZ.vectors[i] = MultiplyMatrixVector(d.vectors[i], ZRotationMatrix);
+                rotaceX.vectors[i] = MultiplyMatrixVector(rotaceZ.vectors[i], XRotationMatrix);
+                t.vectors[i] = rotaceX.vectors[i];
+                t.vectors[i].Z += 8;
+                d.vectors[i] = MultiplyMatrixVector(t.vectors[i], projectionMatrix);
+                d.vectors[i].X = (d.vectors[i].X + 1) * 0.5 * pictureBox1.Width;
+                d.vectors[i].Y = (d.vectors[i].Y + 1) * 0.5 * pictureBox1.Height;
             }
             return d;
         }
