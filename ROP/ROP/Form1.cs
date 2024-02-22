@@ -437,7 +437,8 @@ namespace ROP
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            label1.Text = cubes[0, 0].squares[0].vectors[0].ToString();
+            
+
             //anim += 0.01;
             //ZRotationMatrix[0, 0] = Math.Cos(rotX);
             //ZRotationMatrix[0, 1] = Math.Sin(rotX);
@@ -475,10 +476,18 @@ namespace ROP
                     t += animateTurn[0];
                     animateTurn.RemoveAt(0);
                 }
-                label1.Text = cubes[0, 0].squares[0].vectors[0].ToString();
                 Turn(t);
                 turnAnim = 0;
+                MessageBox.Show((cubes[0, 0].squares[0].vectors[0].X).ToString());
+                label1.Text = cubes[0, 0].squares[0].vectors[0].ToString();
+                double x = cubes[0, 0].squares[0].vectors[0].X;
+                int neg = x < 0 ? -1 : 1;
+                double val = Math.Abs(x) - 0.5;
+                val = Math.Round(val);
+                val += 0.5;
+                MessageBox.Show((val * neg).ToString());
             }
+            label1.Text = cubes[0, 0].squares[0].vectors[0].ToString();
             pictureBox1.Refresh();
         }
 
