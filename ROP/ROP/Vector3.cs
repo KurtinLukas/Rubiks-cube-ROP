@@ -40,13 +40,8 @@ namespace ROP
             Z = z;
             this.animState = new Vector3(animState);
             CalcDisplacement();
-            
         }
-        /// <summary>
-        /// Negeneruje standardní vektor, chybí mu vlastnosti lengthFrom0, displacement, animState !
-        /// Kopíruje se pouze X,Y,Z
-        /// </summary>
-        /// <param name="v"></param>
+
         public Vector3(Vector3 v)
         {
             X = v.X;
@@ -80,24 +75,35 @@ namespace ROP
         public void CalcDisplacement()
         {
             //round up imperfections
-            int neg = X < 0 ? -1 : 1;
-            double val = Math.Abs(X) - 0.5;
-            val = Math.Round(val);
-            val += 0.5;
-            X = val * neg;
-            neg = Y < 0 ? -1 : 1;
-            val = Math.Abs(Y) - 0.5;
-            val = Math.Round(val);
-            val += 0.5; ;
-            Y = val * neg;
-            //Y = (Math.Round(Math.Abs(Y) - 0.5) + 0.5) * neg;
-            neg = Z < 0 ? -1 : 1;
-            val = Math.Abs(Z) - 0.5;
-            val = Math.Round(val);
-            val += 0.5;
-            Z = val * neg;
-            //Z = (Math.Round(Math.Abs(Z) - 0.5) + 0.5) * neg;
+            //int neg = X < 0 ? -1 : 1;
+            //System.Windows.Forms.MessageBox.Show(X.ToString());
+            //double val = Math.Abs(X) - 0.5;
+            //System.Windows.Forms.MessageBox.Show(val.ToString());
+            //val = Math.Round(val);
+            //System.Windows.Forms.MessageBox.Show(val.ToString());
+            //val += 0.5;
+            //System.Windows.Forms.MessageBox.Show((val * neg).ToString());
+            
+            //int neg = X < 0 ? -1 : 1;
+            //double val = Math.Abs(X) - 0.5;
+            //val = Math.Round(val);
+            //val += 0.5;
+            //X = val * neg;
 
+            //neg = Y < 0 ? -1 : 1;
+            //val = Math.Abs(Y) - 0.5;
+            //val = Math.Round(val);
+            //val += 0.5; ;
+            //Y = val * neg;
+            ////Y = (Math.Round(Math.Abs(Y) - 0.5) + 0.5) * neg;
+            //neg = Z < 0 ? -1 : 1;
+            //val = Math.Abs(Z) - 0.5;
+            //val = Math.Round(val);
+            //val += 0.5;
+            //Z = val * neg;
+
+            //Z = (Math.Round(Math.Abs(Z) - 0.5) + 0.5) * neg;
+            
             lengthFrom0 = new Vector3();
             lengthFrom0.X = Math.Sqrt(Y * Y + Z * Z);
             lengthFrom0.Y = Math.Sqrt(X * X + Z * Z);
@@ -109,114 +115,126 @@ namespace ROP
             double uhelInsideZ = 0.5 / lengthFrom0.Z;
             
             double uhelOutside = Math.PI / 4;
-            switch (Math.Abs(X))
+            if (Math.Abs(X) > 1)
             {
-                case 1.5:
-                    switch (Z)
-                    {
-                        case 1.5:
-                            displacement.Y = uhelOutside * 1;
-                            break;
-                        case 0.5:
-                            displacement.Y = Math.PI / 2 - uhelInsideY;
-                            break;
-                        case -0.5:
-                            displacement.Y = Math.PI / 2 + uhelInsideY;
-                            break;
-                        case -1.5:
-                            displacement.Y = uhelOutside * 3;
-                            break;
-                    }
-                    switch (Y)
-                    {
-                        case 1.5:
-                            displacement.Z = uhelOutside * 1;
-                            break;
-                        case 0.5:
-                            displacement.Z = Math.PI / 2 - uhelInsideZ;
-                            break;
-                        case -0.5:
-                            displacement.Z = Math.PI / 2 + uhelInsideZ;
-                            break;
-                        case -1.5:
-                            displacement.Z = uhelOutside * 3;
-                            break;
-                    }
-                    break;
-                case 0.5:
-                    switch (Z)
-                    {
-                        case 1.5:
-                            displacement.Y = uhelInsideY;
-                            break;
-                        case 0.5:
-                            displacement.Y = uhelOutside * 1;
-                            break;
-                        case -0.5:
-                            displacement.Y = uhelOutside * 3;
-                            break;
-                        case -1.5:
-                            displacement.Y = Math.PI - uhelInsideY;
-                            break;
-                    }
-                    switch (Y)
-                    {
-                        case 1.5:
-                            displacement.Z = uhelInsideZ;
-                            break;
-                        case 0.5:
-                            displacement.Z = uhelOutside * 1;
-                            break;
-                        case -0.5:
-                            displacement.Z = uhelOutside * 3;
-                            break;
-                        case -1.5:
-                            displacement.Z = Math.PI - uhelInsideZ;
-                            break;
-                    }
-                    break;
+                //Z
+                if (Z > 1)
+                {
+                    displacement.Y = uhelOutside * 1;
+                }
+                else if (Z > 0)
+                {
+                    displacement.Y = Math.PI / 2 - uhelInsideY;
+                }
+                else if (Z < -1)
+                {
+                    displacement.Y = uhelOutside * 3;
+                }
+                else
+                {
+                    displacement.Y = Math.PI / 2 + uhelInsideY;
+                }
+
+                //Y
+                if (Y > 1)
+                {
+                    displacement.Z = uhelOutside * 1;
+                }
+                else if (Y > 0)
+                {
+                    displacement.Z = Math.PI / 2 - uhelInsideZ;
+                }
+                else if (Y < -1)
+                {
+                    displacement.Z = uhelOutside * 3;
+                }
+                else
+                {
+                    displacement.Z = Math.PI / 2 + uhelInsideZ;
+                }
+            }
+            else if(Math.Abs(X) > 0)
+            {
+                //Z
+                if (Z > 1)
+                {
+                    displacement.Y = uhelInsideY;
+                }
+                else if (Z > 0)
+                {
+                    displacement.Y = uhelOutside * 1;
+                }
+                else if (Z < -1)
+                {
+                    displacement.Y = Math.PI - uhelInsideY;
+                }
+                else
+                {
+                    displacement.Y = uhelOutside * 3;
+                }
+
+                //Y
+                if (Y > 1)
+                {
+                    displacement.Z = uhelInsideZ;
+                }
+                else if (Y > 0)
+                {
+                    displacement.Z = uhelOutside * 1;
+                }
+                else if (Y < -1)
+                {
+                    displacement.Z = Math.PI - uhelInsideZ;
+                }
+                else
+                {
+                    displacement.Z = uhelOutside * 3;
+                }
             }
             if (X < 0)
             {
                 displacement.Y = Math.PI * 2 - displacement.Y;
                 displacement.Z = Math.PI * 2 - displacement.Z;
             }
-            switch (Math.Abs(Z))
+            if(Math.Abs(Z) > 1)
             {
-                case 1.5:
-                    switch (Y)
-                    {
-                        case 1.5:
-                            displacement.X = uhelOutside * 1;
-                            break;
-                        case 0.5:
-                            displacement.X = Math.PI / 2 - uhelInsideX;
-                            break;
-                        case -0.5:
-                            displacement.X = Math.PI / 2 + uhelInsideX;
-                            break;
-                        case -1.5:
-                            displacement.X = uhelOutside * 3;
-                            break;
-                    }
-                    break;
-                case 0.5:
-                    switch (Y)
-                    {
-                        case 1.5:
-                            displacement.X = uhelInsideX;
-                            break;
-                        case 0.5:
-                            displacement.X = uhelOutside * 1;
-                            break;
-                        case -0.5:
-                            displacement.X = uhelOutside * 3;
-                            break;
-                        case -1.5:
-                            displacement.X = Math.PI - uhelInsideX;
-                            break;
-                    }
-                    break;
+                //Y
+                if(Y > 1)
+                {
+                    displacement.X = uhelOutside * 1;
+                }
+                else if(Y > 0)
+                {
+                    displacement.X = Math.PI / 2 - uhelInsideX;
+                }
+                else if(Y < -1)
+                {
+                    displacement.X = uhelOutside * 3;
+                }
+                else
+                {
+                    displacement.X = Math.PI / 2 + uhelInsideX;
+                }
+            }
+            else if(Math.Abs(Z) > 0)
+            {
+                //Y
+                if (Y > 1)
+                {
+                    displacement.X = uhelInsideX;
+                }
+                else if (Y > 0)
+                {
+                    displacement.X = uhelOutside * 1;
+                }
+                else if (Y < -1)
+                {
+                    displacement.X = Math.PI - uhelInsideX;
+                }
+                else
+                {
+                    displacement.X = uhelOutside * 3;
+                }
             }
             if (Z < 0)
             {
