@@ -140,37 +140,6 @@ namespace ROP
 
         Cube[,] cubes = new Cube[9, 3];
 
-
-        private void buttonRight_Click(object sender, EventArgs e)
-        {
-            animateTurn.Add('R');
-        }
-
-        private void buttonLeft_Click(object sender, EventArgs e)
-        {
-            animateTurn.Add('L');
-        }
-
-        private void buttonTop_Click(object sender, EventArgs e)
-        {
-            animateTurn.Add('U');
-        }
-
-        private void buttonBottom_Click(object sender, EventArgs e)
-        {
-            animateTurn.Add('D');
-        }
-
-        private void buttonFront_Click(object sender, EventArgs e)
-        {
-            animateTurn.Add('F');
-        }
-
-        private void buttonBack_Click(object sender, EventArgs e)
-        {
-            animateTurn.Add('B');
-        }
-
         public void Turn(string input)
         {
             if (input[0] == '\'' || input[0] == '2')
@@ -498,7 +467,6 @@ namespace ROP
                 //Turn(t);
             }
             historieTahu += scramble;
-            label2.Text = "Historie: " + historieTahu;
             Algorithm(scramble);
         }
 
@@ -554,7 +522,6 @@ namespace ROP
                 Turn(t);
                 turnAnim = 0;
             }
-            label1.Text = cubes[0, 0].squares[0].vectors[3].ToString();
             pictureBox1.Refresh();
         }
 
@@ -752,12 +719,12 @@ namespace ROP
         {
             if (moveCube)
             {
-                //řádně vypočítat rotaci nebo změnit způsob otáčení
-                if(rotZ%(Math.PI*2) >Math.PI)
+                if(Math.Abs(rotZ)%(Math.PI*4) > Math.PI && Math.Abs(rotZ)%(Math.PI*4) < Math.PI*3)
                     rotX -= (double)(oldMouse.X - MousePosition.X) / 100;
                 else rotX += (double)(oldMouse.X - MousePosition.X) / 100;
                 rotZ -= (double)(oldMouse.Y - MousePosition.Y)/100;
                 oldMouse = MousePosition;
+                label1.Text = "RotZ: " + rotZ + "\nRotX: " + rotX;
             }
         }
 
@@ -791,6 +758,39 @@ namespace ROP
                     }
                 }
             }
+        }
+
+        private void ButtonTurn(object sender, MouseEventArgs e)
+        {
+            char c = (sender as Button).Text[0];
+            if (e.Button == MouseButtons.Left)
+            {
+                animateTurn.Add(c);
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                animateTurn.Add(c);
+                animateTurn.Add('\'');
+                (sender as Button).Focus();
+            }
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string alg = comboBox1.SelectedItem.ToString().Substring(4);
+            textBoxAlgorithm.Text = alg;
+            Algorithm(alg);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form helpForm = new Form();
+            Label notation = new Label();
+            notation.Location = new Point(10, 10);
+            notation.AutoSize = true;
+            notation.Text = "Notace\nYou dumdum je to U jako Up ne? si domysli zbytek, pak U' (čti U prime/prajm) se otáčí proti směru hodinových ručiček";
+            helpForm.Controls.Add(notation);
+            helpForm.Show();
         }
     }
 }

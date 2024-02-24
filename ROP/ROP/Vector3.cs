@@ -73,37 +73,7 @@ namespace ROP
         }
 
         public void CalcDisplacement()
-        {
-            //round up imperfections
-            //int neg = X < 0 ? -1 : 1;
-            //System.Windows.Forms.MessageBox.Show(X.ToString());
-            //double val = Math.Abs(X) - 0.5;
-            //System.Windows.Forms.MessageBox.Show(val.ToString());
-            //val = Math.Round(val);
-            //System.Windows.Forms.MessageBox.Show(val.ToString());
-            //val += 0.5;
-            //System.Windows.Forms.MessageBox.Show((val * neg).ToString());
-            
-            //int neg = X < 0 ? -1 : 1;
-            //double val = Math.Abs(X) - 0.5;
-            //val = Math.Round(val);
-            //val += 0.5;
-            //X = val * neg;
-
-            //neg = Y < 0 ? -1 : 1;
-            //val = Math.Abs(Y) - 0.5;
-            //val = Math.Round(val);
-            //val += 0.5; ;
-            //Y = val * neg;
-            ////Y = (Math.Round(Math.Abs(Y) - 0.5) + 0.5) * neg;
-            //neg = Z < 0 ? -1 : 1;
-            //val = Math.Abs(Z) - 0.5;
-            //val = Math.Round(val);
-            //val += 0.5;
-            //Z = val * neg;
-
-            //Z = (Math.Round(Math.Abs(Z) - 0.5) + 0.5) * neg;
-            
+        {            
             lengthFrom0 = new Vector3();
             lengthFrom0.X = Math.Sqrt(Y * Y + Z * Z);
             lengthFrom0.Y = Math.Sqrt(X * X + Z * Z);

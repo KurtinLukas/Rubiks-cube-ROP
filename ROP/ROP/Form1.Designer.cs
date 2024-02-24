@@ -44,10 +44,12 @@ namespace ROP
             this.label1 = new System.Windows.Forms.Label();
             this.scrambleButton = new System.Windows.Forms.Button();
             this.solveButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +63,7 @@ namespace ROP
             this.buttonRight.TabIndex = 0;
             this.buttonRight.Text = "R";
             this.buttonRight.UseVisualStyleBackColor = true;
-            this.buttonRight.Click += new System.EventHandler(this.buttonRight_Click);
+            this.buttonRight.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonTurn);
             // 
             // buttonLeft
             // 
@@ -72,7 +74,7 @@ namespace ROP
             this.buttonLeft.TabIndex = 1;
             this.buttonLeft.Text = "L";
             this.buttonLeft.UseVisualStyleBackColor = true;
-            this.buttonLeft.Click += new System.EventHandler(this.buttonLeft_Click);
+            this.buttonLeft.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonTurn);
             // 
             // buttonBack
             // 
@@ -83,7 +85,7 @@ namespace ROP
             this.buttonBack.TabIndex = 2;
             this.buttonBack.Text = "B";
             this.buttonBack.UseVisualStyleBackColor = true;
-            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            this.buttonBack.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonTurn);
             // 
             // buttonTop
             // 
@@ -94,7 +96,7 @@ namespace ROP
             this.buttonTop.TabIndex = 3;
             this.buttonTop.Text = "U";
             this.buttonTop.UseVisualStyleBackColor = true;
-            this.buttonTop.Click += new System.EventHandler(this.buttonTop_Click);
+            this.buttonTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonTurn);
             // 
             // buttonBottom
             // 
@@ -105,7 +107,7 @@ namespace ROP
             this.buttonBottom.TabIndex = 4;
             this.buttonBottom.Text = "D";
             this.buttonBottom.UseVisualStyleBackColor = true;
-            this.buttonBottom.Click += new System.EventHandler(this.buttonBottom_Click);
+            this.buttonBottom.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonTurn);
             // 
             // buttonFront
             // 
@@ -116,7 +118,7 @@ namespace ROP
             this.buttonFront.TabIndex = 5;
             this.buttonFront.Text = "F";
             this.buttonFront.UseVisualStyleBackColor = true;
-            this.buttonFront.Click += new System.EventHandler(this.buttonFront_Click);
+            this.buttonFront.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonTurn);
             // 
             // buttonAlgorithm
             // 
@@ -163,7 +165,7 @@ namespace ROP
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 629);
+            this.label1.Location = new System.Drawing.Point(693, 552);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 10;
@@ -190,16 +192,6 @@ namespace ROP
             this.solveButton.Text = "Solve";
             this.solveButton.UseVisualStyleBackColor = true;
             this.solveButton.Click += new System.EventHandler(this.solveButton_Click);
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 673);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "label2";
             // 
             // timer1
             // 
@@ -228,14 +220,68 @@ namespace ROP
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Aa - ",
+            "Ab - ",
+            "E",
+            "F",
+            "Ga",
+            "Gb",
+            "Gc",
+            "Gd",
+            "H",
+            "Ja",
+            "Jb",
+            "Na",
+            "Nb",
+            "Ra - RUR\'F\'RU2R\'U2R\'FRURU2R\'",
+            "Rb - L\'U\'LFL\'U2LU2LF\'L\'U\'L\'U2L",
+            "T - R U R\' U\' R\' F R2 U\' R\' U\' R U R\' F\'",
+            "Ua - y2 M2 U M U2 M\' U M2",
+            "Ub - y2 M2 U\' M U2 M\' U\' M2",
+            "V - R\' U R\' U\' R D\' R\' D R\' U D\' R2 U\' R2 D R2",
+            "Y - F R U\' R\' U\' R U R\' F\' R U R\' U\' R\' F R F\'",
+            "Z - M\' U\' M2 U\' M2 U\' M\' U2 M2"});
+            this.comboBox1.Location = new System.Drawing.Point(915, 501);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 16;
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 664);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Algoritmy:";
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(921, 331);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(115, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Jak používat";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1042, 695);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.solveButton);
             this.Controls.Add(this.scrambleButton);
             this.Controls.Add(this.label1);
@@ -276,10 +322,12 @@ namespace ROP
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button scrambleButton;
         private System.Windows.Forms.Button solveButton;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }
 
