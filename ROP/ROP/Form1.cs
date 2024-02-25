@@ -230,6 +230,19 @@ namespace ROP
                         cubes[6, 1] = new Cube(buffEdge);
                         cubes[7, 1] = new Cube(cubes[7, 1]);
                         break;
+                    case 'M':
+                        buffCorner = new Cube(cubes[1, 0]);
+                        cubes[1, 0] = new Cube(cubes[7, 0]);
+                        cubes[7, 0] = new Cube(cubes[7, 2]);
+                        cubes[7, 2] = new Cube(cubes[1, 2]);
+                        cubes[1, 2] = new Cube(buffCorner);
+                        buffEdge = new Cube(cubes[4, 0]);
+                        cubes[4, 0] = new Cube(cubes[7, 1]);
+                        cubes[7, 1] = new Cube(cubes[4, 2]);
+                        cubes[4, 2] = new Cube(cubes[1, 1]);
+                        cubes[1, 1] = new Cube(buffEdge);
+                        cubes[4, 1] = new Cube(cubes[4, 1]);
+                        break;
                     default:
                         throw new Exception("Invalid first symbol in Turn(" + input[0] + ");");
                 }
@@ -317,6 +330,19 @@ namespace ROP
                         cubes[8, 1] = new Cube(buffEdge);
                         cubes[7, 1] = new Cube(cubes[7, 1]);
                         break;
+                    case 'M':
+                        buffCorner = new Cube(cubes[1, 0]);
+                        cubes[1, 0] = new Cube(cubes[1, 2]);
+                        cubes[1, 2] = new Cube(cubes[7, 2]);
+                        cubes[7, 2] = new Cube(cubes[7, 0]);
+                        cubes[7, 0] = new Cube(buffCorner);
+                        buffEdge = new Cube(cubes[4, 0]);
+                        cubes[4, 0] = new Cube(cubes[1, 1]);
+                        cubes[1, 1] = new Cube(cubes[4, 2]);
+                        cubes[4, 2] = new Cube(cubes[7, 1]);
+                        cubes[7, 1] = new Cube(buffEdge);
+                        cubes[4, 1] = new Cube(cubes[4, 1]);
+                        break;
                     default:
                         throw new Exception("Invalid first symbol in Turn(" + input[0] + ");");
                 }
@@ -336,7 +362,7 @@ namespace ROP
 
         public void Algorithm(string alg)
         {
-            string tahy = "RLUDFB";
+            string tahy = "RLUDFBM";
             for (int i = 0; i < alg.Length; i++)
             {
                 if (tahy.Contains(alg[i]))
@@ -623,6 +649,23 @@ namespace ROP
                                     v.animState.Z+=prime;
                                     v.X = Math.Sin(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
                                     v.Y = Math.Cos(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case 'M':
+                    for (int i = 1; i < 4; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            foreach (Square s in cubes[i * 3 - 2, j].squares)
+                            {
+                                foreach (Vector3 v in s.vectors)
+                                {
+                                    v.animState.X += prime;
+                                    v.Z = Math.Sin(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                    v.Y = Math.Cos(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
                                 }
                             }
                         }
