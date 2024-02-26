@@ -49,7 +49,11 @@ namespace ROP
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonHelp = new System.Windows.Forms.Button();
+            this.buttonEquator = new System.Windows.Forms.Button();
+            this.buttonStanding = new System.Windows.Forms.Button();
+            this.buttonMiddle = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -245,7 +249,7 @@ namespace ROP
             "V - R\' U R\' U\' R D\' R\' D R\' U D\' R2 U\' R2 D R2",
             "Y - F R U\' R\' U\' R U R\' F\' R U R\' U\' R\' F R F\'",
             "Z - M\' U\' M2 U\' M2 U\' M\' U2 M2"});
-            this.comboBox1.Location = new System.Drawing.Point(915, 501);
+            this.comboBox1.Location = new System.Drawing.Point(915, 436);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 16;
@@ -261,23 +265,69 @@ namespace ROP
             this.label2.TabIndex = 17;
             this.label2.Text = "Algoritmy:";
             // 
-            // button1
+            // buttonHelp
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(921, 331);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 23);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Jak používat";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonHelp.Location = new System.Drawing.Point(921, 331);
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Size = new System.Drawing.Size(115, 23);
+            this.buttonHelp.TabIndex = 18;
+            this.buttonHelp.Text = "Jak používat";
+            this.buttonHelp.UseVisualStyleBackColor = true;
+            this.buttonHelp.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // buttonEquator
+            // 
+            this.buttonEquator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEquator.Location = new System.Drawing.Point(880, 518);
+            this.buttonEquator.Name = "buttonEquator";
+            this.buttonEquator.Size = new System.Drawing.Size(75, 23);
+            this.buttonEquator.TabIndex = 19;
+            this.buttonEquator.Text = "E";
+            this.buttonEquator.UseVisualStyleBackColor = true;
+            this.buttonEquator.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonTurn);
+            // 
+            // buttonStanding
+            // 
+            this.buttonStanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStanding.Location = new System.Drawing.Point(961, 518);
+            this.buttonStanding.Name = "buttonStanding";
+            this.buttonStanding.Size = new System.Drawing.Size(75, 23);
+            this.buttonStanding.TabIndex = 20;
+            this.buttonStanding.Text = "S";
+            this.buttonStanding.UseVisualStyleBackColor = true;
+            this.buttonStanding.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonTurn);
+            // 
+            // buttonMiddle
+            // 
+            this.buttonMiddle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMiddle.Location = new System.Drawing.Point(880, 489);
+            this.buttonMiddle.Name = "buttonMiddle";
+            this.buttonMiddle.Size = new System.Drawing.Size(75, 23);
+            this.buttonMiddle.TabIndex = 21;
+            this.buttonMiddle.Text = "M";
+            this.buttonMiddle.UseVisualStyleBackColor = true;
+            this.buttonMiddle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonTurn);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(912, 420);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(73, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "PLL algoritmy:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1042, 695);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.buttonMiddle);
+            this.Controls.Add(this.buttonStanding);
+            this.Controls.Add(this.buttonEquator);
+            this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.pictureBox2);
@@ -327,7 +377,11 @@ namespace ROP
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonHelp;
+        private System.Windows.Forms.Button buttonEquator;
+        private System.Windows.Forms.Button buttonStanding;
+        private System.Windows.Forms.Button buttonMiddle;
+        private System.Windows.Forms.Label label3;
     }
 }
 
