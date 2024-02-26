@@ -16,109 +16,110 @@ namespace ROP
         public Form1()
         {
             InitializeComponent();
-
+            GenerateCubes();
             RenderMatrix();
-
-            //generace kostiček a jejich pozicí
+            pictureBox1.SendToBack();
+            for(int i = 0; i < 21; i++)
+            {
+                comboBox1.Items[i] = PLL[i + 21] + "-" + PLL[i];
+            }           
+        }
+        public void GenerateCubes()
+        {
             {
                 Vector3 b = new Vector3(0, 0, 0);
-                cubes[0, 0] = new Cube(new Vector3(-1.5, +0.5, +0.5)+b, new Vector3(-1.5, 1.5, 0.5)+b, new Vector3(-0.5, 1.5, 0.5)+b, new Vector3(-0.5, 0.5, 0.5)+b,
-                                                     new Vector3(-1.5, 0.5, 1.5)+b, new Vector3(-1.5, 1.5, 1.5)+b, new Vector3(-0.5, 1.5, 1.5)+b, new Vector3(-0.5, 0.5, 1.5)+b,
+                cubes[0, 0] = new Cube(new Vector3(-1.5, +0.5, +0.5) + b, new Vector3(-1.5, 1.5, 0.5) + b, new Vector3(-0.5, 1.5, 0.5) + b, new Vector3(-0.5, 0.5, 0.5) + b,
+                                                     new Vector3(-1.5, 0.5, 1.5) + b, new Vector3(-1.5, 1.5, 1.5) + b, new Vector3(-0.5, 1.5, 1.5) + b, new Vector3(-0.5, 0.5, 1.5) + b,
                                                      Color.Black, Color.Orange, Color.Green, Color.Black, Color.Black, Color.Yellow, 0);
-                cubes[1, 0] = new Cube(new Vector3(-0.5, 0.5, 0.5)+b, new Vector3(-0.5, 1.5, 0.5)+b, new Vector3(0.5, 1.5, 0.5)+b, new Vector3(0.5, 0.5, 0.5)+b,
-                                                     new Vector3(-0.5, 0.5, 1.5)+b, new Vector3(-0.5, 1.5, 1.5)+b, new Vector3(0.5, 1.5, 1.5)+b, new Vector3(0.5, 0.5, 1.5)+b,
+                cubes[1, 0] = new Cube(new Vector3(-0.5, 0.5, 0.5) + b, new Vector3(-0.5, 1.5, 0.5) + b, new Vector3(0.5, 1.5, 0.5) + b, new Vector3(0.5, 0.5, 0.5) + b,
+                                                     new Vector3(-0.5, 0.5, 1.5) + b, new Vector3(-0.5, 1.5, 1.5) + b, new Vector3(0.5, 1.5, 1.5) + b, new Vector3(0.5, 0.5, 1.5) + b,
                                                      Color.Black, Color.Black, Color.Green, Color.Black, Color.Black, Color.Yellow, 1);
-                cubes[2, 0] = new Cube(new Vector3(0.5, 0.5, 0.5)+b, new Vector3(0.5, 1.5, 0.5)+b, new Vector3(1.5, 1.5, 0.5)+b, new Vector3(1.5, 0.5, 0.5)+b,
-                                                     new Vector3(0.5, 0.5, 1.5)+b, new Vector3(0.5, 1.5, 1.5)+b, new Vector3(1.5, 1.5, 1.5)+b, new Vector3(1.5, 0.5, 1.5)+b,
+                cubes[2, 0] = new Cube(new Vector3(0.5, 0.5, 0.5) + b, new Vector3(0.5, 1.5, 0.5) + b, new Vector3(1.5, 1.5, 0.5) + b, new Vector3(1.5, 0.5, 0.5) + b,
+                                                     new Vector3(0.5, 0.5, 1.5) + b, new Vector3(0.5, 1.5, 1.5) + b, new Vector3(1.5, 1.5, 1.5) + b, new Vector3(1.5, 0.5, 1.5) + b,
                                                      Color.Black, Color.Black, Color.Green, Color.Red, Color.Black, Color.Yellow, 2);
-                cubes[3, 0] = new Cube(new Vector3(-1.5, 0.5, -0.5)+b, new Vector3(-1.5, 1.5, -0.5)+b, new Vector3(-0.5, 1.5, -0.5)+b, new Vector3(-0.5, 0.5, -0.5)+b,
-                                                     new Vector3(-1.5, 0.5, 0.5)+b, new Vector3(-1.5, 1.5, 0.5)+b, new Vector3(-0.5, 1.5, 0.5)+b, new Vector3(-0.5, 0.5, 0.5)+b,
+                cubes[3, 0] = new Cube(new Vector3(-1.5, 0.5, -0.5) + b, new Vector3(-1.5, 1.5, -0.5) + b, new Vector3(-0.5, 1.5, -0.5) + b, new Vector3(-0.5, 0.5, -0.5) + b,
+                                                     new Vector3(-1.5, 0.5, 0.5) + b, new Vector3(-1.5, 1.5, 0.5) + b, new Vector3(-0.5, 1.5, 0.5) + b, new Vector3(-0.5, 0.5, 0.5) + b,
                                                      Color.Black, Color.Orange, Color.Black, Color.Black, Color.Black, Color.Yellow, 3);
-                cubes[4, 0] = new Cube(new Vector3(-0.5, 0.5, -0.5)+b, new Vector3(-0.5, 1.5, -0.5)+b, new Vector3(0.5, 1.5, -0.5)+b, new Vector3(0.5, 0.5, -0.5)+b,
-                                                     new Vector3(-0.5, 0.5, 0.5)+b, new Vector3(-0.5, 1.5, 0.5)+b, new Vector3(0.5, 1.5, 0.5)+b, new Vector3(0.5, 0.5, 0.5)+b,
+                cubes[4, 0] = new Cube(new Vector3(-0.5, 0.5, -0.5) + b, new Vector3(-0.5, 1.5, -0.5) + b, new Vector3(0.5, 1.5, -0.5) + b, new Vector3(0.5, 0.5, -0.5) + b,
+                                                     new Vector3(-0.5, 0.5, 0.5) + b, new Vector3(-0.5, 1.5, 0.5) + b, new Vector3(0.5, 1.5, 0.5) + b, new Vector3(0.5, 0.5, 0.5) + b,
                                                      Color.Black, Color.Black, Color.Black, Color.Black, Color.Black, Color.Yellow, 4);
-                cubes[5, 0] = new Cube(new Vector3(0.5, 0.5, -0.5)+b, new Vector3(0.5, 1.5, -0.5)+b, new Vector3(1.5, 1.5, -0.5)+b, new Vector3(1.5, 0.5, -0.5)+b,
-                                                     new Vector3(0.5, 0.5, 0.5)+b, new Vector3(0.5, 1.5, 0.5)+b, new Vector3(1.5, 1.5, 0.5)+b, new Vector3(1.5, 0.5, 0.5)+b,
+                cubes[5, 0] = new Cube(new Vector3(0.5, 0.5, -0.5) + b, new Vector3(0.5, 1.5, -0.5) + b, new Vector3(1.5, 1.5, -0.5) + b, new Vector3(1.5, 0.5, -0.5) + b,
+                                                     new Vector3(0.5, 0.5, 0.5) + b, new Vector3(0.5, 1.5, 0.5) + b, new Vector3(1.5, 1.5, 0.5) + b, new Vector3(1.5, 0.5, 0.5) + b,
                                                      Color.Black, Color.Black, Color.Black, Color.Red, Color.Black, Color.Yellow, 5);
-                cubes[6, 0] = new Cube(new Vector3(-1.5, 0.5, -1.5) +b, new Vector3(-1.5, 1.5, -1.5) +b, new Vector3(-0.5, 1.5, -1.5) +b, new Vector3(-0.5, 0.5, -1.5) +b,
-                                                     new Vector3(-1.5, 0.5, -0.5)+b, new Vector3(-1.5, 1.5, -0.5)+b, new Vector3(-0.5, 1.5, -0.5)+b, new Vector3(-0.5, 0.5, -0.5)+b,
+                cubes[6, 0] = new Cube(new Vector3(-1.5, 0.5, -1.5) + b, new Vector3(-1.5, 1.5, -1.5) + b, new Vector3(-0.5, 1.5, -1.5) + b, new Vector3(-0.5, 0.5, -1.5) + b,
+                                                     new Vector3(-1.5, 0.5, -0.5) + b, new Vector3(-1.5, 1.5, -0.5) + b, new Vector3(-0.5, 1.5, -0.5) + b, new Vector3(-0.5, 0.5, -0.5) + b,
                                                      Color.Blue, Color.Orange, Color.Black, Color.Black, Color.Black, Color.Yellow, 6);
-                cubes[7, 0] = new Cube(new Vector3(-0.5, 0.5, -1.5) +b, new Vector3(-0.5, 1.5, -1.5) +b, new Vector3(0.5, 1.5, -1.5) +b, new Vector3(0.5, 0.5, -1.5) +b,
-                                                     new Vector3(-0.5, 0.5, -0.5)+b, new Vector3(-0.5, 1.5, -0.5)+b, new Vector3(0.5, 1.5, -0.5)+b, new Vector3(0.5, 0.5, -0.5)+b,
+                cubes[7, 0] = new Cube(new Vector3(-0.5, 0.5, -1.5) + b, new Vector3(-0.5, 1.5, -1.5) + b, new Vector3(0.5, 1.5, -1.5) + b, new Vector3(0.5, 0.5, -1.5) + b,
+                                                     new Vector3(-0.5, 0.5, -0.5) + b, new Vector3(-0.5, 1.5, -0.5) + b, new Vector3(0.5, 1.5, -0.5) + b, new Vector3(0.5, 0.5, -0.5) + b,
                                                      Color.Blue, Color.Black, Color.Black, Color.Black, Color.Black, Color.Yellow, 7);
-                cubes[8, 0] = new Cube(new Vector3(0.5, 0.5, -1.5) +b, new Vector3(0.5, 1.5, -1.5) +b, new Vector3(1.5, 1.5, -1.5) +b, new Vector3(1.5, 0.5, -1.5) +b,
-                                                     new Vector3(0.5, 0.5, -0.5)+b, new Vector3(0.5, 1.5, -0.5)+b, new Vector3(1.5, 1.5, -0.5)+b, new Vector3(1.5, 0.5, -0.5)+b,
+                cubes[8, 0] = new Cube(new Vector3(0.5, 0.5, -1.5) + b, new Vector3(0.5, 1.5, -1.5) + b, new Vector3(1.5, 1.5, -1.5) + b, new Vector3(1.5, 0.5, -1.5) + b,
+                                                     new Vector3(0.5, 0.5, -0.5) + b, new Vector3(0.5, 1.5, -0.5) + b, new Vector3(1.5, 1.5, -0.5) + b, new Vector3(1.5, 0.5, -0.5) + b,
                                                      Color.Blue, Color.Black, Color.Black, Color.Red, Color.Black, Color.Yellow, 8);
 
-                cubes[0, 1] = new Cube(new Vector3(-1.5, -0.5, 0.5)+b, new Vector3(-1.5, 0.5, 0.5)+b, new Vector3(-0.5, 0.5, 0.5)+b, new Vector3(-0.5, -0.5, 0.5)+b,
-                                                     new Vector3(-1.5, -0.5, 1.5) +b, new Vector3(-1.5, 0.5, 1.5) +b, new Vector3(-0.5, 0.5, 1.5) +b, new Vector3(-0.5, -0.5, 1.5) +b,
+                cubes[0, 1] = new Cube(new Vector3(-1.5, -0.5, 0.5) + b, new Vector3(-1.5, 0.5, 0.5) + b, new Vector3(-0.5, 0.5, 0.5) + b, new Vector3(-0.5, -0.5, 0.5) + b,
+                                                     new Vector3(-1.5, -0.5, 1.5) + b, new Vector3(-1.5, 0.5, 1.5) + b, new Vector3(-0.5, 0.5, 1.5) + b, new Vector3(-0.5, -0.5, 1.5) + b,
                                                      Color.Black, Color.Orange, Color.Green, Color.Black, Color.Black, Color.Black, 10);
-                cubes[1, 1] = new Cube(new Vector3(-0.5, -0.5, 0.5)+b, new Vector3(-0.5, 0.5, 0.5)+b, new Vector3(0.5, 0.5, 0.5)+b, new Vector3(0.5, -0.5, 0.5)+b,
-                                                     new Vector3(-0.5, -0.5, 1.5)+b, new Vector3(-0.5, 0.5, 1.5)+b, new Vector3(0.5, 0.5, 1.5)+b, new Vector3(0.5, -0.5, 1.5)+b,
+                cubes[1, 1] = new Cube(new Vector3(-0.5, -0.5, 0.5) + b, new Vector3(-0.5, 0.5, 0.5) + b, new Vector3(0.5, 0.5, 0.5) + b, new Vector3(0.5, -0.5, 0.5) + b,
+                                                     new Vector3(-0.5, -0.5, 1.5) + b, new Vector3(-0.5, 0.5, 1.5) + b, new Vector3(0.5, 0.5, 1.5) + b, new Vector3(0.5, -0.5, 1.5) + b,
                                                      Color.Black, Color.Black, Color.Green, Color.Black, Color.Black, Color.Black, 11);
-                cubes[2, 1] = new Cube(new Vector3(0.5, -0.5, 0.5)+b, new Vector3(0.5, 0.5, 0.5)+b, new Vector3(1.5, 0.5, 0.5)+b, new Vector3(1.5, -0.5, 0.5)+b,
-                                                     new Vector3(0.5, -0.5, 1.5)+b, new Vector3(0.5, 0.5, 1.5)+b, new Vector3(1.5, 0.5, 1.5)+b, new Vector3(1.5, -0.5, 1.5)+b,
+                cubes[2, 1] = new Cube(new Vector3(0.5, -0.5, 0.5) + b, new Vector3(0.5, 0.5, 0.5) + b, new Vector3(1.5, 0.5, 0.5) + b, new Vector3(1.5, -0.5, 0.5) + b,
+                                                     new Vector3(0.5, -0.5, 1.5) + b, new Vector3(0.5, 0.5, 1.5) + b, new Vector3(1.5, 0.5, 1.5) + b, new Vector3(1.5, -0.5, 1.5) + b,
                                                      Color.Black, Color.Black, Color.Green, Color.Red, Color.Black, Color.Black, 12);
-                cubes[3, 1] = new Cube(new Vector3(-1.5, -0.5, -0.5)+b, new Vector3(-1.5, 0.5, -0.5)+b, new Vector3(-0.5, 0.5, -0.5)+b, new Vector3(-0.5, -0.5, -0.5)+b,
-                                                     new Vector3(-1.5, -0.5, 0.5)+b, new Vector3(-1.5, 0.5, 0.5)+b, new Vector3(-0.5, 0.5, 0.5)+b, new Vector3(-0.5, -0.5, 0.5)+b,
+                cubes[3, 1] = new Cube(new Vector3(-1.5, -0.5, -0.5) + b, new Vector3(-1.5, 0.5, -0.5) + b, new Vector3(-0.5, 0.5, -0.5) + b, new Vector3(-0.5, -0.5, -0.5) + b,
+                                                     new Vector3(-1.5, -0.5, 0.5) + b, new Vector3(-1.5, 0.5, 0.5) + b, new Vector3(-0.5, 0.5, 0.5) + b, new Vector3(-0.5, -0.5, 0.5) + b,
                                                      Color.Black, Color.Orange, Color.Black, Color.Black, Color.Black, Color.Black, 13);
-                cubes[4, 1] = new Cube(new Vector3(-0.5, -0.5, -0.5)+b, new Vector3(-0.5, 0.5, -0.5)+b, new Vector3(0.5, 0.5, -0.5)+b, new Vector3(0.5, -0.5, -0.5)+b,
-                                                     new Vector3(-0.5, -0.5, 0.5)+b, new Vector3(-0.5, 0.5, 0.5)+b, new Vector3(0.5, 0.5, 0.5)+b, new Vector3(0.5, -0.5, 0.5)+b,
+                cubes[4, 1] = new Cube(new Vector3(-0.5, -0.5, -0.5) + b, new Vector3(-0.5, 0.5, -0.5) + b, new Vector3(0.5, 0.5, -0.5) + b, new Vector3(0.5, -0.5, -0.5) + b,
+                                                     new Vector3(-0.5, -0.5, 0.5) + b, new Vector3(-0.5, 0.5, 0.5) + b, new Vector3(0.5, 0.5, 0.5) + b, new Vector3(0.5, -0.5, 0.5) + b,
                                                      Color.Black, Color.Black, Color.Black, Color.Black, Color.Black, Color.Black, 14);
-                cubes[5, 1] = new Cube(new Vector3(0.5, -0.5, -0.5)+b, new Vector3(0.5, 0.5, -0.5)+b, new Vector3(1.5, 0.5, -0.5)+b, new Vector3(1.5, -0.5, -0.5)+b,
-                                                     new Vector3(0.5, -0.5, 0.5)+b, new Vector3(0.5, 0.5, 0.5)+b, new Vector3(1.5, 0.5, 0.5)+b, new Vector3(1.5, -0.5, 0.5)+b,
+                cubes[5, 1] = new Cube(new Vector3(0.5, -0.5, -0.5) + b, new Vector3(0.5, 0.5, -0.5) + b, new Vector3(1.5, 0.5, -0.5) + b, new Vector3(1.5, -0.5, -0.5) + b,
+                                                     new Vector3(0.5, -0.5, 0.5) + b, new Vector3(0.5, 0.5, 0.5) + b, new Vector3(1.5, 0.5, 0.5) + b, new Vector3(1.5, -0.5, 0.5) + b,
                                                      Color.Black, Color.Black, Color.Black, Color.Red, Color.Black, Color.Black, 15);
-                cubes[6, 1] = new Cube(new Vector3(-1.5, -0.5, -1.5) +b, new Vector3(-1.5, 0.5, -1.5) +b, new Vector3(-0.5, 0.5, -1.5) +b, new Vector3(-0.5, -0.5, -1.5) +b,
-                                                     new Vector3(-1.5, -0.5, -0.5)+b, new Vector3(-1.5, 0.5, -0.5)+b, new Vector3(-0.5, 0.5, -0.5)+b, new Vector3(-0.5, -0.5, -0.5)+b,
+                cubes[6, 1] = new Cube(new Vector3(-1.5, -0.5, -1.5) + b, new Vector3(-1.5, 0.5, -1.5) + b, new Vector3(-0.5, 0.5, -1.5) + b, new Vector3(-0.5, -0.5, -1.5) + b,
+                                                     new Vector3(-1.5, -0.5, -0.5) + b, new Vector3(-1.5, 0.5, -0.5) + b, new Vector3(-0.5, 0.5, -0.5) + b, new Vector3(-0.5, -0.5, -0.5) + b,
                                                      Color.Blue, Color.Orange, Color.Black, Color.Black, Color.Black, Color.Black, 16);
-                cubes[7, 1] = new Cube(new Vector3(-0.5, -0.5, -1.5) +b, new Vector3(-0.5, 0.5, -1.5) +b, new Vector3(0.5, 0.5, -1.5) +b, new Vector3(0.5, -0.5, -1.5) +b,
-                                                     new Vector3(-0.5, -0.5, -0.5)+b, new Vector3(-0.5, 0.5, -0.5)+b, new Vector3(0.5, 0.5, -0.5)+b, new Vector3(0.5, -0.5, -0.5)+b,
+                cubes[7, 1] = new Cube(new Vector3(-0.5, -0.5, -1.5) + b, new Vector3(-0.5, 0.5, -1.5) + b, new Vector3(0.5, 0.5, -1.5) + b, new Vector3(0.5, -0.5, -1.5) + b,
+                                                     new Vector3(-0.5, -0.5, -0.5) + b, new Vector3(-0.5, 0.5, -0.5) + b, new Vector3(0.5, 0.5, -0.5) + b, new Vector3(0.5, -0.5, -0.5) + b,
                                                      Color.Blue, Color.Black, Color.Black, Color.Black, Color.Black, Color.Black, 17);
-                cubes[8, 1] = new Cube(new Vector3(0.5, -0.5, -1.5) +b, new Vector3(0.5, 0.5, -1.5) +b, new Vector3(1.5, 0.5, -1.5) +b, new Vector3(1.5, -0.5, -1.5) +b,
-                                                     new Vector3(0.5, -0.5, -0.5)+b, new Vector3(0.5, 0.5, -0.5)+b, new Vector3(1.5, 0.5, -0.5)+b, new Vector3(1.5, -0.5, -0.5)+b,
+                cubes[8, 1] = new Cube(new Vector3(0.5, -0.5, -1.5) + b, new Vector3(0.5, 0.5, -1.5) + b, new Vector3(1.5, 0.5, -1.5) + b, new Vector3(1.5, -0.5, -1.5) + b,
+                                                     new Vector3(0.5, -0.5, -0.5) + b, new Vector3(0.5, 0.5, -0.5) + b, new Vector3(1.5, 0.5, -0.5) + b, new Vector3(1.5, -0.5, -0.5) + b,
                                                      Color.Blue, Color.Black, Color.Black, Color.Red, Color.Black, Color.Black, 18);
 
-                cubes[0, 2] = new Cube(new Vector3(-1.5, -1.5, 0.5)+b, new Vector3(-1.5, -0.5, 0.5)+b, new Vector3(-0.5, -0.5, 0.5)+b, new Vector3(-0.5, -1.5, 0.5)+b,
-                                                     new Vector3(-1.5, -1.5, 1.5)+b, new Vector3(-1.5, -0.5, 1.5)+b, new Vector3(-0.5, -0.5, 1.5)+b, new Vector3(-0.5, -1.5, 1.5)+b,
+                cubes[0, 2] = new Cube(new Vector3(-1.5, -1.5, 0.5) + b, new Vector3(-1.5, -0.5, 0.5) + b, new Vector3(-0.5, -0.5, 0.5) + b, new Vector3(-0.5, -1.5, 0.5) + b,
+                                                     new Vector3(-1.5, -1.5, 1.5) + b, new Vector3(-1.5, -0.5, 1.5) + b, new Vector3(-0.5, -0.5, 1.5) + b, new Vector3(-0.5, -1.5, 1.5) + b,
                                                      Color.Black, Color.Orange, Color.Green, Color.Black, Color.White, Color.Black, 20);
-                cubes[1, 2] = new Cube(new Vector3(-0.5, -1.5, 0.5)+b, new Vector3(-0.5, -0.5, 0.5)+b, new Vector3(0.5, -0.5, 0.5)+b, new Vector3(0.5, -1.5, 0.5)+b,
-                                                     new Vector3(-0.5, -1.5, 1.5)+b, new Vector3(-0.5, -0.5, 1.5)+b, new Vector3(0.5, -0.5, 1.5)+b, new Vector3(0.5, -1.5, 1.5)+b,
+                cubes[1, 2] = new Cube(new Vector3(-0.5, -1.5, 0.5) + b, new Vector3(-0.5, -0.5, 0.5) + b, new Vector3(0.5, -0.5, 0.5) + b, new Vector3(0.5, -1.5, 0.5) + b,
+                                                     new Vector3(-0.5, -1.5, 1.5) + b, new Vector3(-0.5, -0.5, 1.5) + b, new Vector3(0.5, -0.5, 1.5) + b, new Vector3(0.5, -1.5, 1.5) + b,
                                                      Color.Black, Color.Black, Color.Green, Color.Black, Color.White, Color.Black, 21);
-                cubes[2, 2] = new Cube(new Vector3(0.5, -1.5, 0.5)+b, new Vector3(0.5, -0.5, 0.5)+b, new Vector3(1.5, -0.5, 0.5)+b, new Vector3(1.5, -1.5, 0.5)+b,
-                                                     new Vector3(0.5, -1.5, 1.5)+b, new Vector3(0.5, -0.5, 1.5)+b, new Vector3(1.5, -0.5, 1.5)+b, new Vector3(1.5, -1.5, 1.5)+b,
+                cubes[2, 2] = new Cube(new Vector3(0.5, -1.5, 0.5) + b, new Vector3(0.5, -0.5, 0.5) + b, new Vector3(1.5, -0.5, 0.5) + b, new Vector3(1.5, -1.5, 0.5) + b,
+                                                     new Vector3(0.5, -1.5, 1.5) + b, new Vector3(0.5, -0.5, 1.5) + b, new Vector3(1.5, -0.5, 1.5) + b, new Vector3(1.5, -1.5, 1.5) + b,
                                                      Color.Black, Color.Black, Color.Green, Color.Red, Color.White, Color.Black, 22);
-                cubes[3, 2] = new Cube(new Vector3(-1.5, -1.5, -0.5)+b, new Vector3(-1.5, -0.5, -0.5)+b, new Vector3(-0.5, -0.5, -0.5)+b, new Vector3(-0.5, -1.5, -0.5)+b,
-                                                     new Vector3(-1.5, -1.5, 0.5)+b, new Vector3(-1.5, -0.5, 0.5)+b, new Vector3(-0.5, -0.5, 0.5)+b, new Vector3(-0.5, -1.5, 0.5)+b,
+                cubes[3, 2] = new Cube(new Vector3(-1.5, -1.5, -0.5) + b, new Vector3(-1.5, -0.5, -0.5) + b, new Vector3(-0.5, -0.5, -0.5) + b, new Vector3(-0.5, -1.5, -0.5) + b,
+                                                     new Vector3(-1.5, -1.5, 0.5) + b, new Vector3(-1.5, -0.5, 0.5) + b, new Vector3(-0.5, -0.5, 0.5) + b, new Vector3(-0.5, -1.5, 0.5) + b,
                                                      Color.Black, Color.Orange, Color.Black, Color.Black, Color.White, Color.Black, 23);
-                cubes[4, 2] = new Cube(new Vector3(-0.5, -1.5, -0.5)+b, new Vector3(-0.5, -0.5, -0.5)+b, new Vector3(0.5, -0.5, -0.5)+b, new Vector3(0.5, -1.5, -0.5)+b,
-                                                     new Vector3(-0.5, -1.5, 0.5)+b, new Vector3(-0.5, -0.5, 0.5)+b, new Vector3(0.5, -0.5, 0.5)+b, new Vector3(0.5, -1.5, 0.5)+b,
+                cubes[4, 2] = new Cube(new Vector3(-0.5, -1.5, -0.5) + b, new Vector3(-0.5, -0.5, -0.5) + b, new Vector3(0.5, -0.5, -0.5) + b, new Vector3(0.5, -1.5, -0.5) + b,
+                                                     new Vector3(-0.5, -1.5, 0.5) + b, new Vector3(-0.5, -0.5, 0.5) + b, new Vector3(0.5, -0.5, 0.5) + b, new Vector3(0.5, -1.5, 0.5) + b,
                                                      Color.Black, Color.Black, Color.Black, Color.Black, Color.White, Color.Black, 24);
-                cubes[5, 2] = new Cube(new Vector3(0.5, -1.5, -0.5)+b, new Vector3(0.5, -0.5, -0.5)+b, new Vector3(1.5, -0.5, -0.5)+b, new Vector3(1.5, -1.5, -0.5)+b,
-                                                     new Vector3(0.5, -1.5, 0.5)+b, new Vector3(0.5, -0.5, 0.5)+b, new Vector3(1.5, -0.5, 0.5)+b, new Vector3(1.5, -1.5, 0.5)+b,
+                cubes[5, 2] = new Cube(new Vector3(0.5, -1.5, -0.5) + b, new Vector3(0.5, -0.5, -0.5) + b, new Vector3(1.5, -0.5, -0.5) + b, new Vector3(1.5, -1.5, -0.5) + b,
+                                                     new Vector3(0.5, -1.5, 0.5) + b, new Vector3(0.5, -0.5, 0.5) + b, new Vector3(1.5, -0.5, 0.5) + b, new Vector3(1.5, -1.5, 0.5) + b,
                                                      Color.Black, Color.Black, Color.Black, Color.Red, Color.White, Color.Black, 25);
-                cubes[6, 2] = new Cube(new Vector3(-1.5, -1.5, -1.5) +b, new Vector3(-1.5, -0.5, -1.5) +b, new Vector3(-0.5, -0.5, -1.5) +b, new Vector3(-0.5, -1.5, -1.5) +b,
-                                                     new Vector3(-1.5, -1.5, -0.5)+b, new Vector3(-1.5, -0.5, -0.5)+b, new Vector3(-0.5, -0.5, -0.5)+b, new Vector3(-0.5, -1.5, -0.5)+b,
+                cubes[6, 2] = new Cube(new Vector3(-1.5, -1.5, -1.5) + b, new Vector3(-1.5, -0.5, -1.5) + b, new Vector3(-0.5, -0.5, -1.5) + b, new Vector3(-0.5, -1.5, -1.5) + b,
+                                                     new Vector3(-1.5, -1.5, -0.5) + b, new Vector3(-1.5, -0.5, -0.5) + b, new Vector3(-0.5, -0.5, -0.5) + b, new Vector3(-0.5, -1.5, -0.5) + b,
                                                      Color.Blue, Color.Orange, Color.Black, Color.Black, Color.White, Color.Black, 26);
-                cubes[7, 2] = new Cube(new Vector3(-0.5, -1.5, -1.5) +b, new Vector3(-0.5, -0.5, -1.5) +b, new Vector3(0.5, -0.5, -1.5) +b, new Vector3(0.5, -1.5, -1.5) +b,
-                                                     new Vector3(-0.5, -1.5, -0.5)+b, new Vector3(-0.5, -0.5, -0.5)+b, new Vector3(0.5, -0.5, -0.5)+b, new Vector3(0.5, -1.5, -0.5)+b,
+                cubes[7, 2] = new Cube(new Vector3(-0.5, -1.5, -1.5) + b, new Vector3(-0.5, -0.5, -1.5) + b, new Vector3(0.5, -0.5, -1.5) + b, new Vector3(0.5, -1.5, -1.5) + b,
+                                                     new Vector3(-0.5, -1.5, -0.5) + b, new Vector3(-0.5, -0.5, -0.5) + b, new Vector3(0.5, -0.5, -0.5) + b, new Vector3(0.5, -1.5, -0.5) + b,
                                                      Color.Blue, Color.Black, Color.Black, Color.Black, Color.White, Color.Black, 27);
-                cubes[8, 2] = new Cube(new Vector3(0.5, -1.5, -1.5) +b, new Vector3(0.5, -0.5, -1.5) +b, new Vector3(1.5, -0.5, -1.5) +b, new Vector3(1.5, -1.5, -1.5) +b,
-                                                     new Vector3(0.5, -1.5, -0.5)+b, new Vector3(0.5, -0.5, -0.5)+b, new Vector3(1.5, -0.5, -0.5)+b, new Vector3(1.5, -1.5, -0.5)+b,
+                cubes[8, 2] = new Cube(new Vector3(0.5, -1.5, -1.5) + b, new Vector3(0.5, -0.5, -1.5) + b, new Vector3(1.5, -0.5, -1.5) + b, new Vector3(1.5, -1.5, -1.5) + b,
+                                                     new Vector3(0.5, -1.5, -0.5) + b, new Vector3(0.5, -0.5, -0.5) + b, new Vector3(1.5, -0.5, -0.5) + b, new Vector3(1.5, -1.5, -0.5) + b,
                                                      Color.Blue, Color.Black, Color.Black, Color.Red, Color.White, Color.Black, 28);
             }
-            for(int i = 0; i < 9; i++)
+            for (int i = 0; i < 9; i++)
             {
-                for(int j = 0; j < 3; j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    cubes[i,j] = new Cube(cubes[i,j]);
+                    cubes[i, j] = new Cube(cubes[i, j]);
                 }
             }
-            // scale_x     0       0        translation_X
-            //    0         scale_y 0       translation_Y
-            //      0       0       scale_z translation_Z
-            //      0       0       0         1           
         }
-
         //bílá = 0; žlutá = 1; červená = 2; oranžová = 3; modrá = 4; zelená = 5
 
         public double[,] projectionMatrix = new double[4, 4];
@@ -133,11 +134,12 @@ namespace ROP
         public double rotZ = Math.PI * 2;
         public double turnStep = 31;
         public double turnStepChangeRequest = 32;
+        public double distanceFromCamera = 7;
 
         public string historieTahu = "";
 
         Cube[,] cubes = new Cube[9, 3];
-
+        
         string[] PLL = {"R'FR'B2RF'R'B2R2",//Aa  
             "R2B2RFR'B2RF'R",//Ab
             "R2UR2UDR2U'R2UR2U'D'R2UR2U2R2",//E
@@ -158,16 +160,17 @@ namespace ROP
             "M2U'MU2M'U'M2",//Ub
             "R'UR'U'RD'R'DR'UD'R2U'R2DR2",//V
             "FRU'R'U'RUR'F'RUR'U'R'FRF'",//Y
-            "M2UM2UM'U2M2U2M'" //Z
+            "M2UM2UM'U2M2U2M'U2", //Z
+            "Aa","Ab","E","F","Ga","Gb","Gc","Gd","H","Ja","Jb","Na","Nb","Ra","Rb","T","Ua","Ub","V","Y","Z"
         };
 
         public void Turn(string input)
         {
             if (input[0] == '\'' || input[0] == '2')
                 return;
-
+            
             historieTahu += input;
-            label2.Text = "Historie: " + historieTahu;
+            label2.Text = "Historie: " + historieTahu.Substring(historieTahu.Length > 30 ? historieTahu.Length-31 : 0);
             Cube buffCorner = new Cube();
             Cube buffEdge = new Cube();
             if(input.Length == 1)
@@ -564,6 +567,11 @@ namespace ROP
 
         private void Form1_ResizeEnd(object sender, EventArgs e)
         {
+            if(Width < Height)
+            {
+                pictureBox1.Size = new Size((int)(Width*0.75),(int)(Width*0.75));
+            }
+            else pictureBox1.Size = new Size((int)(Height * 0.75), (int)(Height * 0.75));
             RenderMatrix();
         }
 
@@ -813,7 +821,7 @@ namespace ROP
                 rotaceZ.vectors[i] = MultiplyMatrixVector(d.vectors[i], ZRotationMatrix);
                 rotaceX.vectors[i] = MultiplyMatrixVector(rotaceZ.vectors[i], XRotationMatrix);
                 t.vectors[i] = rotaceX.vectors[i];
-                t.vectors[i].Z += 8;
+                t.vectors[i].Z += distanceFromCamera;
                 d.vectors[i] = MultiplyMatrixVector(t.vectors[i], projectionMatrix);
                 d.vectors[i].X = (d.vectors[i].X + 1) * 0.5 * pictureBox1.Width;
                 d.vectors[i].Y = (d.vectors[i].Y + 1) * 0.5 * pictureBox1.Height;
@@ -861,6 +869,7 @@ namespace ROP
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            
             moveCube = true;
             oldMouse = MousePosition;
         }
@@ -874,7 +883,6 @@ namespace ROP
                 else rotX += (double)(oldMouse.X - MousePosition.X) / 100;
                 rotZ -= (double)(oldMouse.Y - MousePosition.Y)/100;
                 oldMouse = MousePosition;
-                label1.Text = "RotZ: " + rotZ + "\nRotX: " + rotX;
             }
         }
 
@@ -883,32 +891,32 @@ namespace ROP
             moveCube = false;
         }
 
-        private void pictureBox2_Paint(object sender, PaintEventArgs e)
-        {
-            float aspectRatio = pictureBox2.Width / pictureBox2.Height;
-            int width = Convert.ToInt32(pictureBox2.Size.Width/4 *aspectRatio);
-            int height = Convert.ToInt32(pictureBox2.Size.Height/3*aspectRatio);
-            Graphics g = e.Graphics;
+        //private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        //{
+        //    float aspectRatio = pictureBox2.Width / pictureBox2.Height;
+        //    int width = Convert.ToInt32(pictureBox2.Size.Width/4 *aspectRatio);
+        //    int height = Convert.ToInt32(pictureBox2.Size.Height/3*aspectRatio);
+        //    Graphics g = e.Graphics;
             
-            g.FillRectangle(Brushes.Black, new Rectangle(new Point(0, height), new Size(pictureBox2.Size.Width, height)));
-            g.FillRectangle(Brushes.Black, new Rectangle(new Point(width, 0), new Size(width, pictureBox2.Size.Height)));
+        //    g.FillRectangle(Brushes.Black, new Rectangle(new Point(0, height), new Size(pictureBox2.Size.Width, height)));
+        //    g.FillRectangle(Brushes.Black, new Rectangle(new Point(width, 0), new Size(width, pictureBox2.Size.Height)));
             
-            for(int i = 0; i < 3; i++)
-            {
-                for(int j = 0; j < 9; j++)
-                {
-                    Cube c = cubes[j, i];
-                    foreach(Square s in c.squares)
-                    {
-                        Brush b = Brushes.Black;
-                        //not working
-                        if (b == Brushes.Black) break;
+        //    for(int i = 0; i < 3; i++)
+        //    {
+        //        for(int j = 0; j < 9; j++)
+        //        {
+        //            Cube c = cubes[j, i];
+        //            foreach(Square s in c.squares)
+        //            {
+        //                Brush b = Brushes.Black;
+        //                //not working
+        //                if (b == Brushes.Black) break;
 
-                        g.FillRectangle(b, new Rectangle(new Point(i,j), new Size((width-5)/3, (height-5)/3)));
-                    }
-                }
-            }
-        }
+        //                g.FillRectangle(b, new Rectangle(new Point(i,j), new Size((width-5)/3, (height-5)/3)));
+        //            }
+        //        }
+        //    }
+        //}
 
         private void ButtonTurn(object sender, MouseEventArgs e)
         {
@@ -927,7 +935,7 @@ namespace ROP
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            string alg = comboBox1.SelectedItem.ToString().Substring(4);
+            string alg = comboBox1.SelectedItem.ToString().Substring(2);
             textBoxAlgorithm.Text = alg;
             Algorithm(alg);
         }
@@ -945,6 +953,25 @@ namespace ROP
         private void numericUpDown1_KeyUp(object sender, KeyEventArgs e)
         {
             turnStepChangeRequest = 101 - (double)numericUpDown1.Value;
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            animateTurn.Clear();
+            GenerateCubes();
+            historieTahu = "";
+            label2.Text = "Historie:";
+            turnAnim = 0;
+        }
+
+        private void buttonHistory_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(historieTahu);
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            distanceFromCamera = (double)numericUpDown2.Value;
         }
     }
 }

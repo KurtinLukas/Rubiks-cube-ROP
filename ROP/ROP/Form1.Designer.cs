@@ -45,7 +45,6 @@ namespace ROP
             this.scrambleButton = new System.Windows.Forms.Button();
             this.solveButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,15 +55,19 @@ namespace ROP
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.labelSpeed = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.buttonReset = new System.Windows.Forms.Button();
+            this.buttonHistory = new System.Windows.Forms.Button();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonRight
             // 
             this.buttonRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRight.Location = new System.Drawing.Point(961, 547);
+            this.buttonRight.Location = new System.Drawing.Point(653, 577);
             this.buttonRight.Name = "buttonRight";
             this.buttonRight.Size = new System.Drawing.Size(75, 23);
             this.buttonRight.TabIndex = 0;
@@ -75,7 +78,7 @@ namespace ROP
             // buttonLeft
             // 
             this.buttonLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLeft.Location = new System.Drawing.Point(961, 576);
+            this.buttonLeft.Location = new System.Drawing.Point(653, 606);
             this.buttonLeft.Name = "buttonLeft";
             this.buttonLeft.Size = new System.Drawing.Size(75, 23);
             this.buttonLeft.TabIndex = 1;
@@ -86,7 +89,7 @@ namespace ROP
             // buttonBack
             // 
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBack.Location = new System.Drawing.Point(961, 605);
+            this.buttonBack.Location = new System.Drawing.Point(653, 635);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
             this.buttonBack.TabIndex = 2;
@@ -97,7 +100,7 @@ namespace ROP
             // buttonTop
             // 
             this.buttonTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonTop.Location = new System.Drawing.Point(880, 547);
+            this.buttonTop.Location = new System.Drawing.Point(572, 577);
             this.buttonTop.Name = "buttonTop";
             this.buttonTop.Size = new System.Drawing.Size(75, 23);
             this.buttonTop.TabIndex = 3;
@@ -108,7 +111,7 @@ namespace ROP
             // buttonBottom
             // 
             this.buttonBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBottom.Location = new System.Drawing.Point(880, 576);
+            this.buttonBottom.Location = new System.Drawing.Point(572, 606);
             this.buttonBottom.Name = "buttonBottom";
             this.buttonBottom.Size = new System.Drawing.Size(75, 23);
             this.buttonBottom.TabIndex = 4;
@@ -119,7 +122,7 @@ namespace ROP
             // buttonFront
             // 
             this.buttonFront.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFront.Location = new System.Drawing.Point(880, 605);
+            this.buttonFront.Location = new System.Drawing.Point(572, 635);
             this.buttonFront.Name = "buttonFront";
             this.buttonFront.Size = new System.Drawing.Size(75, 23);
             this.buttonFront.TabIndex = 5;
@@ -130,7 +133,7 @@ namespace ROP
             // buttonAlgorithm
             // 
             this.buttonAlgorithm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAlgorithm.Location = new System.Drawing.Point(921, 664);
+            this.buttonAlgorithm.Location = new System.Drawing.Point(613, 694);
             this.buttonAlgorithm.Name = "buttonAlgorithm";
             this.buttonAlgorithm.Size = new System.Drawing.Size(115, 23);
             this.buttonAlgorithm.TabIndex = 6;
@@ -141,7 +144,7 @@ namespace ROP
             // textBoxAlgorithm
             // 
             this.textBoxAlgorithm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAlgorithm.Location = new System.Drawing.Point(696, 638);
+            this.textBoxAlgorithm.Location = new System.Drawing.Point(388, 668);
             this.textBoxAlgorithm.Name = "textBoxAlgorithm";
             this.textBoxAlgorithm.Size = new System.Drawing.Size(340, 20);
             this.textBoxAlgorithm.TabIndex = 7;
@@ -149,22 +152,22 @@ namespace ROP
             // algorithm2
             // 
             this.algorithm2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.algorithm2.Location = new System.Drawing.Point(696, 604);
+            this.algorithm2.Location = new System.Drawing.Point(381, 634);
             this.algorithm2.Name = "algorithm2";
-            this.algorithm2.Size = new System.Drawing.Size(89, 23);
+            this.algorithm2.Size = new System.Drawing.Size(96, 23);
             this.algorithm2.TabIndex = 8;
-            this.algorithm2.Text = "Checker";
+            this.algorithm2.Text = "Šachovnice";
             this.algorithm2.UseVisualStyleBackColor = true;
             this.algorithm2.Click += new System.EventHandler(this.algorithm2_Click);
             // 
             // algorithm1
             // 
             this.algorithm1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.algorithm1.Location = new System.Drawing.Point(696, 575);
+            this.algorithm1.Location = new System.Drawing.Point(381, 605);
             this.algorithm1.Name = "algorithm1";
-            this.algorithm1.Size = new System.Drawing.Size(89, 23);
+            this.algorithm1.Size = new System.Drawing.Size(96, 23);
             this.algorithm1.TabIndex = 9;
-            this.algorithm1.Text = "Cube in a Cube";
+            this.algorithm1.Text = "Kostka v kostce";
             this.algorithm1.UseVisualStyleBackColor = true;
             this.algorithm1.Click += new System.EventHandler(this.algorithm1_Click);
             // 
@@ -172,7 +175,7 @@ namespace ROP
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(693, 552);
+            this.label1.Location = new System.Drawing.Point(385, 582);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 10;
@@ -181,22 +184,22 @@ namespace ROP
             // scrambleButton
             // 
             this.scrambleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.scrambleButton.Location = new System.Drawing.Point(785, 575);
+            this.scrambleButton.Location = new System.Drawing.Point(477, 605);
             this.scrambleButton.Name = "scrambleButton";
             this.scrambleButton.Size = new System.Drawing.Size(89, 23);
             this.scrambleButton.TabIndex = 11;
-            this.scrambleButton.Text = "Scramble";
+            this.scrambleButton.Text = "Zamíchat";
             this.scrambleButton.UseVisualStyleBackColor = true;
             this.scrambleButton.Click += new System.EventHandler(this.scrambleButton_Click);
             // 
             // solveButton
             // 
             this.solveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.solveButton.Location = new System.Drawing.Point(785, 604);
+            this.solveButton.Location = new System.Drawing.Point(477, 634);
             this.solveButton.Name = "solveButton";
             this.solveButton.Size = new System.Drawing.Size(89, 23);
             this.solveButton.TabIndex = 12;
-            this.solveButton.Text = "Solve";
+            this.solveButton.Text = "Poskládat";
             this.solveButton.UseVisualStyleBackColor = true;
             this.solveButton.Click += new System.EventHandler(this.solveButton_Click);
             // 
@@ -205,15 +208,6 @@ namespace ROP
             this.timer1.Enabled = true;
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(568, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(462, 313);
-            this.pictureBox2.TabIndex = 15;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
             // 
             // pictureBox1
             // 
@@ -253,9 +247,9 @@ namespace ROP
             "V - R\' U R\' U\' R D\' R\' D R\' U D\' R2 U\' R2 D R2",
             "Y - F R U\' R\' U\' R U R\' F\' R U R\' U\' R\' F R F\'",
             "Z - M\' U\' M2 U\' M2 U\' M\' U2 M2"});
-            this.comboBox1.Location = new System.Drawing.Point(915, 436);
+            this.comboBox1.Location = new System.Drawing.Point(568, 466);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.Size = new System.Drawing.Size(160, 21);
             this.comboBox1.TabIndex = 16;
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
@@ -263,27 +257,27 @@ namespace ROP
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 664);
+            this.label2.Location = new System.Drawing.Point(12, 694);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 13);
+            this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 17;
-            this.label2.Text = "Algoritmy:";
+            this.label2.Text = "Historie:";
             // 
             // buttonHelp
             // 
             this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonHelp.Location = new System.Drawing.Point(921, 331);
+            this.buttonHelp.Location = new System.Drawing.Point(567, 12);
             this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(115, 23);
+            this.buttonHelp.Size = new System.Drawing.Size(160, 23);
             this.buttonHelp.TabIndex = 18;
-            this.buttonHelp.Text = "Jak používat";
+            this.buttonHelp.Text = "Návod";
             this.buttonHelp.UseVisualStyleBackColor = true;
             this.buttonHelp.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonEquator
             // 
             this.buttonEquator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEquator.Location = new System.Drawing.Point(880, 518);
+            this.buttonEquator.Location = new System.Drawing.Point(572, 539);
             this.buttonEquator.Name = "buttonEquator";
             this.buttonEquator.Size = new System.Drawing.Size(75, 23);
             this.buttonEquator.TabIndex = 19;
@@ -294,7 +288,7 @@ namespace ROP
             // buttonStanding
             // 
             this.buttonStanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStanding.Location = new System.Drawing.Point(961, 518);
+            this.buttonStanding.Location = new System.Drawing.Point(653, 539);
             this.buttonStanding.Name = "buttonStanding";
             this.buttonStanding.Size = new System.Drawing.Size(75, 23);
             this.buttonStanding.TabIndex = 20;
@@ -305,7 +299,7 @@ namespace ROP
             // buttonMiddle
             // 
             this.buttonMiddle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonMiddle.Location = new System.Drawing.Point(880, 489);
+            this.buttonMiddle.Location = new System.Drawing.Point(572, 510);
             this.buttonMiddle.Name = "buttonMiddle";
             this.buttonMiddle.Size = new System.Drawing.Size(75, 23);
             this.buttonMiddle.TabIndex = 21;
@@ -317,7 +311,7 @@ namespace ROP
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(912, 420);
+            this.label3.Location = new System.Drawing.Point(565, 450);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(73, 13);
             this.label3.TabIndex = 22;
@@ -326,14 +320,14 @@ namespace ROP
             // numericUpDown1
             // 
             this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown1.Location = new System.Drawing.Point(915, 384);
+            this.numericUpDown1.Location = new System.Drawing.Point(568, 414);
             this.numericUpDown1.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(159, 20);
             this.numericUpDown1.TabIndex = 23;
             this.numericUpDown1.Value = new decimal(new int[] {
             70,
@@ -347,17 +341,78 @@ namespace ROP
             // 
             this.labelSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSpeed.AutoSize = true;
-            this.labelSpeed.Location = new System.Drawing.Point(915, 365);
+            this.labelSpeed.Location = new System.Drawing.Point(565, 398);
             this.labelSpeed.Name = "labelSpeed";
             this.labelSpeed.Size = new System.Drawing.Size(91, 13);
             this.labelSpeed.TabIndex = 24;
             this.labelSpeed.Text = "Rychlost otáčení:";
             // 
+            // buttonReset
+            // 
+            this.buttonReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonReset.Location = new System.Drawing.Point(477, 577);
+            this.buttonReset.Name = "buttonReset";
+            this.buttonReset.Size = new System.Drawing.Size(89, 23);
+            this.buttonReset.TabIndex = 25;
+            this.buttonReset.Text = "Reset";
+            this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+            // 
+            // buttonHistory
+            // 
+            this.buttonHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonHistory.Location = new System.Drawing.Point(15, 665);
+            this.buttonHistory.Name = "buttonHistory";
+            this.buttonHistory.Size = new System.Drawing.Size(160, 23);
+            this.buttonHistory.TabIndex = 26;
+            this.buttonHistory.Text = "Zobrazit celou historii";
+            this.buttonHistory.UseVisualStyleBackColor = true;
+            this.buttonHistory.Click += new System.EventHandler(this.buttonHistory_Click);
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDown2.DecimalPlaces = 1;
+            this.numericUpDown2.Location = new System.Drawing.Point(569, 366);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(159, 20);
+            this.numericUpDown2.TabIndex = 27;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(566, 350);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(111, 13);
+            this.label4.TabIndex = 28;
+            this.label4.Text = "Vzdálenost od kamery";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1042, 695);
+            this.ClientSize = new System.Drawing.Size(734, 725);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.buttonHistory);
+            this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.labelSpeed);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label3);
@@ -367,7 +422,6 @@ namespace ROP
             this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.solveButton);
             this.Controls.Add(this.scrambleButton);
@@ -387,9 +441,9 @@ namespace ROP
             this.Text = "Simulátor Rubikovy kostky";
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -412,7 +466,6 @@ namespace ROP
         private System.Windows.Forms.Button solveButton;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonHelp;
@@ -422,6 +475,10 @@ namespace ROP
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label labelSpeed;
+        private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.Button buttonHistory;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label label4;
     }
 }
 
