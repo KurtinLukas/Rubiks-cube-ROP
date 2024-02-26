@@ -265,7 +265,7 @@ namespace ROP
             // 
             // buttonHelp
             // 
-            this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonHelp.Location = new System.Drawing.Point(567, 12);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Size = new System.Drawing.Size(160, 23);
@@ -360,7 +360,7 @@ namespace ROP
             // 
             // buttonHistory
             // 
-            this.buttonHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonHistory.Location = new System.Drawing.Point(15, 665);
             this.buttonHistory.Name = "buttonHistory";
             this.buttonHistory.Size = new System.Drawing.Size(160, 23);
