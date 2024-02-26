@@ -131,7 +131,8 @@ namespace ROP
         public double turnAnim = 0;
         public double rotX = 0;
         public double rotZ = Math.PI * 2;
-        public double turnStep = 32;
+        public double turnStep = 31;
+        public double turnStepChangeRequest = 32;
 
         public string historieTahu = "";
 
@@ -164,6 +165,7 @@ namespace ROP
         {
             if (input[0] == '\'' || input[0] == '2')
                 return;
+
             historieTahu += input;
             label2.Text = "Historie: " + historieTahu;
             Cube buffCorner = new Cube();
@@ -536,7 +538,7 @@ namespace ROP
                 else solve += historieTahu[i] + "\'";
                 historieTahu = historieTahu.Remove(i);
             }
-            label2.Text = "Historie: " + historieTahu;
+            historieTahu = "";
             Algorithm(solve);
         }
 
@@ -545,13 +547,18 @@ namespace ROP
             string moves = "RLUDFB2'";
             Random rng = new Random();
             string scramble = moves[rng.Next(0, 6)].ToString();
+            string rawScramble = scramble;
             for (int i = 1; i < 20; i++)
             {
                 string t = MoveRandom(rng);
+                while (t[0] == rawScramble[rawScramble.Length - 1])
+                {
+                    t = MoveRandom(rng);
+                }
                 scramble += t;
+                rawScramble += t[0];
                 //Turn(t);
             }
-            historieTahu += scramble;
             Algorithm(scramble);
         }
 
@@ -588,11 +595,13 @@ namespace ROP
 
             if (animateTurn.Count > 0)
             {
+                if (solveButton.Enabled)
+                    solveButton.Enabled = false;
                 turnAnim += 1;
                 AnimateTurn();
             }
             
-            if (turnAnim == turnStep)
+            if (turnAnim >= turnStep)
             {
                 string t = animateTurn[0].ToString();
                 animateTurn.RemoveAt(0);
@@ -606,6 +615,14 @@ namespace ROP
                 }
                 Turn(t);
                 turnAnim = 0;
+                if(turnStepChangeRequest != turnStep)
+                {
+                    turnStep = turnStepChangeRequest;
+                }
+            }
+            if(animateTurn.Count == 0)
+            {
+                solveButton.Enabled = true;
             }
             pictureBox1.Refresh();
         }
@@ -917,13 +934,17 @@ namespace ROP
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form helpForm = new Form();
-            Label notation = new Label();
-            notation.Location = new Point(10, 10);
-            notation.AutoSize = true;
-            notation.Text = "Notace\nYou dumdum je to U jako Up ne? si domysli zbytek, pak U' (čti U prime/prajm) se otáčí proti směru hodinových ručiček";
-            helpForm.Controls.Add(notation);
-            helpForm.Show();
+            new HelperForm().Show();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            turnStepChangeRequest = 101 - (double)numericUpDown1.Value;
+        }
+
+        private void numericUpDown1_KeyUp(object sender, KeyEventArgs e)
+        {
+            turnStepChangeRequest = 101 - (double)numericUpDown1.Value;
         }
     }
 }
