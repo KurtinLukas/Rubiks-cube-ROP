@@ -24,7 +24,6 @@ namespace ROP
             Z = z;
             animState = new Vector3();
             CalcDisplacement();
-            //System.Windows.Forms.MessageBox.Show(this.ToString());
         }
         public Vector3()
         {

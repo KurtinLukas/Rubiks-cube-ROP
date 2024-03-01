@@ -37,6 +37,6 @@ M:\ITA4\kurtinl.04\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.Gener
 M:\ITA4\kurtinl.04\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.CoreCompileInputs.cache
 M:\ITA4\kurtinl.04\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.exe
 M:\ITA4\kurtinl.04\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.pdb
-G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.AssemblyReference.cache
-G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csproj.SuggestedBindingRedirects.cache
 E:\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.HelperForm.resources
+G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.HelperForm.resources
+G:\RPR\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Debug\ROP.csprojAssemblyReference.cache
