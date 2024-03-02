@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Media;
 
 namespace ROP
 {
@@ -39,22 +40,22 @@ namespace ROP
                                                      Color.Black, Color.Black, Color.Green, Color.Red, Color.Black, Color.Yellow, 2);
                 cubes[3, 0] = new Cube(new Vector3(-1.5, 0.5, -0.5) + b, new Vector3(-1.5, 1.5, -0.5) + b, new Vector3(-0.5, 1.5, -0.5) + b, new Vector3(-0.5, 0.5, -0.5) + b,
                                                      new Vector3(-1.5, 0.5, 0.5) + b, new Vector3(-1.5, 1.5, 0.5) + b, new Vector3(-0.5, 1.5, 0.5) + b, new Vector3(-0.5, 0.5, 0.5) + b,
-                                                     Color.Black, Color.Orange, Color.Black, Color.Black, Color.Black, Color.Yellow, 3);
+                                                     Color.Black, Color.Orange, Color.Black, Color.Black, Color.Black, Color.Yellow, 5);
                 cubes[4, 0] = new Cube(new Vector3(-0.5, 0.5, -0.5) + b, new Vector3(-0.5, 1.5, -0.5) + b, new Vector3(0.5, 1.5, -0.5) + b, new Vector3(0.5, 0.5, -0.5) + b,
                                                      new Vector3(-0.5, 0.5, 0.5) + b, new Vector3(-0.5, 1.5, 0.5) + b, new Vector3(0.5, 1.5, 0.5) + b, new Vector3(0.5, 0.5, 0.5) + b,
                                                      Color.Black, Color.Black, Color.Black, Color.Black, Color.Black, Color.Yellow, 4);
                 cubes[5, 0] = new Cube(new Vector3(0.5, 0.5, -0.5) + b, new Vector3(0.5, 1.5, -0.5) + b, new Vector3(1.5, 1.5, -0.5) + b, new Vector3(1.5, 0.5, -0.5) + b,
                                                      new Vector3(0.5, 0.5, 0.5) + b, new Vector3(0.5, 1.5, 0.5) + b, new Vector3(1.5, 1.5, 0.5) + b, new Vector3(1.5, 0.5, 0.5) + b,
-                                                     Color.Black, Color.Black, Color.Black, Color.Red, Color.Black, Color.Yellow, 5);
+                                                     Color.Black, Color.Black, Color.Black, Color.Red, Color.Black, Color.Yellow, 8);
                 cubes[6, 0] = new Cube(new Vector3(-1.5, 0.5, -1.5) + b, new Vector3(-1.5, 1.5, -1.5) + b, new Vector3(-0.5, 1.5, -1.5) + b, new Vector3(-0.5, 0.5, -1.5) + b,
                                                      new Vector3(-1.5, 0.5, -0.5) + b, new Vector3(-1.5, 1.5, -0.5) + b, new Vector3(-0.5, 1.5, -0.5) + b, new Vector3(-0.5, 0.5, -0.5) + b,
-                                                     Color.Blue, Color.Orange, Color.Black, Color.Black, Color.Black, Color.Yellow, 6);
+                                                     Color.Blue, Color.Orange, Color.Black, Color.Black, Color.Black, Color.Yellow, 7);
                 cubes[7, 0] = new Cube(new Vector3(-0.5, 0.5, -1.5) + b, new Vector3(-0.5, 1.5, -1.5) + b, new Vector3(0.5, 1.5, -1.5) + b, new Vector3(0.5, 0.5, -1.5) + b,
                                                      new Vector3(-0.5, 0.5, -0.5) + b, new Vector3(-0.5, 1.5, -0.5) + b, new Vector3(0.5, 1.5, -0.5) + b, new Vector3(0.5, 0.5, -0.5) + b,
-                                                     Color.Blue, Color.Black, Color.Black, Color.Black, Color.Black, Color.Yellow, 7);
+                                                     Color.Blue, Color.Black, Color.Black, Color.Black, Color.Black, Color.Yellow, 6);
                 cubes[8, 0] = new Cube(new Vector3(0.5, 0.5, -1.5) + b, new Vector3(0.5, 1.5, -1.5) + b, new Vector3(1.5, 1.5, -1.5) + b, new Vector3(1.5, 0.5, -1.5) + b,
                                                      new Vector3(0.5, 0.5, -0.5) + b, new Vector3(0.5, 1.5, -0.5) + b, new Vector3(1.5, 1.5, -0.5) + b, new Vector3(1.5, 0.5, -0.5) + b,
-                                                     Color.Blue, Color.Black, Color.Black, Color.Red, Color.Black, Color.Yellow, 8);
+                                                     Color.Blue, Color.Black, Color.Black, Color.Red, Color.Black, Color.Yellow, 3);
 
                 cubes[0, 1] = new Cube(new Vector3(-1.5, -0.5, 0.5) + b, new Vector3(-1.5, 0.5, 0.5) + b, new Vector3(-0.5, 0.5, 0.5) + b, new Vector3(-0.5, -0.5, 0.5) + b,
                                                      new Vector3(-1.5, -0.5, 1.5) + b, new Vector3(-1.5, 0.5, 1.5) + b, new Vector3(-0.5, 0.5, 1.5) + b, new Vector3(-0.5, -0.5, 1.5) + b,
@@ -140,6 +141,8 @@ namespace ROP
         private bool solving = false;
 
         Cube[,] cubes = new Cube[9, 3];
+
+        SoundPlayer soundPlayer = new SoundPlayer(@"E:\GitHub\Rubiks-cube-ROP\ROP\ROP\DeathSound.wav");
         
         string[] PLL = {"R'FR'B2RF'R'B2R2",//Aa  
             "R2B2RFR'B2RF'R",//Ab
@@ -174,7 +177,10 @@ namespace ROP
             label2.Text = "Historie: " + historieTahu.Substring(historieTahu.Length > 30 ? historieTahu.Length-31 : 0);
             Cube buffCorner = new Cube();
             Cube buffEdge = new Cube();
-            if(input.Length == 1)
+            
+            //soundPlayer.Play();
+
+            if (input.Length == 1)
             {
                 switch (input[0])
                 {
@@ -427,7 +433,6 @@ namespace ROP
                     default:
                         throw new Exception("Invalid first symbol in Turn(" + input[0] + ");");
                 }
-                //animateTurn.Prepend('\'');
                 return;
             }
             else if(input.Last() == '2')
@@ -628,7 +633,11 @@ namespace ROP
                 }
                 Turn(t);
                 turnAnim = 0;
-                if(turnStepChangeRequest != turnStep)
+
+                if (solving)
+                    Solve();
+
+                if (turnStepChangeRequest != turnStep)
                 {
                     turnStep = turnStepChangeRequest;
                 }
@@ -638,8 +647,7 @@ namespace ROP
                 solveButton.Enabled = true;
             }
             pictureBox1.Refresh();
-            if (solving && turnAnim == 0)
-                Solve();
+
         }
 
         public void AnimateTurn()
@@ -986,8 +994,11 @@ namespace ROP
             string solve = Solver.FindPLL(cubes);
             if (solve == "")
             {
-                animateTurn.Add('U');
                 return;
+            }
+            else if(solve == "solved")
+            {
+                label1.Text = "Solved";
             }
             solving = false;
             Algorithm(solve);

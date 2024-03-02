@@ -8,7 +8,8 @@ namespace ROP
 {
     public static class Solver
     {
-        public static string[] PLL = {"R'FR'B2RF'R'B2R2",//Aa  
+        public static int[] sortedPosition = { 0, 1, 2, 5, 4, 8, 7, 6, 3 };
+        public static string[] PLL = {"R'FR'B2RF'R'B2R2",//Aa
             "R2B2RFR'B2RF'R",//Ab
             "R2UR2UDR2U'R2UR2U'D'R2UR2U2R2",//E
             "R'URU'R2F'U'FURFR'F'R2",//F
@@ -32,39 +33,50 @@ namespace ROP
         };
 
         public static void Solve(Cube[,] c)
-        { 
+        {
 
         }
         public static string FindPLL(Cube[,] c)
         {
             string output = "";
-            string input = "";
+            string input;
             bool found = false;
-            for(int i = 0; i < 9; i++)
-            {
-                input += c[i, 0].cubeIndex%9;
-            }
 
             for(int i = 0; i < 4 && !found; i++)
             {
-                switch(input)
+                input = "";
+                for (int j = 0; j < 9; j++)
                 {
-                    case "016345872":
-                        output = PLL[0];
+                    if (j == 4) continue;
+                    int num = (c[j, 0].cubeIndex % 9 + i * 2) % 9;
+                    input += num > 4 ? num+1%9 : num;
+                }
+                System.Windows.Forms.MessageBox.Show(input);
+                switch (input)
+                {
+                    case "01635872":
+                        output += PLL[0];
+                        found = true;
                         break;
-                    case "018345276":
-                        output = PLL[1];
+                    case "01835276":
+                        output += PLL[1];
+                        found = true;
                         break;
-                    case "210345876":
-                        output = PLL[2];
+                    case "21035876":
+                        output += PLL[2];
+                        found = true;
                         break;
-                    case "078345612":
+                    case "07835612":
                         output = PLL[3];
+                        found = true;
                         break;
-                    case "012345678":
+                    case "01258763":
                         output = "solved";
+                        found = true;
                         break;
                 }
+                if (!found)
+                    output += "U'";
             }
             return output;
         }
