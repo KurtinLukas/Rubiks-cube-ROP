@@ -199,9 +199,6 @@ namespace ROP
                         cubes[7, 0] = new Cube(cubes[3, 0]);
                         cubes[3, 0] = new Cube(buffEdge);
                         cubes[4, 0] = new Cube(cubes[4, 0]);
-                        cubes[0, 0].position = 0; cubes[1, 0].position = 1; cubes[2, 0].position = 2; cubes[3, 0].position = 3;
-                        cubes[4, 0].position = 4; cubes[5, 0].position = 5; cubes[6, 0].position = 6; cubes[7, 0].position = 7; 
-                        cubes[8, 0].position = 8;
                         break;
                     case 'D':
                         buffCorner = new Cube(cubes[0, 2]);
@@ -310,9 +307,8 @@ namespace ROP
                     default:
                         throw new Exception("Invalid first symbol in Turn(" + input[0] + ");");
                 }
-                return;
             }
-            if(input.Last() == '\'') 
+            else if(input.Last() == '\'') 
             {
                 switch (input[0])
                 {
@@ -436,12 +432,21 @@ namespace ROP
                     default:
                         throw new Exception("Invalid first symbol in Turn(" + input[0] + ");");
                 }
-                return;
             }
-            else if(input.Last() == '2')
+            else if (input.Last() == '2')
             {
                 animateTurn.Prepend(input[0]);
             }
+
+            //asign new positions
+            for (int i = 1; i < 10; i++)
+            {
+                for(int j = 1; j < 4; j++)
+                {
+                    cubes[i-1, j-1].position = i * j - 1;
+                }
+            }
+            
         }
 
         private void buttonAlgorithm_Click(object sender, EventArgs e)

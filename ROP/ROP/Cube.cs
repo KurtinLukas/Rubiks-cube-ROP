@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ROP
 {
-    public class Cube : ICloneable
+    public class Cube
     {
         public Square[] squares = new Square[6];
         public int rotation = 0;
@@ -58,16 +58,6 @@ namespace ROP
             this.rotation = c.rotation;
             this.position = c.position;
             this.cubeIndex = c.cubeIndex;
-        }
-
-        public Cube Copy()
-        {
-            return new Cube(squares, position);
-        }
-
-        public object Clone()
-        {
-            return new Cube(squares, position);
         }
     }
 }

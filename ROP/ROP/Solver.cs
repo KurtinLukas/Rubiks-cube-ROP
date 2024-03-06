@@ -40,27 +40,56 @@ namespace ROP
                     case "61058723": offsetTurn = "U2"; output += "U2"; goto case "01652783";
                     case "61250783": offsetTurn = "U'"; output += "U"; goto case "01652783";
                     case "01652783":
-                        output += Form1.PLL[0];
+                        output += Form1.PLL[0];//Aa
                         found = true;
                         break;
                     case "81256703": offsetTurn = "U'"; output += "U"; goto case "01856723";
                     case "21658703": offsetTurn = "U2"; output += "U2"; goto case "01856723";
                     case "21850763": offsetTurn = "U"; output += "U'"; goto case "01856723";
                     case "01856723":
-                        output += Form1.PLL[1];
+                        output += Form1.PLL[1];//Ab
                         found = true;
                         break;
+                    case "21056783":offsetTurn = "U"; output += "U'"; goto case "61852703";
                     case "61852703":
-                        output += Form1.PLL[2];
+                        output += Form1.PLL[2];//E
                         found = true;
                         break;
                     case "01236785": offsetTurn = "U'"; output += "U"; goto case "07852163";
                     case "67258213": offsetTurn = "U2"; output += "U2"; goto case "07852163";
                     case "21038765": offsetTurn = "U"; output += "U'"; goto case "07852163";
                     case "07852163":
-                        output += Form1.PLL[3];
+                        output += Form1.PLL[3];//F
                         found = true;
                         break;
+                    case "27038561": offsetTurn = "U"; output += "U'"; goto case "05832167";
+                    case "67218305": offsetTurn = "U2"; output += "U2"; goto case "05832167";
+                    case "03276185": offsetTurn = "U'"; output += "U"; goto case "05832167";
+                    case "05832167":
+                        output += Form1.PLL[4];//Ga
+                        found = true;
+                        break;
+                    //case "27038561": offsetTurn = "U"; output += "U'"; goto case "07812365";
+                    //case "67218305": offsetTurn = "U2"; output += "U2"; goto case "07812365";
+                    //case "03276185": offsetTurn = "U'"; output += "U"; goto case "07812365";
+                    //case "07812365":
+                    //    output += Form1.PLL[5];//Gb
+                    //    found = true;
+                    //    break;
+                    //case "27038561": offsetTurn = "U"; output += "U'"; goto case "05832167";
+                    //case "67218305": offsetTurn = "U2"; output += "U2"; goto case "05832167";
+                    //case "03276185": offsetTurn = "U'"; output += "U"; goto case "05832167";
+                    //case "05832167":
+                    //    output += Form1.PLL[6];//Gc
+                    //    found = true;
+                    //    break;
+                    //case "27038561": offsetTurn = "U"; output += "U'"; goto case "05832167";
+                    //case "67218305": offsetTurn = "U2"; output += "U2"; goto case "05832167";
+                    //case "03276185": offsetTurn = "U'"; output += "U"; goto case "05832167";
+                    //case "05832167":
+                    //    output += Form1.PLL[7];//Gd
+                    //    found = true;
+                    //    break;
                 }
                 if (!found)
                     output += "U";
