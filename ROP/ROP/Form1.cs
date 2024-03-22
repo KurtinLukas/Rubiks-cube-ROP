@@ -173,7 +173,7 @@ namespace ROP
             if (input[0] == '\'' || input[0] == '2')
                 return;
 
-            if (historieTahu.Last() == input[0] && input.Length == 1)
+            if (historieTahu != "" && historieTahu.Last() == input[0] && input.Length == 1)
                 historieTahu += "2";
             else historieTahu += input;
             label2.Text = "Historie: " + historieTahu.Substring(historieTahu.Length > 30 ? historieTahu.Length-31 : 0);
@@ -542,25 +542,28 @@ namespace ROP
         //Algorithm stuff
         private void solveButton_Click(object sender, EventArgs e)
         {
-            //string solve = "";
-            //for (int i = historieTahu.Length - 1; i >= 0; i--)
-            //{
-            //    if (historieTahu[i] == '\'')
-            //    {
-            //        solve += historieTahu[i - 1];
-            //        i--;
-            //    }
-            //    else if (historieTahu[i] == '2')
-            //    {
-            //        solve += historieTahu[i - 1] + "2";
-            //        i--;
-            //    }
-            //    else solve += historieTahu[i] + "\'";
-            //    historieTahu = historieTahu.Remove(i);
-            //}
-            //historieTahu = "";
+            string solve = "";
+            for (int i = historieTahu.Length - 1; i >= 0; i--)
+            {
+                if (historieTahu[i] == '\'')
+                {
+                    solve += historieTahu[i - 1];
+                    i--;
+                }
+                else if (historieTahu[i] == '2')
+                {
+                    solve += historieTahu[i - 1] + "2";
+                    i--;
+                }
+                else
+                {
+                    solve += historieTahu[i] + "\'";
+                }
+                historieTahu = historieTahu.Remove(i);
+            }
+            historieTahu = "";
+            Algorithm(solve);
             solving = true;
-            Solve();
         }
 
         private void scrambleButton_Click(object sender, EventArgs e)
@@ -578,7 +581,6 @@ namespace ROP
                 }
                 scramble += t;
                 rawScramble += t[0];
-                //Turn(t);
             }
             Algorithm(scramble);
         }
@@ -595,16 +597,6 @@ namespace ROP
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
-
-            //anim += 0.01;
-            //ZRotationMatrix[0, 0] = Math.Cos(rotX);
-            //ZRotationMatrix[0, 1] = Math.Sin(rotX);
-            //ZRotationMatrix[1, 0] = -Math.Sin(rotX);
-            //ZRotationMatrix[1, 1] = Math.Cos(rotX);
-            //ZRotationMatrix[2, 2] = 1;
-            //ZRotationMatrix[3, 3] = 1;
-
             ZRotationMatrix[0, 0] = Math.Cos(rotX);
             ZRotationMatrix[0, 2] = -Math.Sin(rotX);
             ZRotationMatrix[1, 1] = 1;
@@ -626,9 +618,14 @@ namespace ROP
                 turnAnim += 1;
                 AnimateTurn();
             }
-            
+
             if (turnAnim >= turnStep)
             {
+                if (turnStepChangeRequest != turnStep)
+                {
+                    turnStep = turnStepChangeRequest;
+                }
+
                 string t = animateTurn[0].ToString();
                 animateTurn.RemoveAt(0);
                 if (animateTurn.Count > 0)
@@ -643,12 +640,7 @@ namespace ROP
                 turnAnim = 0;
 
                 if (solving)
-                    Solve();
-
-                if (turnStepChangeRequest != turnStep)
-                {
-                    turnStep = turnStepChangeRequest;
-                }
+                    historieTahu = "";
             }
             if(animateTurn.Count == 0)
             {
