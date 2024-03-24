@@ -889,16 +889,62 @@ namespace ROP
             oldMouse = MousePosition;
         }
 
+        double turningRotX = 0;
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (moveCube)
             {
-                if(Math.Abs(rotZ)%(Math.PI*4) > Math.PI && Math.Abs(rotZ)%(Math.PI*4) < Math.PI*3)
-                    rotX -= (double)(oldMouse.X - MousePosition.X) / 100;
-                else rotX += (double)(oldMouse.X - MousePosition.X) / 100;
+                double value = (double)(oldMouse.X - MousePosition.X) / 100;
+                if (Math.Abs(rotZ) % (Math.PI * 4) > Math.PI && Math.Abs(rotZ) % (Math.PI * 4) < Math.PI * 3)
+                {
+                    rotX -= value;
+                    turningRotX -= value;
+                }
+                else
+                {
+                    rotX += value;
+                    turningRotX += value;
+                }
                 rotZ -= (double)(oldMouse.Y - MousePosition.Y)/100;
                 oldMouse = MousePosition;
+                if (turningRotX % Math.PI > Math.PI / 4)
+                {
+                    turningRotX = -Math.PI / 4;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Cube buffCorner = new Cube(cubes[0, i]);
+                        cubes[0, i] = new Cube(cubes[6, i]);
+                        cubes[6, i] = new Cube(cubes[8, i]);
+                        cubes[8, i] = new Cube(cubes[2, i]);
+                        cubes[2, i] = new Cube(buffCorner);
+                        Cube buffEdge = new Cube(cubes[1, i]);
+                        cubes[1, i] = new Cube(cubes[3, i]);
+                        cubes[3, i] = new Cube(cubes[7, i]);
+                        cubes[7, i] = new Cube(cubes[5, i]);
+                        cubes[5, i] = new Cube(buffEdge);
+                    }
+                }
+                else if(turningRotX % Math.PI < -Math.PI / 4)
+                {
+                    turningRotX = Math.PI / 4;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Cube buffCorner = new Cube(cubes[0, i]);
+                        cubes[0, i] = new Cube(cubes[2, i]);
+                        cubes[2, i] = new Cube(cubes[8, i]);
+                        cubes[8, i] = new Cube(cubes[6, i]);
+                        cubes[6, i] = new Cube(buffCorner);
+                        Cube buffEdge = new Cube(cubes[1, i]);
+                        cubes[1, i] = new Cube(cubes[5, i]);
+                        cubes[5, i] = new Cube(cubes[7, i]);
+                        cubes[7, i] = new Cube(cubes[3, i]);
+                        cubes[3, i] = new Cube(buffEdge);
+                        cubes[4, i] = new Cube(cubes[4, i]);
+                        cubes[4, i] = new Cube(cubes[4, i]);
+                    }
+                }
             }
+            label2.Text = turningRotX + "\n" + rotX;
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
