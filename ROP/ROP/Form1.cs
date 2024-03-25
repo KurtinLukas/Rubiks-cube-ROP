@@ -467,17 +467,7 @@ namespace ROP
             else if (input.Last() == '2')
             {
                 animateTurn.Prepend(input[0]);
-            }
-
-            //asign new positions
-            for (int i = 1; i < 10; i++)
-            {
-                for(int j = 1; j < 4; j++)
-                {
-                    cubes[i-1, j-1].position = i * j - 1;
-                }
-            }
-            
+            }            
         }
 
         private void buttonAlgorithm_Click(object sender, EventArgs e)

@@ -152,7 +152,7 @@ namespace ROP
             // algorithm2
             // 
             this.algorithm2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.algorithm2.Location = new System.Drawing.Point(381, 634);
+            this.algorithm2.Location = new System.Drawing.Point(375, 634);
             this.algorithm2.Name = "algorithm2";
             this.algorithm2.Size = new System.Drawing.Size(96, 23);
             this.algorithm2.TabIndex = 8;
@@ -163,7 +163,7 @@ namespace ROP
             // algorithm1
             // 
             this.algorithm1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.algorithm1.Location = new System.Drawing.Point(381, 605);
+            this.algorithm1.Location = new System.Drawing.Point(273, 635);
             this.algorithm1.Name = "algorithm1";
             this.algorithm1.Size = new System.Drawing.Size(96, 23);
             this.algorithm1.TabIndex = 9;
@@ -175,11 +175,11 @@ namespace ROP
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(385, 582);
+            this.label1.Location = new System.Drawing.Point(270, 619);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.Size = new System.Drawing.Size(92, 13);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Algoritmy:";
+            this.label1.Text = "Ukázka algoritmů:";
             // 
             // scrambleButton
             // 
