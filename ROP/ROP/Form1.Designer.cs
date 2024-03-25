@@ -334,8 +334,8 @@ namespace ROP
             0,
             0,
             0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            this.numericUpDown1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numericUpDown1_KeyUp);
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.ChangeSpeed);
+            this.numericUpDown1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ChangeSpeed);
             // 
             // labelSpeed
             // 
@@ -392,7 +392,8 @@ namespace ROP
             0,
             0,
             0});
-            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.ChangeDistance);
+            this.numericUpDown2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ChangeDistance);
             // 
             // label4
             // 

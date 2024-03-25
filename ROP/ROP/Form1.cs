@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
-using System.Media;
 
 namespace ROP
 {
@@ -145,8 +144,6 @@ namespace ROP
         private bool solving = false;
 
         Cube[,] cubes = new Cube[9, 3];
-
-        SoundPlayer soundPlayer = new SoundPlayer(@"E:\GitHub\Rubiks-cube-ROP\ROP\ROP\DeathSound.wav");
         
         public static string[] PLL = {"R'FR'B2RF'R'B2R2",//Aa  
             "R2B2RFR'B2RF'R",//Ab
@@ -184,8 +181,6 @@ namespace ROP
 
             Cube buffCorner = new Cube();
             Cube buffEdge = new Cube();
-            
-            //soundPlayer.Play();
 
             if (input.Length == 1)
             {
@@ -1052,7 +1047,6 @@ namespace ROP
                 {
                     rotX -= value;
                     turningRotX -= value;
-                    
                 }
                 else
                 {
@@ -1077,33 +1071,6 @@ namespace ROP
         {
             moveCube = false;
         }
-
-        //private void pictureBox2_Paint(object sender, PaintEventArgs e)
-        //{
-        //    float aspectRatio = pictureBox2.Width / pictureBox2.Height;
-        //    int width = Convert.ToInt32(pictureBox2.Size.Width/4 *aspectRatio);
-        //    int height = Convert.ToInt32(pictureBox2.Size.Height/3*aspectRatio);
-        //    Graphics g = e.Graphics;
-            
-        //    g.FillRectangle(Brushes.Black, new Rectangle(new Point(0, height), new Size(pictureBox2.Size.Width, height)));
-        //    g.FillRectangle(Brushes.Black, new Rectangle(new Point(width, 0), new Size(width, pictureBox2.Size.Height)));
-            
-        //    for(int i = 0; i < 3; i++)
-        //    {
-        //        for(int j = 0; j < 9; j++)
-        //        {
-        //            Cube c = cubes[j, i];
-        //            foreach(Square s in c.squares)
-        //            {
-        //                Brush b = Brushes.Black;
-        //                //not working
-        //                if (b == Brushes.Black) break;
-
-        //                g.FillRectangle(b, new Rectangle(new Point(i,j), new Size((width-5)/3, (height-5)/3)));
-        //            }
-        //        }
-        //    }
-        //}
 
         private void ButtonTurn(object sender, MouseEventArgs e)
         {
@@ -1132,12 +1099,7 @@ namespace ROP
             new HelperForm().Show();
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            turnStepChangeRequest = 101 - (double)numericUpDown1.Value;
-        }
-
-        private void numericUpDown1_KeyUp(object sender, KeyEventArgs e)
+        private void ChangeSpeed(object sender, EventArgs e)
         {
             turnStepChangeRequest = 101 - (double)numericUpDown1.Value;
         }
@@ -1156,6 +1118,10 @@ namespace ROP
             MessageBox.Show(historieTahu);
         }
 
+        private void ChangeDistance(object sender, EventArgs e)
+        {
+            distanceFromCamera = (double)numericUpDown2.Value;
+        }
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
             distanceFromCamera = (double)numericUpDown2.Value;
