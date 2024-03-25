@@ -120,6 +120,12 @@ namespace ROP
                     cubes[i, j] = new Cube(cubes[i, j]);
                 }
             }
+            cubes[4, 0].rotateAxis = 2;
+            cubes[4, 2].rotateAxis = 2;
+            cubes[5, 1].rotateAxis = 1;
+            cubes[3, 1].rotateAxis = 1;
+            cubes[1, 1].rotateAxis = 3;
+            cubes[7, 1].rotateAxis = 3;
         }
         //bílá = 0; žlutá = 1; červená = 2; oranžová = 3; modrá = 4; zelená = 5
 
@@ -728,9 +734,21 @@ namespace ROP
                             {
                                 foreach (Vector3 v in s.vectors)
                                 {
-                                    v.animState.Z+=prime;
-                                    v.X = Math.Sin(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
-                                    v.Y = Math.Cos(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                    if (cubes[1, 1].rotateAxis == 1)
+                                    {
+                                        label2.Text = "rotateAxis 1";
+                                        v.animState.X += prime;
+                                        v.Z = Math.Sin(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                        v.Y = Math.Cos(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                    }
+                                    else if (cubes[1, 1].rotateAxis == 3)
+                                    {
+                                        label2.Text = "rotateAxis 3";
+                                        v.animState.Z += prime;
+                                        v.X = Math.Sin(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                        v.Y = Math.Cos(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                    }
+                                    else MessageBox.Show("chyba");
                                 }
                             }
                         }
@@ -923,6 +941,10 @@ namespace ROP
                         cubes[7, i] = new Cube(cubes[5, i]);
                         cubes[5, i] = new Cube(buffEdge);
                     }
+                    cubes[1, 1].rotateAxis = (cubes[1, 1].rotateAxis + 2) % 4;
+                    cubes[5, 1].rotateAxis = (cubes[5, 1].rotateAxis + 2) % 4;
+                    cubes[7, 1].rotateAxis = (cubes[7, 1].rotateAxis + 2) % 4;
+                    cubes[3, 1].rotateAxis = (cubes[3, 1].rotateAxis + 2) % 4;
                 }
                 else if(turningRotX % Math.PI < -Math.PI / 4)
                 {
@@ -942,6 +964,10 @@ namespace ROP
                         cubes[4, i] = new Cube(cubes[4, i]);
                         cubes[4, i] = new Cube(cubes[4, i]);
                     }
+                    cubes[1, 1].rotateAxis = (cubes[1, 1].rotateAxis + 2) % 4;
+                    cubes[5, 1].rotateAxis = (cubes[5, 1].rotateAxis + 2) % 4;
+                    cubes[7, 1].rotateAxis = (cubes[7, 1].rotateAxis + 2) % 4;
+                    cubes[3, 1].rotateAxis = (cubes[3, 1].rotateAxis + 2) % 4;
                 }
             }
             label2.Text = turningRotX + "\n" + rotX;

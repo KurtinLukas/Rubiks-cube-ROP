@@ -15,7 +15,7 @@ namespace ROP
         public int position;
         //sudé = rohy, liché = hrany; správná originální pozice
         public int cubeIndex = -1;
-
+        public int rotateAxis = -1;
         public Cube(Square[] arr, int pos)
         {
             arr.CopyTo(squares, 0);
@@ -58,6 +58,7 @@ namespace ROP
             this.rotation = c.rotation;
             this.position = c.position;
             this.cubeIndex = c.cubeIndex;
+            this.rotateAxis = c.rotateAxis;
         }
     }
 }
