@@ -247,7 +247,7 @@ namespace ROP
             "V - R\' U R\' U\' R D\' R\' D R\' U D\' R2 U\' R2 D R2",
             "Y - F R U\' R\' U\' R U R\' F\' R U R\' U\' R\' F R F\'",
             "Z - M\' U\' M2 U\' M2 U\' M\' U2 M2"});
-            this.comboBox1.Location = new System.Drawing.Point(568, 466);
+            this.comboBox1.Location = new System.Drawing.Point(568, 425);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(160, 21);
             this.comboBox1.TabIndex = 16;
@@ -311,7 +311,7 @@ namespace ROP
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(565, 450);
+            this.label3.Location = new System.Drawing.Point(565, 409);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(73, 13);
             this.label3.TabIndex = 22;
@@ -320,7 +320,7 @@ namespace ROP
             // numericUpDown1
             // 
             this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown1.Location = new System.Drawing.Point(568, 414);
+            this.numericUpDown1.Location = new System.Drawing.Point(568, 373);
             this.numericUpDown1.Minimum = new decimal(new int[] {
             1,
             0,
@@ -341,7 +341,7 @@ namespace ROP
             // 
             this.labelSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSpeed.AutoSize = true;
-            this.labelSpeed.Location = new System.Drawing.Point(565, 398);
+            this.labelSpeed.Location = new System.Drawing.Point(565, 357);
             this.labelSpeed.Name = "labelSpeed";
             this.labelSpeed.Size = new System.Drawing.Size(91, 13);
             this.labelSpeed.TabIndex = 24;
@@ -373,7 +373,7 @@ namespace ROP
             // 
             this.numericUpDown2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDown2.DecimalPlaces = 1;
-            this.numericUpDown2.Location = new System.Drawing.Point(569, 366);
+            this.numericUpDown2.Location = new System.Drawing.Point(569, 325);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             12,
             0,
@@ -398,7 +398,7 @@ namespace ROP
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(566, 350);
+            this.label4.Location = new System.Drawing.Point(566, 309);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(111, 13);
             this.label4.TabIndex = 28;

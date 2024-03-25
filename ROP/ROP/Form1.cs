@@ -120,12 +120,10 @@ namespace ROP
                     cubes[i, j] = new Cube(cubes[i, j]);
                 }
             }
-            cubes[4, 0].rotateAxis = 2;
-            cubes[4, 2].rotateAxis = 2;
+            cubes[1, 1].rotateAxis = 0;
             cubes[5, 1].rotateAxis = 1;
-            cubes[3, 1].rotateAxis = 1;
-            cubes[1, 1].rotateAxis = 3;
-            cubes[7, 1].rotateAxis = 3;
+            cubes[7, 1].rotateAxis = 2;
+            cubes[3, 1].rotateAxis = 3;
         }
         //bílá = 0; žlutá = 1; červená = 2; oranžová = 3; modrá = 4; zelená = 5
 
@@ -310,6 +308,21 @@ namespace ROP
                         cubes[5, 1] = new Cube(buffEdge);
                         cubes[4, 1] = new Cube(cubes[4, 1]);
                         break;
+                    case 'x':
+                        for (int i = 0; i < 3; i++)
+                        {
+                            buffCorner = new Cube(cubes[0, i]);
+                            cubes[0, i] = new Cube(cubes[6, i]);
+                            cubes[6, i] = new Cube(cubes[8, i]);
+                            cubes[8, i] = new Cube(cubes[2, i]);
+                            cubes[2, i] = new Cube(buffCorner);
+                            buffEdge = new Cube(cubes[1, i]);
+                            cubes[1, i] = new Cube(cubes[3, i]);
+                            cubes[3, i] = new Cube(cubes[7, i]);
+                            cubes[7, i] = new Cube(cubes[5, i]);
+                            cubes[5, i] = new Cube(buffEdge);
+                        }
+                        break;
                     default:
                         throw new Exception("Invalid first symbol in Turn(" + input[0] + ");");
                 }
@@ -435,6 +448,23 @@ namespace ROP
                         cubes[3, 1] = new Cube(buffEdge);
                         cubes[4, 1] = new Cube(cubes[4, 1]);
                         break;
+                    case 'x':
+                        for (int i = 0; i < 3; i++)
+                        {
+                            buffCorner = new Cube(cubes[0, i]);
+                            cubes[0, i] = new Cube(cubes[2, i]);
+                            cubes[2, i] = new Cube(cubes[8, i]);
+                            cubes[8, i] = new Cube(cubes[6, i]);
+                            cubes[6, i] = new Cube(buffCorner);
+                            buffEdge = new Cube(cubes[1, i]);
+                            cubes[1, i] = new Cube(cubes[5, i]);
+                            cubes[5, i] = new Cube(cubes[7, i]);
+                            cubes[7, i] = new Cube(cubes[3, i]);
+                            cubes[3, i] = new Cube(buffEdge);
+                            cubes[4, i] = new Cube(cubes[4, i]);
+                            cubes[4, i] = new Cube(cubes[4, i]);
+                        }
+                        break;
                     default:
                         throw new Exception("Invalid first symbol in Turn(" + input[0] + ");");
                 }
@@ -462,12 +492,23 @@ namespace ROP
 
         public void Algorithm(string alg)
         {
-            string tahy = "RLUDFBMES";
+            string tahy = "RLUDFBMESx";
+            int xPlus = 0;
             for (int i = 0; i < alg.Length; i++)
             {
                 if (tahy.Contains(alg[i]))
                 {
-                    
+                    if (alg[i] == 'x')
+                    {
+                        xPlus--;
+                        if (i + 1 < alg.Length)
+                        {
+                            if (alg[i + 1] == '\'')
+                            {
+                                xPlus += 2;
+                            }
+                        }
+                    }
                     animateTurn.Add(alg[i]);
                     if (i + 1 < alg.Length)
                     {
@@ -483,6 +524,22 @@ namespace ROP
                             i++;
                         }
                     }
+                    
+                }
+            }
+            if(xPlus > 0)
+            {
+                for(int i = 0; i < xPlus; i++)
+                {
+                    animateTurn.Add('x');
+                }
+            }
+            else
+            {
+                for(int i = 0; i > xPlus; i--)
+                {
+                    animateTurn.Add('x');
+                    animateTurn.Add('\'');
                 }
             }
         }
@@ -567,7 +624,7 @@ namespace ROP
                 }
                 historieTahu = historieTahu.Remove(i);
             }
-            historieTahu = "";
+            historieTahu = " ";
             Algorithm(solve);
             solving = true;
         }
@@ -645,8 +702,12 @@ namespace ROP
                 Turn(t);
                 turnAnim = 0;
 
-                if (solving)
-                    historieTahu = "";
+                if (solving && animateTurn.Count == 0)
+                {
+                    historieTahu = " ";
+                    solving = false;
+                    label2.Text = "Historie: ";
+                }
             }
             if(animateTurn.Count == 0)
             {
@@ -700,9 +761,30 @@ namespace ROP
                             {
                                 foreach (Vector3 v in s.vectors)
                                 {
-                                    v.animState.X+=prime;
-                                    v.Z = Math.Sin(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
-                                    v.Y = Math.Cos(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                    switch (cubes[5, 1].rotateAxis)
+                                    {
+                                        case 0:
+                                            v.animState.Z += prime;
+                                            v.X = Math.Sin(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            v.Y = Math.Cos(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            break;
+                                        case 1:
+                                            v.animState.X += prime;
+                                            v.Z = Math.Sin(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            v.Y = Math.Cos(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            break;
+                                        case 2:
+                                            v.animState.Z += prime;
+                                            v.X = Math.Sin(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            v.Y = Math.Cos(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            break;
+                                        case 3:
+                                            v.animState.X += prime;
+                                            v.Z = Math.Sin(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            v.Y = Math.Cos(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            break;
+                                            
+                                    }
                                 }
                             }
                         }
@@ -717,9 +799,30 @@ namespace ROP
                             {
                                 foreach (Vector3 v in s.vectors)
                                 {
-                                    v.animState.X+=prime;
-                                    v.Z = Math.Sin(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
-                                    v.Y = Math.Cos(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                    switch (cubes[3, 1].rotateAxis)
+                                    {
+                                        case 0:
+                                            v.animState.Z += prime;
+                                            v.X = Math.Sin(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            v.Y = Math.Cos(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            break;
+                                        case 1:
+                                            v.animState.X += prime;
+                                            v.Z = Math.Sin(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            v.Y = Math.Cos(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            break;
+                                        case 2:
+                                            v.animState.Z += prime;
+                                            v.X = Math.Sin(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            v.Y = Math.Cos(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            break;
+                                        case 3:
+                                            v.animState.X += prime;
+                                            v.Z = Math.Sin(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            v.Y = Math.Cos(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            break;
+                                            
+                                    }
                                 }
                             }
                         }
@@ -734,21 +837,30 @@ namespace ROP
                             {
                                 foreach (Vector3 v in s.vectors)
                                 {
-                                    if (cubes[1, 1].rotateAxis == 1)
+                                    switch (cubes[1, 1].rotateAxis%4)
                                     {
-                                        label2.Text = "rotateAxis 1";
-                                        v.animState.X += prime;
-                                        v.Z = Math.Sin(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
-                                        v.Y = Math.Cos(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                        case 0:
+                                            v.animState.Z += prime;
+                                            v.X = Math.Sin(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            v.Y = Math.Cos(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            break;
+                                        case 1:
+                                            v.animState.X += prime;
+                                            v.Z = Math.Sin(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            v.Y = Math.Cos(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            break;
+                                        case 2:
+                                            v.animState.Z += prime;
+                                            v.X = Math.Sin(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            v.Y = Math.Cos(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            break;
+                                        case 3:
+                                            v.animState.X += prime;
+                                            v.Z = Math.Sin(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            v.Y = Math.Cos(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            break;
                                     }
-                                    else if (cubes[1, 1].rotateAxis == 3)
-                                    {
-                                        label2.Text = "rotateAxis 3";
-                                        v.animState.Z += prime;
-                                        v.X = Math.Sin(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
-                                        v.Y = Math.Cos(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
-                                    }
-                                    else MessageBox.Show("chyba");
+                                   
                                 }
                             }
                         }
@@ -763,9 +875,30 @@ namespace ROP
                             {
                                 foreach (Vector3 v in s.vectors)
                                 {
-                                    v.animState.Z+=prime;
-                                    v.X = Math.Sin(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
-                                    v.Y = Math.Cos(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                    switch (cubes[7, 1].rotateAxis)
+                                    {
+                                        case 0:
+                                            v.animState.Z += prime;
+                                            v.X = Math.Sin(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            v.Y = Math.Cos(v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            break;
+                                        case 1:
+                                            v.animState.X += prime;
+                                            v.Z = Math.Sin(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            v.Y = Math.Cos(-v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            break;
+                                        case 2:
+                                            v.animState.Z += prime;
+                                            v.X = Math.Sin(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            v.Y = Math.Cos(-v.animState.Z * Math.PI / 2 / turnStep + v.displacement.Z) * v.lengthFrom0.Z;
+                                            break;
+                                        case 3:
+                                            v.animState.X += prime;
+                                            v.Z = Math.Sin(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            v.Y = Math.Cos(v.animState.X * Math.PI / 2 / turnStep + v.displacement.X) * v.lengthFrom0.X;
+                                            break;
+                                            
+                                    }
                                 }
                             }
                         }
@@ -927,50 +1060,16 @@ namespace ROP
                 oldMouse = MousePosition;
                 if (turningRotX % Math.PI > Math.PI / 4)
                 {
-                    turningRotX = -Math.PI / 4;
-                    for (int i = 0; i < 3; i++)
-                    {
-                        Cube buffCorner = new Cube(cubes[0, i]);
-                        cubes[0, i] = new Cube(cubes[6, i]);
-                        cubes[6, i] = new Cube(cubes[8, i]);
-                        cubes[8, i] = new Cube(cubes[2, i]);
-                        cubes[2, i] = new Cube(buffCorner);
-                        Cube buffEdge = new Cube(cubes[1, i]);
-                        cubes[1, i] = new Cube(cubes[3, i]);
-                        cubes[3, i] = new Cube(cubes[7, i]);
-                        cubes[7, i] = new Cube(cubes[5, i]);
-                        cubes[5, i] = new Cube(buffEdge);
-                    }
-                    cubes[1, 1].rotateAxis = (cubes[1, 1].rotateAxis + 2) % 4;
-                    cubes[5, 1].rotateAxis = (cubes[5, 1].rotateAxis + 2) % 4;
-                    cubes[7, 1].rotateAxis = (cubes[7, 1].rotateAxis + 2) % 4;
-                    cubes[3, 1].rotateAxis = (cubes[3, 1].rotateAxis + 2) % 4;
+                    turningRotX = -Math.PI / 4 + 0.1;
+                    animateTurn.Add('x');
                 }
                 else if(turningRotX % Math.PI < -Math.PI / 4)
                 {
-                    turningRotX = Math.PI / 4;
-                    for (int i = 0; i < 3; i++)
-                    {
-                        Cube buffCorner = new Cube(cubes[0, i]);
-                        cubes[0, i] = new Cube(cubes[2, i]);
-                        cubes[2, i] = new Cube(cubes[8, i]);
-                        cubes[8, i] = new Cube(cubes[6, i]);
-                        cubes[6, i] = new Cube(buffCorner);
-                        Cube buffEdge = new Cube(cubes[1, i]);
-                        cubes[1, i] = new Cube(cubes[5, i]);
-                        cubes[5, i] = new Cube(cubes[7, i]);
-                        cubes[7, i] = new Cube(cubes[3, i]);
-                        cubes[3, i] = new Cube(buffEdge);
-                        cubes[4, i] = new Cube(cubes[4, i]);
-                        cubes[4, i] = new Cube(cubes[4, i]);
-                    }
-                    cubes[1, 1].rotateAxis = (cubes[1, 1].rotateAxis + 2) % 4;
-                    cubes[5, 1].rotateAxis = (cubes[5, 1].rotateAxis + 2) % 4;
-                    cubes[7, 1].rotateAxis = (cubes[7, 1].rotateAxis + 2) % 4;
-                    cubes[3, 1].rotateAxis = (cubes[3, 1].rotateAxis + 2) % 4;
+                    turningRotX = Math.PI / 4 - 0.1;
+                    animateTurn.Add('x');
+                    animateTurn.Add('\'');
                 }
             }
-            label2.Text = turningRotX + "\n" + rotX;
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -1046,7 +1145,7 @@ namespace ROP
         {
             animateTurn.Clear();
             GenerateCubes();
-            historieTahu = "";
+            historieTahu = " ";
             label2.Text = "Historie:";
             turnAnim = 0;
         }
