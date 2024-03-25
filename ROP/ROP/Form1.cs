@@ -1046,17 +1046,18 @@ namespace ROP
             if (moveCube)
             {
                 double value = (double)(oldMouse.X - MousePosition.X) / 100;
+                double vertical = (double)(oldMouse.Y - MousePosition.Y) / 100;
+                rotZ -= vertical;
                 if (Math.Abs(rotZ) % (Math.PI * 4) > Math.PI && Math.Abs(rotZ) % (Math.PI * 4) < Math.PI * 3)
                 {
                     rotX -= value;
                     turningRotX -= value;
+                    
                 }
                 else
                 {
-                    rotX += value;
-                    turningRotX += value;
+                    rotZ += vertical;
                 }
-                rotZ -= (double)(oldMouse.Y - MousePosition.Y)/100;
                 oldMouse = MousePosition;
                 if (turningRotX % Math.PI > Math.PI / 4)
                 {
