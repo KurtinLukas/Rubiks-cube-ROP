@@ -144,9 +144,9 @@ namespace ROP
             // textBoxAlgorithm
             // 
             this.textBoxAlgorithm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAlgorithm.Location = new System.Drawing.Point(388, 668);
+            this.textBoxAlgorithm.Location = new System.Drawing.Point(419, 668);
             this.textBoxAlgorithm.Name = "textBoxAlgorithm";
-            this.textBoxAlgorithm.Size = new System.Drawing.Size(340, 20);
+            this.textBoxAlgorithm.Size = new System.Drawing.Size(309, 20);
             this.textBoxAlgorithm.TabIndex = 7;
             // 
             // algorithm2
