@@ -441,6 +441,7 @@ namespace ROP
             this.Name = "Form1";
             this.Text = "Simulátor Rubikovy kostky";
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
+            this.ClientSizeChanged += new System.EventHandler(this.Form1_ClientSizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
