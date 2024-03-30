@@ -1,0 +1,11 @@
+E:\GitHub\Rubiks-cube-ROP\ROP\ROP\bin\Release\ROP.exe.config
+E:\GitHub\Rubiks-cube-ROP\ROP\ROP\bin\Release\ROP.exe
+E:\GitHub\Rubiks-cube-ROP\ROP\ROP\bin\Release\ROP.pdb
+E:\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Release\ROP.csproj.AssemblyReference.cache
+E:\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Release\ROP.Form1.resources
+E:\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Release\ROP.HelperForm.resources
+E:\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Release\ROP.Properties.Resources.resources
+E:\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Release\ROP.csproj.GenerateResource.cache
+E:\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Release\ROP.csproj.CoreCompileInputs.cache
+E:\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Release\ROP.exe
+E:\GitHub\Rubiks-cube-ROP\ROP\ROP\obj\Release\ROP.pdb
