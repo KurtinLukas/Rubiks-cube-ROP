@@ -79,7 +79,7 @@ namespace ROP
             lengthFrom0.Z = Math.Sqrt(X * X + Y * Y);
 
             displacement = new Vector3();
-            double uhelInsideX = 0.5 / lengthFrom0.X;
+            double uhelInsideX = 1 / lengthFrom0.X;
             double uhelInsideY = 0.5 / lengthFrom0.Y;
             double uhelInsideZ = 0.5 / lengthFrom0.Z;
             
