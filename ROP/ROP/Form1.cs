@@ -19,6 +19,7 @@ namespace ROP
             GenerateCubes();
             RenderMatrix();
             pictureBox1.SendToBack();
+            pictureBox1.MouseWheel += pictureBox1_MouseWheel;
             for(int i = 0; i < 21; i++)
             {
                 comboBox1.Items[i] = PLL[i + 21] + "-" + PLL[i];
@@ -1140,6 +1141,40 @@ namespace ROP
         {
             Clipboard.SetText(historieTahu.Substring(1));
             
+        }
+
+        //otázka 1: Navrhněte postup (metody, komponenty) pro ovládání jednotlivých tahů (R, L, U, D, F, B, ...) z klávesnice.
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string tahy = "RLUDFBMES";
+            char key = e.KeyChar;
+            if(tahy.Contains((char)(key-32)))
+            {
+                animateTurn.Add((char)(key-32));
+            }
+            else if(tahy.Contains(key))
+            {
+                animateTurn.Add(key);
+                animateTurn.Add('\'');
+            }
+        }
+
+        private void Form1_Scroll(object sender, ScrollEventArgs e)
+        {
+            label1.Text += "a";
+        }
+
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox1.Focus();
+        }
+        private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            int val = e.Delta > 0 ? -1 : 1;
+            if(numericUpDown2.Maximum >= numericUpDown2.Value + val && numericUpDown2.Minimum <= numericUpDown2.Value + val)
+            {
+                numericUpDown2.Value += val;
+            }
         }
     }
 }
